@@ -1,0 +1,482 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4321 ]
+[d frameptr 4065 ]
+"4 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"19 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\main.c
+[v _MyRSI MyRSI `IIH(v  1 s 1 MyRSI ]
+"25
+[v _initPorts initPorts `(v  1 e 1 0 ]
+"30
+[v _main main `(v  1 e 1 0 ]
+"8 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_ADC.c
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+"17
+[v _ADC_ExistValue ADC_ExistValue `(uc  1 e 1 0 ]
+"21
+[v _ADC_GetX ADC_GetX `(ui  1 e 2 0 ]
+"25
+[v _ADC_GetY ADC_GetY `(ui  1 e 2 0 ]
+"29
+[v _ADC_Start ADC_Start `(v  1 e 1 0 ]
+"33
+[v _ADC_Finished ADC_Finished `(uc  1 e 1 0 ]
+"44
+[v _ADC_Motor ADC_Motor `(v  1 e 1 0 ]
+"26 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_DISPLAY.c
+[v _DSP_Init DSP_Init `(v  1 e 1 0 ]
+"38
+[v _DSP_Motor DSP_Motor `(v  1 e 1 0 ]
+"33 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_SERIAL.c
+[v _SERIAL_Init SERIAL_Init `(v  1 e 1 0 ]
+"65
+[v _SERIAL_PutString SERIAL_PutString `(v  1 e 1 0 ]
+"74
+[v _SERIAL_ReadByte SERIAL_ReadByte `(uc  1 e 1 0 ]
+"95
+[v _guardarCharArr guardarCharArr `(v  1 e 1 0 ]
+"117
+[v _SERIAL_denegarEscritura SERIAL_denegarEscritura `(v  1 e 1 0 ]
+"132
+[v _Motor_Serial Motor_Serial `(v  1 e 1 0 ]
+"18 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_TIMER.c
+[v _RSI_Timer0 RSI_Timer0 `(v  1 e 1 0 ]
+"24
+[v _TI_Init TI_Init `(v  1 e 1 0 ]
+"34
+[v _TI_NewTimer TI_NewTimer `(uc  1 e 1 0 ]
+"44
+[v _TI_ResetTics TI_ResetTics `(v  1 e 1 0 ]
+"49
+[v _TI_GetTics TI_GetTics `(ul  1 e 4 0 ]
+[s S38 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"326 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
+[s S261 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 INT1 1 0 :1:1 
+`uc 1 INT2 1 0 :1:2 
+`uc 1 CCP2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S270 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 AN11 1 0 :1:4 
+`uc 1 PGM 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S279 . 1 `uc 1 FLT0 1 0 :1:0 
+]
+[s S281 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S284 . 1 `S38 1 . 1 0 `S261 1 . 1 0 `S270 1 . 1 0 `S279 1 . 1 0 `S281 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES284  1 e 1 @3969 ]
+[s S29 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"1740
+[u S47 . 1 `S29 1 . 1 0 `S38 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES47  1 e 1 @3987 ]
+[s S468 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 PSPIF 1 0 :1:7 
+]
+"2702
+[s S477 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+]
+[u S481 . 1 `S468 1 . 1 0 `S477 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES481  1 e 1 @3998 ]
+[s S412 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"3160
+[s S421 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 ADEN 1 0 :1:3 
+]
+[s S424 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 SRENA 1 0 :1:5 
+]
+[s S427 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC8_9 1 0 :1:6 
+]
+[s S430 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC9 1 0 :1:6 
+]
+[s S433 . 1 `uc 1 RCD8 1 0 :1:0 
+]
+[u S435 . 1 `S412 1 . 1 0 `S421 1 . 1 0 `S424 1 . 1 0 `S427 1 . 1 0 `S430 1 . 1 0 `S433 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES435  1 e 1 @4011 ]
+[s S360 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"3368
+[s S369 . 1 `uc 1 TX9D1 1 0 :1:0 
+`uc 1 TRMT1 1 0 :1:1 
+`uc 1 BRGH1 1 0 :1:2 
+`uc 1 SENDB1 1 0 :1:3 
+`uc 1 SYNC1 1 0 :1:4 
+`uc 1 TXEN1 1 0 :1:5 
+`uc 1 TX91 1 0 :1:6 
+`uc 1 CSRC1 1 0 :1:7 
+]
+[s S378 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[s S381 . 1 `uc 1 TXD8 1 0 :1:0 
+]
+[u S383 . 1 `S360 1 . 1 0 `S369 1 . 1 0 `S378 1 . 1 0 `S381 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES383  1 e 1 @4012 ]
+"3585
+[v _TXREG TXREG `VEuc  1 e 1 @4013 ]
+"3597
+[v _RCREG RCREG `VEuc  1 e 1 @4014 ]
+"3609
+[v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
+"3621
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @4016 ]
+"4643
+[v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
+"4714
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+"4799
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
+[s S153 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"4843
+[s S156 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+]
+[s S160 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+]
+[s S167 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S170 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S173 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S176 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[s S179 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S182 . 1 `S153 1 . 1 0 `S156 1 . 1 0 `S160 1 . 1 0 `S167 1 . 1 0 `S170 1 . 1 0 `S173 1 . 1 0 `S176 1 . 1 0 `S179 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES182  1 e 1 @4034 ]
+"4925
+[v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
+"4932
+[v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
+"6181
+[v _T0CON T0CON `VEuc  1 e 1 @4053 ]
+"6258
+[v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
+[s S69 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 NOT_RBPU 1 0 :1:7 
+]
+"6654
+[s S72 . 1 `uc 1 RBIP 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 TMR0IP 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INTEDG2 1 0 :1:4 
+`uc 1 INTEDG1 1 0 :1:5 
+`uc 1 INTEDG0 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+[s S81 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 RBPU 1 0 :1:7 
+]
+[u S84 . 1 `S69 1 . 1 0 `S72 1 . 1 0 `S81 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES84  1 e 1 @4081 ]
+[s S564 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"6731
+[s S573 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S582 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S586 . 1 `S564 1 . 1 0 `S573 1 . 1 0 `S582 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES586  1 e 1 @4082 ]
+"8680
+[v _TMR0IF TMR0IF `VEb  1 e 0 @32658 ]
+"3 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_ADC.c
+[v _estat estat `uc  1 s 1 estat ]
+"4
+[v _valueX valueX `ui  1 s 2 valueX ]
+"5
+[v _valueY valueY `ui  1 s 2 valueY ]
+"6
+[v _dataReady dataReady `uc  1 s 1 dataReady ]
+"19 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_DISPLAY.c
+[v _valorX valorX `ui  1 s 2 valorX ]
+"20
+[v _valorY valorY `ui  1 s 2 valorY ]
+"21
+[v _lastDirX lastDirX `uc  1 s 1 lastDirX ]
+"22
+[v _lastDirY lastDirY `uc  1 s 1 lastDirY ]
+"23
+[v _timerRebotes timerRebotes `uc  1 s 1 timerRebotes ]
+"24
+[v _flagRebotes flagRebotes `uc  1 s 1 flagRebotes ]
+"13 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_SERIAL.c
+[v _estado estado `uc  1 s 1 estado ]
+"14
+[v _readArr readArr `[100]uc  1 s 100 readArr ]
+"15
+[v _indice indice `uc  1 s 1 indice ]
+"17
+[v _permisosEscritura permisosEscritura `uc  1 s 1 permisosEscritura ]
+"20
+[v _frase0 frase0 `C[10]uc  1 s 10 frase0 ]
+"21
+[v _frase1 frase1 `C[12]uc  1 s 12 frase1 ]
+"22
+[v _frase2 frase2 `C[12]uc  1 s 12 frase2 ]
+"23
+[v _frase3 frase3 `C[13]uc  1 s 13 frase3 ]
+"24
+[v _frase4 frase4 `C[9]uc  1 s 9 frase4 ]
+"28
+[v _frases frases `C[5]*.31Cuc  1 s 5 frases ]
+"31
+[v _pTxFrase pTxFrase `*.31Cuc  1 s 1 pTxFrase ]
+[s S558 Timer 5 `ul 1 TicsInicials 4 0 `uc 1 Busy 1 4 ]
+"14 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_TIMER.c
+[v _Timers Timers `[4]S558  1 s 20 Timers ]
+"16
+[v _Tics Tics `VEul  1 s 4 Tics ]
+"30 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"43
+} 0
+"25
+[v _initPorts initPorts `(v  1 e 1 0 ]
+{
+"28
+} 0
+"24 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_TIMER.c
+[v _TI_Init TI_Init `(v  1 e 1 0 ]
+{
+"25
+[v TI_Init@counter counter `uc  1 a 1 0 ]
+"32
+} 0
+"33 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_SERIAL.c
+[v _SERIAL_Init SERIAL_Init `(v  1 e 1 0 ]
+{
+"56
+} 0
+"117
+[v _SERIAL_denegarEscritura SERIAL_denegarEscritura `(v  1 e 1 0 ]
+{
+"119
+} 0
+"132
+[v _Motor_Serial Motor_Serial `(v  1 e 1 0 ]
+{
+"151
+[v Motor_Serial@c c `uc  1 a 1 2 ]
+"133
+[v Motor_Serial@aux aux `uc  1 a 1 3 ]
+"172
+} 0
+"95
+[v _guardarCharArr guardarCharArr `(v  1 e 1 0 ]
+{
+[v guardarCharArr@aux aux `uc  1 p 1 wreg ]
+[v guardarCharArr@aux aux `uc  1 p 1 wreg ]
+"97
+[v guardarCharArr@aux aux `uc  1 p 1 0 ]
+"109
+} 0
+"74
+[v _SERIAL_ReadByte SERIAL_ReadByte `(uc  1 e 1 0 ]
+{
+[v SERIAL_ReadByte@b b `*.30uc  1 p 1 0 ]
+"89
+} 0
+"38 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_DISPLAY.c
+[v _DSP_Motor DSP_Motor `(v  1 e 1 0 ]
+{
+"39
+[v DSP_Motor@estado estado `uc  1 s 1 estado ]
+"40
+[v DSP_Motor@i i `uc  1 s 1 i ]
+"146
+} 0
+"44 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_TIMER.c
+[v _TI_ResetTics TI_ResetTics `(v  1 e 1 0 ]
+{
+[v TI_ResetTics@TimerHandle TimerHandle `uc  1 p 1 wreg ]
+[v TI_ResetTics@TimerHandle TimerHandle `uc  1 p 1 wreg ]
+[v TI_ResetTics@TimerHandle TimerHandle `uc  1 p 1 0 ]
+"46
+} 0
+"49
+[v _TI_GetTics TI_GetTics `(ul  1 e 4 0 ]
+{
+[v TI_GetTics@TimerHandle TimerHandle `uc  1 p 1 wreg ]
+"50
+[v TI_GetTics@CopiaTicsActual CopiaTicsActual `ul  1 a 4 8 ]
+"49
+[v TI_GetTics@TimerHandle TimerHandle `uc  1 p 1 wreg ]
+[v TI_GetTics@TimerHandle TimerHandle `uc  1 p 1 12 ]
+"52
+} 0
+"65 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_SERIAL.c
+[v _SERIAL_PutString SERIAL_PutString `(v  1 e 1 0 ]
+{
+[v SERIAL_PutString@s s `uc  1 p 1 wreg ]
+[v SERIAL_PutString@s s `uc  1 p 1 wreg ]
+[v SERIAL_PutString@s s `uc  1 p 1 1 ]
+"68
+} 0
+"25 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_ADC.c
+[v _ADC_GetY ADC_GetY `(ui  1 e 2 0 ]
+{
+"27
+} 0
+"21
+[v _ADC_GetX ADC_GetX `(ui  1 e 2 0 ]
+{
+"23
+} 0
+"17
+[v _ADC_ExistValue ADC_ExistValue `(uc  1 e 1 0 ]
+{
+"19
+} 0
+"26 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_DISPLAY.c
+[v _DSP_Init DSP_Init `(v  1 e 1 0 ]
+{
+"30
+} 0
+"34 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_TIMER.c
+[v _TI_NewTimer TI_NewTimer `(uc  1 e 1 0 ]
+{
+"35
+[v TI_NewTimer@Comptador Comptador `uc  1 a 1 2 ]
+"34
+[v TI_NewTimer@TimerHandle TimerHandle `*.30uc  1 p 1 0 ]
+"42
+} 0
+"44 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_ADC.c
+[v _ADC_Motor ADC_Motor `(v  1 e 1 0 ]
+{
+"80
+} 0
+"29
+[v _ADC_Start ADC_Start `(v  1 e 1 0 ]
+{
+"31
+} 0
+"33
+[v _ADC_Finished ADC_Finished `(uc  1 e 1 0 ]
+{
+"35
+} 0
+"8
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+{
+"15
+} 0
+"19 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\main.c
+[v _MyRSI MyRSI `IIH(v  1 s 1 MyRSI ]
+{
+"23
+} 0
+"18 C:\Users\Santiago\Documents\3rUNI\COMPUS\S2\LAB_ADC.X\LAB_ADC.X\TAD_TIMER.c
+[v _RSI_Timer0 RSI_Timer0 `(v  1 e 1 0 ]
+{
+"22
+} 0
