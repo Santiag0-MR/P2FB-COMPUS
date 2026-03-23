@@ -4795,6 +4795,8 @@ unsigned int ADC_GetY(void);
 void ADC_Start(void);
 char ADC_Finished(void);
 unsigned char ADC_ExistValue();
+unsigned char ADC_ExistValueLDR();
+unsigned int ADC_GetLDR();
 # 3 "main.c" 2
 # 1 "./TAD_DISPLAY.h" 1
 
@@ -4819,21 +4821,21 @@ void DSP_Motor();
 
 
 
-
 void SERIAL_Init(void);
-
-
 void SERIAL_PutChar(char c);
-
-
 void SERIAL_PutString(unsigned char s);
-
-
 void Motor_Serial(void);
 
-void SERIAL_denegarEscritura();
+unsigned char SERIAL_SleepReceived(void);
+unsigned char SERIAL_GetAnimalsReceived(void);
+unsigned char SERIAL_GetProductsReceived(void);
+unsigned char SERIAL_ResetReceived(void);
+unsigned char SERIAL_StartRebellionReceived(void);
+unsigned char SERIAL_StopRebellionReceived(void);
+unsigned char SERIAL_ConsumeReceived(void);
+unsigned char SERIAL_InitializeReceived(void);
 
-void SERIAL_permitirEscritura();
+unsigned char* SERIAL_GetPayload(void);
 # 5 "main.c" 2
 # 1 "./TAD_TIMER.h" 1
 
@@ -4865,6 +4867,13 @@ unsigned long TI_GetTics (unsigned char TimerHandle);
 
 void TI_End (void);
 # 6 "main.c" 2
+# 1 "./TAD_LDR.h" 1
+
+
+
+void LDR_Init();
+void LDR_Motor();
+# 7 "main.c" 2
 
 #pragma config OSC = HS
 #pragma config PBADEN = DIG
@@ -4887,6 +4896,9 @@ static void __attribute__((picinterrupt(("high_priority")))) MyRSI (void){
 void initPorts(){
     TRISBbits.TRISB2 = 1;
     INTCON2bits.RBPU = 0;
+    ADCON0 = 0x01;
+    ADCON1 = 0x0C;
+    ADCON2 = 0x80;
 }
 
 void main(void) {
@@ -4895,6 +4907,7 @@ void main(void) {
     ADC_Init();
     DSP_Init();
     SERIAL_Init();
+    LDR_Init();
 
 
     while(1){

@@ -1,4 +1,4 @@
-# 1 "TAD_ADC.c"
+# 1 "TAD_LDR.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 285 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "TAD_ADC.c" 2
+# 1 "TAD_LDR.c" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4783,99 +4783,126 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/xc.h" 2 3
-# 2 "TAD_ADC.c" 2
-
-static unsigned char estat;
-static unsigned int valueX;
-static unsigned int valueY;
-static unsigned int valueLDR;
-static unsigned char dataReady = 0;
-static unsigned char dataReadyLDR = 0;
+# 2 "TAD_LDR.c" 2
+# 1 "./TAD_LDR.h" 1
 
 
-void ADC_Init(){
-    estat = 0;
-    valueX = 0;
-    valueY = 0;
+
+void LDR_Init();
+void LDR_Motor();
+# 3 "TAD_LDR.c" 2
+# 1 "./TAD_SERIAL.h" 1
+
+
+
+void SERIAL_Init(void);
+void SERIAL_PutChar(char c);
+void SERIAL_PutString(unsigned char s);
+void Motor_Serial(void);
+
+unsigned char SERIAL_SleepReceived(void);
+unsigned char SERIAL_GetAnimalsReceived(void);
+unsigned char SERIAL_GetProductsReceived(void);
+unsigned char SERIAL_ResetReceived(void);
+unsigned char SERIAL_StartRebellionReceived(void);
+unsigned char SERIAL_StopRebellionReceived(void);
+unsigned char SERIAL_ConsumeReceived(void);
+unsigned char SERIAL_InitializeReceived(void);
+
+unsigned char* SERIAL_GetPayload(void);
+# 4 "TAD_LDR.c" 2
+# 1 "./TAD_TIMER.h" 1
+
+
+
+
+
+
+
+
+void RSI_Timer0(void);
+
+
+
+void TI_Init (void);
+
+
+unsigned char TI_NewTimer(unsigned char *TimerHandle) ;
+
+
+
+void TI_ResetTics (unsigned char TimerHandle);
+
+
+
+unsigned long TI_GetTics (unsigned char TimerHandle);
+
+
+
+void TI_End (void);
+# 5 "TAD_LDR.c" 2
+# 1 "./TAD_ADC.h" 1
+
+
+
+void ADC_Init(void);
+void ADC_Motor(void);
+unsigned int ADC_GetX(void);
+unsigned int ADC_GetY(void);
+void ADC_Start(void);
+char ADC_Finished(void);
+unsigned char ADC_ExistValue();
+unsigned char ADC_ExistValueLDR();
+unsigned int ADC_GetLDR();
+# 6 "TAD_LDR.c" 2
+
+
+
+
+static unsigned char timerLDR;
+
+
+void LDR_Init(){
+    TI_NewTimer(&timerLDR);
 }
 
-unsigned char ADC_ExistValue(){
-    return dataReady == 1;
-}
+void LDR_Motor(){
+    static unsigned char estado = 0;
+    static unsigned char i;
+    static unsigned int valorLDR;
 
-unsigned char ADC_ExistValueLDR(){
-    return dataReadyLDR;
-}
-
-unsigned int ADC_GetLDR(){
-    return valueLDR;
-}
-
-unsigned int ADC_GetX(void){
-    return valueX;
-}
-
-unsigned int ADC_GetY(void){
-    return valueY;
-}
-
-void ADC_Start(void){
-    ADCON0bits.GO_DONE = 1;
-}
-
-char ADC_Finished(void){
-    return !ADCON0bits.GO_DONE;
-}
-# 52 "TAD_ADC.c"
-void ADC_Motor(){
-    switch(estat){
+    switch(estado){
         case 0:
-            ADCON0bits.CHS3 = 0;
-            ADCON0bits.CHS2 = 0;
-            ADCON0bits.CHS1 = 0;
-            ADCON0bits.CHS0 = 0;
-            estat++;
-            dataReady = 0;
-            ADC_Start();
+            if(SERIAL_SleepReceived()){
+                TI_ResetTics(timerLDR);
+                estado++;
+            }
             break;
         case 1:
-            if(ADC_Finished()){
-                valueX = ((unsigned int)ADRESH * 256) | ADRESL;
-
-                estat++;
+            if(ADC_ExistValueLDR()){
+                valorLDR = ADC_GetLDR();
+                i = 0;
+                estado++;
             }
             break;
         case 2:
-            ADCON0bits.CHS3 = 0;
-            ADCON0bits.CHS2 = 0;
-            ADCON0bits.CHS1 = 0;
-            ADCON0bits.CHS0 = 1;
-            estat++;
-            dataReady = 0;
-            ADC_Start();
-            break;
-        case 3:
-            if(ADC_Finished()){
-                valueY = ((unsigned int)ADRESH * 256) | ADRESL;
-
-                dataReady = 1;
-                estat++;
+            if(i == 7){
+                estado++;
+            }else{
+                i++;
+                valorLDR = valorLDR >> 1;
             }
             break;
-        case 4:
-            ADCON0bits.CHS3 = 0;
-            ADCON0bits.CHS2 = 0;
-            ADCON0bits.CHS1 = 1;
-            ADCON0bits.CHS0 = 0;
-            dataReadyLDR = 0;
-            ADC_Start();
-            estat++;
-            break;
-        case 5:
-            if(ADC_Finished()){
-                valueLDR = ((unsigned int)ADRESH * 256) | ADRESL;
-                dataReadyLDR = 1;
-                estat = 0;
+        case 3:
+            valorLDR = valorLDR & 0x07;
+            if(valorLDR < 200){
+
+                SERIAL_PutString(5);
+                estado = 0;
+            } else if(TI_GetTics(timerLDR) >= 5000){
+
+                SERIAL_PutString(6);
+                estado = 0;
             }
             break;
     }

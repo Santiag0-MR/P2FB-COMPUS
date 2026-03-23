@@ -461,8 +461,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _RSI_Timer0 ]
 [f ]
 "19
-[; ;TAD_TIMER.c: 19:     TMR0=64911;
-[e = _TMR0 -> -> 64911 `l `us ]
+[; ;TAD_TIMER.c: 19:     TMR0=65224;
+[e = _TMR0 -> -> 65224 `l `us ]
 "20
 [; ;TAD_TIMER.c: 20:     TMR0IF=0;
 [e = _TMR0IF -> -> 0 `i `b ]
@@ -502,8 +502,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;TAD_TIMER.c: 28:  T0CON=0x82;
 [e = _T0CON -> -> 130 `i `uc ]
 "29
-[; ;TAD_TIMER.c: 29:     TMR0=64911;
-[e = _TMR0 -> -> 64911 `l `us ]
+[; ;TAD_TIMER.c: 29:     TMR0=65224;
+[e = _TMR0 -> -> 65224 `l `us ]
 "30
 [; ;TAD_TIMER.c: 30:  INTCONbits.TMR0IF = 0;
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]

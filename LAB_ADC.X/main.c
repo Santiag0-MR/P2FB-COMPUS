@@ -3,6 +3,7 @@
 #include "TAD_DISPLAY.h"
 #include "TAD_SERIAL.h"
 #include "TAD_TIMER.h"
+#include "TAD_LDR.h"
 
 #pragma config OSC   = HS
 #pragma config PBADEN = DIG
@@ -25,6 +26,9 @@ static void __interrupt (high_priority) MyRSI (void){
 void initPorts(){
     TRISBbits.TRISB2 = 1;
     INTCON2bits.RBPU = 0; 
+    ADCON0 = 0x01;  // canal AN0, ADC encendido
+    ADCON1 = 0x0C;  // AN0, AN1, AN2 analógicos, resto digital
+    ADCON2 = 0x80;  // right-justified
 }
 
 void main(void) {
@@ -33,6 +37,7 @@ void main(void) {
     ADC_Init();
     DSP_Init();
     SERIAL_Init();
+    LDR_Init();
     
 
     while(1){

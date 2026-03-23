@@ -11,7 +11,7 @@
  */
 #define UMBRAL_MAX  7
 #define UMBRAL_MIN  0
-#define REBOTES 8
+#define REBOTES 16
 #define NO_MIRAR_REBOTES 0
 #define MIRAR_REBOTES_SALIDA 1
 #define MIRAR_REBOTES_ENTRADA 2

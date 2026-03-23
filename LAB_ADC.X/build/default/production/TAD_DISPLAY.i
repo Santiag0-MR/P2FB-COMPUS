@@ -4796,26 +4796,28 @@ unsigned int ADC_GetY(void);
 void ADC_Start(void);
 char ADC_Finished(void);
 unsigned char ADC_ExistValue();
+unsigned char ADC_ExistValueLDR();
+unsigned int ADC_GetLDR();
 # 4 "TAD_DISPLAY.c" 2
 # 1 "./TAD_SERIAL.h" 1
 
 
 
-
 void SERIAL_Init(void);
-
-
 void SERIAL_PutChar(char c);
-
-
 void SERIAL_PutString(unsigned char s);
-
-
 void Motor_Serial(void);
 
-void SERIAL_denegarEscritura();
+unsigned char SERIAL_SleepReceived(void);
+unsigned char SERIAL_GetAnimalsReceived(void);
+unsigned char SERIAL_GetProductsReceived(void);
+unsigned char SERIAL_ResetReceived(void);
+unsigned char SERIAL_StartRebellionReceived(void);
+unsigned char SERIAL_StopRebellionReceived(void);
+unsigned char SERIAL_ConsumeReceived(void);
+unsigned char SERIAL_InitializeReceived(void);
 
-void SERIAL_permitirEscritura();
+unsigned char* SERIAL_GetPayload(void);
 # 5 "TAD_DISPLAY.c" 2
 # 1 "./TAD_TIMER.h" 1
 
@@ -4940,7 +4942,7 @@ void DSP_Motor(){
 
             } else if(flagRebotes == 2){
 
-                if(TI_GetTics(timerRebotes) >= 8){
+                if(TI_GetTics(timerRebotes) >= 16){
                     if(!PORTBbits.RB2){
 
                         SERIAL_PutString(4);
@@ -4963,7 +4965,7 @@ void DSP_Motor(){
             }
             break;
         case 4:
-            if(TI_GetTics(timerRebotes) >= 8){
+            if(TI_GetTics(timerRebotes) >= 16){
                 if(PORTBbits.RB2){
 
                     flagRebotes = 0;

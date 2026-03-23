@@ -1,14 +1,5 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"4799 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 4799: extern volatile unsigned char ADCON0 __attribute__((address(0xFC2)));
-[v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
-"4714
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 4714: extern volatile unsigned char ADCON1 __attribute__((address(0xFC1)));
-[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
-"4643
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 4643: extern volatile unsigned char ADCON2 __attribute__((address(0xFC0)));
-[v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
-"4805
+"4805 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 4805:     struct {
 [s S188 :1 `uc 1 :1 `uc 1 ]
 [n S188 . . GO_NOT_DONE ]
@@ -477,35 +468,35 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;TAD_ADC.c: 5: static unsigned int valueY;
 [v _valueY `ui ~T0 @X0 1 s ]
 "6
-[; ;TAD_ADC.c: 6: static unsigned char dataReady = 0;
+[; ;TAD_ADC.c: 6: static unsigned int valueLDR;
+[v _valueLDR `ui ~T0 @X0 1 s ]
+"7
+[; ;TAD_ADC.c: 7: static unsigned char dataReady = 0;
 [v _dataReady `uc ~T0 @X0 1 s ]
 [i _dataReady
 -> -> 0 `i `uc
 ]
 "8
-[; ;TAD_ADC.c: 8: void ADC_Init(){
+[; ;TAD_ADC.c: 8: static unsigned char dataReadyLDR = 0;
+[v _dataReadyLDR `uc ~T0 @X0 1 s ]
+[i _dataReadyLDR
+-> -> 0 `i `uc
+]
+"11
+[; ;TAD_ADC.c: 11: void ADC_Init(){
 [v _ADC_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _ADC_Init ]
 [f ]
-"9
-[; ;TAD_ADC.c: 9:     estat = 0;
-[e = _estat -> -> 0 `i `uc ]
-"10
-[; ;TAD_ADC.c: 10:     valueX = 0;
-[e = _valueX -> -> 0 `i `ui ]
-"11
-[; ;TAD_ADC.c: 11:     valueY = 0;
-[e = _valueY -> -> 0 `i `ui ]
 "12
-[; ;TAD_ADC.c: 12:     ADCON0 = 0x01;
-[e = _ADCON0 -> -> 1 `i `uc ]
+[; ;TAD_ADC.c: 12:     estat = 0;
+[e = _estat -> -> 0 `i `uc ]
 "13
-[; ;TAD_ADC.c: 13:     ADCON1 = 0x0D;
-[e = _ADCON1 -> -> 13 `i `uc ]
+[; ;TAD_ADC.c: 13:     valueX = 0;
+[e = _valueX -> -> 0 `i `ui ]
 "14
-[; ;TAD_ADC.c: 14:     ADCON2 = 0x80;
-[e = _ADCON2 -> -> 128 `i `uc ]
+[; ;TAD_ADC.c: 14:     valueY = 0;
+[e = _valueY -> -> 0 `i `ui ]
 "15
 [; ;TAD_ADC.c: 15: }
 [e :UE 302 ]
@@ -525,179 +516,259 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 303 ]
 }
 "21
-[; ;TAD_ADC.c: 21: unsigned int ADC_GetX(void){
-[v _ADC_GetX `(ui ~T0 @X0 1 ef ]
+[; ;TAD_ADC.c: 21: unsigned char ADC_ExistValueLDR(){
+[v _ADC_ExistValueLDR `(uc ~T0 @X0 1 ef ]
 {
-[e :U _ADC_GetX ]
+[e :U _ADC_ExistValueLDR ]
 [f ]
 "22
-[; ;TAD_ADC.c: 22:     return valueX;
-[e ) _valueX ]
+[; ;TAD_ADC.c: 22:     return dataReadyLDR;
+[e ) _dataReadyLDR ]
 [e $UE 304  ]
 "23
 [; ;TAD_ADC.c: 23: }
 [e :UE 304 ]
 }
 "25
-[; ;TAD_ADC.c: 25: unsigned int ADC_GetY(void){
-[v _ADC_GetY `(ui ~T0 @X0 1 ef ]
+[; ;TAD_ADC.c: 25: unsigned int ADC_GetLDR(){
+[v _ADC_GetLDR `(ui ~T0 @X0 1 ef ]
 {
-[e :U _ADC_GetY ]
+[e :U _ADC_GetLDR ]
 [f ]
 "26
-[; ;TAD_ADC.c: 26:     return valueY;
-[e ) _valueY ]
+[; ;TAD_ADC.c: 26:     return valueLDR;
+[e ) _valueLDR ]
 [e $UE 305  ]
 "27
 [; ;TAD_ADC.c: 27: }
 [e :UE 305 ]
 }
 "29
-[; ;TAD_ADC.c: 29: void ADC_Start(void){
-[v _ADC_Start `(v ~T0 @X0 1 ef ]
+[; ;TAD_ADC.c: 29: unsigned int ADC_GetX(void){
+[v _ADC_GetX `(ui ~T0 @X0 1 ef ]
 {
-[e :U _ADC_Start ]
+[e :U _ADC_GetX ]
 [f ]
 "30
-[; ;TAD_ADC.c: 30:     ADCON0bits.GO_DONE = 1;
-[e = . . _ADCON0bits 6 1 -> -> 1 `i `uc ]
+[; ;TAD_ADC.c: 30:     return valueX;
+[e ) _valueX ]
+[e $UE 306  ]
 "31
 [; ;TAD_ADC.c: 31: }
 [e :UE 306 ]
 }
 "33
-[; ;TAD_ADC.c: 33: char ADC_Finished(void){
-[v _ADC_Finished `(uc ~T0 @X0 1 ef ]
+[; ;TAD_ADC.c: 33: unsigned int ADC_GetY(void){
+[v _ADC_GetY `(ui ~T0 @X0 1 ef ]
 {
-[e :U _ADC_Finished ]
+[e :U _ADC_GetY ]
 [f ]
 "34
-[; ;TAD_ADC.c: 34:     return !ADCON0bits.GO_DONE;
-[e ) -> -> ! != -> . . _ADCON0bits 6 1 `i -> 0 `i `i `uc ]
+[; ;TAD_ADC.c: 34:     return valueY;
+[e ) _valueY ]
 [e $UE 307  ]
 "35
 [; ;TAD_ADC.c: 35: }
 [e :UE 307 ]
 }
-"44
-[; ;TAD_ADC.c: 44: void ADC_Motor(){
+"37
+[; ;TAD_ADC.c: 37: void ADC_Start(void){
+[v _ADC_Start `(v ~T0 @X0 1 ef ]
+{
+[e :U _ADC_Start ]
+[f ]
+"38
+[; ;TAD_ADC.c: 38:     ADCON0bits.GO_DONE = 1;
+[e = . . _ADCON0bits 6 1 -> -> 1 `i `uc ]
+"39
+[; ;TAD_ADC.c: 39: }
+[e :UE 308 ]
+}
+"41
+[; ;TAD_ADC.c: 41: char ADC_Finished(void){
+[v _ADC_Finished `(uc ~T0 @X0 1 ef ]
+{
+[e :U _ADC_Finished ]
+[f ]
+"42
+[; ;TAD_ADC.c: 42:     return !ADCON0bits.GO_DONE;
+[e ) -> -> ! != -> . . _ADCON0bits 6 1 `i -> 0 `i `i `uc ]
+[e $UE 309  ]
+"43
+[; ;TAD_ADC.c: 43: }
+[e :UE 309 ]
+}
+"52
+[; ;TAD_ADC.c: 52: void ADC_Motor(){
 [v _ADC_Motor `(v ~T0 @X0 1 ef ]
 {
 [e :U _ADC_Motor ]
 [f ]
-"45
-[; ;TAD_ADC.c: 45:     switch(estat){
-[e $U 310  ]
-{
-"46
-[; ;TAD_ADC.c: 46:         case 0:
-[e :U 311 ]
-"47
-[; ;TAD_ADC.c: 47:             ADCON0bits.CHS3 = 0;
-[e = . . _ADCON0bits 2 5 -> -> 0 `i `uc ]
-"48
-[; ;TAD_ADC.c: 48:             ADCON0bits.CHS2 = 0;
-[e = . . _ADCON0bits 2 4 -> -> 0 `i `uc ]
-"49
-[; ;TAD_ADC.c: 49:             ADCON0bits.CHS1 = 0;
-[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
-"50
-[; ;TAD_ADC.c: 50:             ADCON0bits.CHS0 = 0;
-[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
-"51
-[; ;TAD_ADC.c: 51:             estat++;
-[e ++ _estat -> -> 1 `i `uc ]
-"52
-[; ;TAD_ADC.c: 52:             dataReady = 0;
-[e = _dataReady -> -> 0 `i `uc ]
 "53
-[; ;TAD_ADC.c: 53:             ADC_Start();
-[e ( _ADC_Start ..  ]
-"54
-[; ;TAD_ADC.c: 54:             break;
-[e $U 309  ]
-"55
-[; ;TAD_ADC.c: 55:         case 1:
-[e :U 312 ]
-"56
-[; ;TAD_ADC.c: 56:             if(ADC_Finished()){
-[e $ ! != -> ( _ADC_Finished ..  `i -> 0 `i 313  ]
+[; ;TAD_ADC.c: 53:     switch(estat){
+[e $U 312  ]
 {
+"54
+[; ;TAD_ADC.c: 54:         case 0:
+[e :U 313 ]
+"55
+[; ;TAD_ADC.c: 55:             ADCON0bits.CHS3 = 0;
+[e = . . _ADCON0bits 2 5 -> -> 0 `i `uc ]
+"56
+[; ;TAD_ADC.c: 56:             ADCON0bits.CHS2 = 0;
+[e = . . _ADCON0bits 2 4 -> -> 0 `i `uc ]
 "57
-[; ;TAD_ADC.c: 57:                 valueX = ((unsigned int)ADRESH * 256) | ADRESL;
-[e = _valueX | * -> _ADRESH `ui -> -> 256 `i `ui -> _ADRESL `ui ]
+[; ;TAD_ADC.c: 57:             ADCON0bits.CHS1 = 0;
+[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
+"58
+[; ;TAD_ADC.c: 58:             ADCON0bits.CHS0 = 0;
+[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
 "59
-[; ;TAD_ADC.c: 59:                 estat++;
+[; ;TAD_ADC.c: 59:             estat++;
 [e ++ _estat -> -> 1 `i `uc ]
 "60
-[; ;TAD_ADC.c: 60:             }
-}
-[e :U 313 ]
+[; ;TAD_ADC.c: 60:             dataReady = 0;
+[e = _dataReady -> -> 0 `i `uc ]
 "61
-[; ;TAD_ADC.c: 61:             break;
-[e $U 309  ]
+[; ;TAD_ADC.c: 61:             ADC_Start();
+[e ( _ADC_Start ..  ]
 "62
-[; ;TAD_ADC.c: 62:         case 2:
-[e :U 314 ]
+[; ;TAD_ADC.c: 62:             break;
+[e $U 311  ]
 "63
-[; ;TAD_ADC.c: 63:             ADCON0bits.CHS3 = 0;
-[e = . . _ADCON0bits 2 5 -> -> 0 `i `uc ]
+[; ;TAD_ADC.c: 63:         case 1:
+[e :U 314 ]
 "64
-[; ;TAD_ADC.c: 64:             ADCON0bits.CHS2 = 0;
-[e = . . _ADCON0bits 2 4 -> -> 0 `i `uc ]
+[; ;TAD_ADC.c: 64:             if(ADC_Finished()){
+[e $ ! != -> ( _ADC_Finished ..  `i -> 0 `i 315  ]
+{
 "65
-[; ;TAD_ADC.c: 65:             ADCON0bits.CHS1 = 0;
-[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
-"66
-[; ;TAD_ADC.c: 66:             ADCON0bits.CHS0 = 1;
-[e = . . _ADCON0bits 2 2 -> -> 1 `i `uc ]
+[; ;TAD_ADC.c: 65:                 valueX = ((unsigned int)ADRESH * 256) | ADRESL;
+[e = _valueX | * -> _ADRESH `ui -> -> 256 `i `ui -> _ADRESL `ui ]
 "67
-[; ;TAD_ADC.c: 67:             estat++;
+[; ;TAD_ADC.c: 67:                 estat++;
 [e ++ _estat -> -> 1 `i `uc ]
 "68
-[; ;TAD_ADC.c: 68:             dataReady = 0;
-[e = _dataReady -> -> 0 `i `uc ]
-"69
-[; ;TAD_ADC.c: 69:             ADC_Start();
-[e ( _ADC_Start ..  ]
-"70
-[; ;TAD_ADC.c: 70:             break;
-[e $U 309  ]
-"71
-[; ;TAD_ADC.c: 71:         case 3:
-[e :U 315 ]
-"72
-[; ;TAD_ADC.c: 72:             if(ADC_Finished()){
-[e $ ! != -> ( _ADC_Finished ..  `i -> 0 `i 316  ]
-{
-"73
-[; ;TAD_ADC.c: 73:                 valueY = ((unsigned int)ADRESH * 256) | ADRESL;
-[e = _valueY | * -> _ADRESH `ui -> -> 256 `i `ui -> _ADRESL `ui ]
-"75
-[; ;TAD_ADC.c: 75:                 dataReady = 1;
-[e = _dataReady -> -> 1 `i `uc ]
-"76
-[; ;TAD_ADC.c: 76:                 estat = 0;
-[e = _estat -> -> 0 `i `uc ]
-"77
-[; ;TAD_ADC.c: 77:             }
+[; ;TAD_ADC.c: 68:             }
 }
+[e :U 315 ]
+"69
+[; ;TAD_ADC.c: 69:             break;
+[e $U 311  ]
+"70
+[; ;TAD_ADC.c: 70:         case 2:
 [e :U 316 ]
+"71
+[; ;TAD_ADC.c: 71:             ADCON0bits.CHS3 = 0;
+[e = . . _ADCON0bits 2 5 -> -> 0 `i `uc ]
+"72
+[; ;TAD_ADC.c: 72:             ADCON0bits.CHS2 = 0;
+[e = . . _ADCON0bits 2 4 -> -> 0 `i `uc ]
+"73
+[; ;TAD_ADC.c: 73:             ADCON0bits.CHS1 = 0;
+[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
+"74
+[; ;TAD_ADC.c: 74:             ADCON0bits.CHS0 = 1;
+[e = . . _ADCON0bits 2 2 -> -> 1 `i `uc ]
+"75
+[; ;TAD_ADC.c: 75:             estat++;
+[e ++ _estat -> -> 1 `i `uc ]
+"76
+[; ;TAD_ADC.c: 76:             dataReady = 0;
+[e = _dataReady -> -> 0 `i `uc ]
+"77
+[; ;TAD_ADC.c: 77:             ADC_Start();
+[e ( _ADC_Start ..  ]
 "78
 [; ;TAD_ADC.c: 78:             break;
-[e $U 309  ]
+[e $U 311  ]
 "79
-[; ;TAD_ADC.c: 79:     }
-}
-[e $U 309  ]
-[e :U 310 ]
-[e [\ _estat , $ -> 0 `i 311
- , $ -> 1 `i 312
- , $ -> 2 `i 314
- , $ -> 3 `i 315
- 309 ]
-[e :U 309 ]
+[; ;TAD_ADC.c: 79:         case 3:
+[e :U 317 ]
 "80
-[; ;TAD_ADC.c: 80: }
-[e :UE 308 ]
+[; ;TAD_ADC.c: 80:             if(ADC_Finished()){
+[e $ ! != -> ( _ADC_Finished ..  `i -> 0 `i 318  ]
+{
+"81
+[; ;TAD_ADC.c: 81:                 valueY = ((unsigned int)ADRESH * 256) | ADRESL;
+[e = _valueY | * -> _ADRESH `ui -> -> 256 `i `ui -> _ADRESL `ui ]
+"83
+[; ;TAD_ADC.c: 83:                 dataReady = 1;
+[e = _dataReady -> -> 1 `i `uc ]
+"84
+[; ;TAD_ADC.c: 84:                 estat++;
+[e ++ _estat -> -> 1 `i `uc ]
+"85
+[; ;TAD_ADC.c: 85:             }
+}
+[e :U 318 ]
+"86
+[; ;TAD_ADC.c: 86:             break;
+[e $U 311  ]
+"87
+[; ;TAD_ADC.c: 87:         case 4:
+[e :U 319 ]
+"88
+[; ;TAD_ADC.c: 88:             ADCON0bits.CHS3 = 0;
+[e = . . _ADCON0bits 2 5 -> -> 0 `i `uc ]
+"89
+[; ;TAD_ADC.c: 89:             ADCON0bits.CHS2 = 0;
+[e = . . _ADCON0bits 2 4 -> -> 0 `i `uc ]
+"90
+[; ;TAD_ADC.c: 90:             ADCON0bits.CHS1 = 1;
+[e = . . _ADCON0bits 2 3 -> -> 1 `i `uc ]
+"91
+[; ;TAD_ADC.c: 91:             ADCON0bits.CHS0 = 0;
+[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
+"92
+[; ;TAD_ADC.c: 92:             dataReadyLDR = 0;
+[e = _dataReadyLDR -> -> 0 `i `uc ]
+"93
+[; ;TAD_ADC.c: 93:             ADC_Start();
+[e ( _ADC_Start ..  ]
+"94
+[; ;TAD_ADC.c: 94:             estat++;
+[e ++ _estat -> -> 1 `i `uc ]
+"95
+[; ;TAD_ADC.c: 95:             break;
+[e $U 311  ]
+"96
+[; ;TAD_ADC.c: 96:         case 5:
+[e :U 320 ]
+"97
+[; ;TAD_ADC.c: 97:             if(ADC_Finished()){
+[e $ ! != -> ( _ADC_Finished ..  `i -> 0 `i 321  ]
+{
+"98
+[; ;TAD_ADC.c: 98:                 valueLDR = ((unsigned int)ADRESH * 256) | ADRESL;
+[e = _valueLDR | * -> _ADRESH `ui -> -> 256 `i `ui -> _ADRESL `ui ]
+"99
+[; ;TAD_ADC.c: 99:                 dataReadyLDR = 1;
+[e = _dataReadyLDR -> -> 1 `i `uc ]
+"100
+[; ;TAD_ADC.c: 100:                 estat = 0;
+[e = _estat -> -> 0 `i `uc ]
+"101
+[; ;TAD_ADC.c: 101:             }
+}
+[e :U 321 ]
+"102
+[; ;TAD_ADC.c: 102:             break;
+[e $U 311  ]
+"103
+[; ;TAD_ADC.c: 103:     }
+}
+[e $U 311  ]
+[e :U 312 ]
+[e [\ _estat , $ -> 0 `i 313
+ , $ -> 1 `i 314
+ , $ -> 2 `i 316
+ , $ -> 3 `i 317
+ , $ -> 4 `i 319
+ , $ -> 5 `i 320
+ 311 ]
+[e :U 311 ]
+"104
+[; ;TAD_ADC.c: 104: }
+[e :UE 310 ]
 }

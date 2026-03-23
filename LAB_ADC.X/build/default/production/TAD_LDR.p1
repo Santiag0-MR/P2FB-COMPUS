@@ -2,45 +2,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "16 ./TAD_TIMER.h
 [; ;./TAD_TIMER.h: 16: unsigned char TI_NewTimer(unsigned char *TimerHandle) ;
 [v _TI_NewTimer `(uc ~T0 @X0 0 ef1`*uc ]
-"10 ./TAD_ADC.h
-[; ;./TAD_ADC.h: 10: unsigned char ADC_ExistValue();
-[v _ADC_ExistValue `(uc ~T0 @X0 0 e? ]
-"6
-[; ;./TAD_ADC.h: 6: unsigned int ADC_GetX(void);
-[v _ADC_GetX `(ui ~T0 @X0 0 ef ]
-"7
-[; ;./TAD_ADC.h: 7: unsigned int ADC_GetY(void);
-[v _ADC_GetY `(ui ~T0 @X0 0 ef ]
-"288 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 288:     struct {
-[s S15 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S15 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"298
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 298:     struct {
-[s S16 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S16 . INT0 INT1 INT2 CCP2 KBI0 KBI1 KBI2 KBI3 ]
-"308
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 308:     struct {
-[s S17 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S17 . AN12 AN10 AN8 AN9 AN11 PGM PGC PGD ]
-"318
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 318:     struct {
-[s S18 :1 `uc 1 ]
-[n S18 . FLT0 ]
-"321
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 321:     struct {
-[s S19 :3 `uc 1 :1 `uc 1 ]
-[n S19 . . CCP2_PA2 ]
-"287
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 287: typedef union {
-[u S14 `S15 1 `S16 1 `S17 1 `S18 1 `S19 1 ]
-[n S14 . . . . . . ]
-"326
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 326: extern volatile PORTBbits_t PORTBbits __attribute__((address(0xF81)));
-[v _PORTBbits `VS14 ~T0 @X0 0 e@3969 ]
+"9 ./TAD_SERIAL.h
+[; ;./TAD_SERIAL.h: 9: unsigned char SERIAL_SleepReceived(void);
+[v _SERIAL_SleepReceived `(uc ~T0 @X0 0 ef ]
 "20 ./TAD_TIMER.h
 [; ;./TAD_TIMER.h: 20: void TI_ResetTics (unsigned char TimerHandle);
 [v _TI_ResetTics `(v ~T0 @X0 0 ef1`uc ]
+"11 ./TAD_ADC.h
+[; ;./TAD_ADC.h: 11: unsigned char ADC_ExistValueLDR();
+[v _ADC_ExistValueLDR `(uc ~T0 @X0 0 e? ]
+"12
+[; ;./TAD_ADC.h: 12: unsigned int ADC_GetLDR();
+[v _ADC_GetLDR `(ui ~T0 @X0 0 e? ]
 "6 ./TAD_SERIAL.h
 [; ;./TAD_SERIAL.h: 6: void SERIAL_PutString(unsigned char s);
 [v _SERIAL_PutString `(v ~T0 @X0 0 ef1`uc ]
@@ -461,409 +434,165 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7008
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 7008: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"19 TAD_DISPLAY.c
-[; ;TAD_DISPLAY.c: 19: static unsigned int valorX;
-[v _valorX `ui ~T0 @X0 1 s ]
-"20
-[; ;TAD_DISPLAY.c: 20: static unsigned int valorY;
-[v _valorY `ui ~T0 @X0 1 s ]
-"21
-[; ;TAD_DISPLAY.c: 21: static unsigned char lastDirX = 0xFF;
-[v _lastDirX `uc ~T0 @X0 1 s ]
-[i _lastDirX
--> -> 255 `i `uc
-]
-"22
-[; ;TAD_DISPLAY.c: 22: static unsigned char lastDirY = 0xFF;
-[v _lastDirY `uc ~T0 @X0 1 s ]
-[i _lastDirY
--> -> 255 `i `uc
-]
-"23
-[; ;TAD_DISPLAY.c: 23: static unsigned char timerRebotes;
-[v _timerRebotes `uc ~T0 @X0 1 s ]
-"24
-[; ;TAD_DISPLAY.c: 24: static unsigned char flagRebotes = 0;
-[v _flagRebotes `uc ~T0 @X0 1 s ]
-[i _flagRebotes
--> -> 0 `i `uc
-]
-"26
-[; ;TAD_DISPLAY.c: 26: void DSP_Init(){
-[v _DSP_Init `(v ~T0 @X0 1 ef ]
+"10 TAD_LDR.c
+[; ;TAD_LDR.c: 10: static unsigned char timerLDR;
+[v _timerLDR `uc ~T0 @X0 1 s ]
+"13
+[; ;TAD_LDR.c: 13: void LDR_Init(){
+[v _LDR_Init `(v ~T0 @X0 1 ef ]
 {
-[e :U _DSP_Init ]
+[e :U _LDR_Init ]
 [f ]
-"27
-[; ;TAD_DISPLAY.c: 27:     valorX = 0;
-[e = _valorX -> -> 0 `i `ui ]
-"28
-[; ;TAD_DISPLAY.c: 28:     valorY = 0;
-[e = _valorY -> -> 0 `i `ui ]
-"29
-[; ;TAD_DISPLAY.c: 29:     TI_NewTimer(&timerRebotes);
-[e ( _TI_NewTimer (1 &U _timerRebotes ]
-"30
-[; ;TAD_DISPLAY.c: 30: }
+"14
+[; ;TAD_LDR.c: 14:     TI_NewTimer(&timerLDR);
+[e ( _TI_NewTimer (1 &U _timerLDR ]
+"15
+[; ;TAD_LDR.c: 15: }
 [e :UE 302 ]
 }
-"32
-[; ;TAD_DISPLAY.c: 32: void DSP_Reset(void){
-[v _DSP_Reset `(v ~T0 @X0 1 ef ]
+"17
+[; ;TAD_LDR.c: 17: void LDR_Motor(){
+[v _LDR_Motor `(v ~T0 @X0 1 ef ]
 {
-[e :U _DSP_Reset ]
+[e :U _LDR_Motor ]
 [f ]
-"34
-[; ;TAD_DISPLAY.c: 34:     valorX = 0;
-[e = _valorX -> -> 0 `i `ui ]
-"35
-[; ;TAD_DISPLAY.c: 35:     valorY = 0;
-[e = _valorY -> -> 0 `i `ui ]
-"36
-[; ;TAD_DISPLAY.c: 36: }
-[e :UE 303 ]
-}
-"38
-[; ;TAD_DISPLAY.c: 38: void DSP_Motor(){
-[v _DSP_Motor `(v ~T0 @X0 1 ef ]
-{
-[e :U _DSP_Motor ]
-[f ]
-"39
-[; ;TAD_DISPLAY.c: 39:     static unsigned char estado = 0;
-[v F2735 `uc ~T0 @X0 1 s estado ]
-[i F2735
+"18
+[; ;TAD_LDR.c: 18:     static unsigned char estado = 0;
+[v F2731 `uc ~T0 @X0 1 s estado ]
+[i F2731
 -> -> 0 `i `uc
 ]
-"40
-[; ;TAD_DISPLAY.c: 40:     static unsigned char i;
-[v F2736 `uc ~T0 @X0 1 s i ]
-"42
-[; ;TAD_DISPLAY.c: 42:     switch(estado){
-[e $U 306  ]
+"19
+[; ;TAD_LDR.c: 19:     static unsigned char i;
+[v F2732 `uc ~T0 @X0 1 s i ]
+"20
+[; ;TAD_LDR.c: 20:     static unsigned int valorLDR;
+[v F2733 `ui ~T0 @X0 1 s valorLDR ]
+"22
+[; ;TAD_LDR.c: 22:     switch(estado){
+[e $U 305  ]
 {
-"43
-[; ;TAD_DISPLAY.c: 43:         case 0:
+"23
+[; ;TAD_LDR.c: 23:         case 0:
+[e :U 306 ]
+"24
+[; ;TAD_LDR.c: 24:             if(SERIAL_SleepReceived()){
+[e $ ! != -> ( _SERIAL_SleepReceived ..  `i -> 0 `i 307  ]
+{
+"25
+[; ;TAD_LDR.c: 25:                 TI_ResetTics(timerLDR);
+[e ( _TI_ResetTics (1 _timerLDR ]
+"26
+[; ;TAD_LDR.c: 26:                 estado++;
+[e ++ F2731 -> -> 1 `i `uc ]
+"27
+[; ;TAD_LDR.c: 27:             }
+}
 [e :U 307 ]
-"44
-[; ;TAD_DISPLAY.c: 44:             if(ADC_ExistValue()){
-[e $ ! != -> ( _ADC_ExistValue ..  `i -> 0 `i 308  ]
-{
-"45
-[; ;TAD_DISPLAY.c: 45:                 valorX = ADC_GetX();
-[e = _valorX ( _ADC_GetX ..  ]
-"46
-[; ;TAD_DISPLAY.c: 46:                 valorY = ADC_GetY();
-[e = _valorY ( _ADC_GetY ..  ]
-"47
-[; ;TAD_DISPLAY.c: 47:                 i = 0;
-[e = F2736 -> -> 0 `i `uc ]
-"48
-[; ;TAD_DISPLAY.c: 48:                 estado++;
-[e ++ F2735 -> -> 1 `i `uc ]
-"49
-[; ;TAD_DISPLAY.c: 49:             }
-}
+"28
+[; ;TAD_LDR.c: 28:             break;
+[e $U 304  ]
+"29
+[; ;TAD_LDR.c: 29:         case 1:
 [e :U 308 ]
-"50
-[; ;TAD_DISPLAY.c: 50:             break;
-[e $U 305  ]
-"51
-[; ;TAD_DISPLAY.c: 51:         case 1:
+"30
+[; ;TAD_LDR.c: 30:             if(ADC_ExistValueLDR()){
+[e $ ! != -> ( _ADC_ExistValueLDR ..  `i -> 0 `i 309  ]
+{
+"31
+[; ;TAD_LDR.c: 31:                 valorLDR = ADC_GetLDR();
+[e = F2733 ( _ADC_GetLDR ..  ]
+"32
+[; ;TAD_LDR.c: 32:                 i = 0;
+[e = F2732 -> -> 0 `i `uc ]
+"33
+[; ;TAD_LDR.c: 33:                 estado++;
+[e ++ F2731 -> -> 1 `i `uc ]
+"34
+[; ;TAD_LDR.c: 34:             }
+}
 [e :U 309 ]
-"52
-[; ;TAD_DISPLAY.c: 52:             if(i == 7){
-[e $ ! == -> F2736 `i -> 7 `i 310  ]
-{
-"53
-[; ;TAD_DISPLAY.c: 53:                 estado++;
-[e ++ F2735 -> -> 1 `i `uc ]
-"54
-[; ;TAD_DISPLAY.c: 54:             }else{
-}
-[e $U 311  ]
+"35
+[; ;TAD_LDR.c: 35:             break;
+[e $U 304  ]
+"36
+[; ;TAD_LDR.c: 36:         case 2:
 [e :U 310 ]
+"37
+[; ;TAD_LDR.c: 37:             if(i == 7){
+[e $ ! == -> F2732 `i -> 7 `i 311  ]
 {
-"55
-[; ;TAD_DISPLAY.c: 55:                 i++;
-[e ++ F2736 -> -> 1 `i `uc ]
-"56
-[; ;TAD_DISPLAY.c: 56:                 valorX = valorX >> 1;
-[e = _valorX >> _valorX -> 1 `i ]
-"57
-[; ;TAD_DISPLAY.c: 57:                 valorY = valorY >> 1;
-[e = _valorY >> _valorY -> 1 `i ]
-"58
-[; ;TAD_DISPLAY.c: 58:             }
+"38
+[; ;TAD_LDR.c: 38:                 estado++;
+[e ++ F2731 -> -> 1 `i `uc ]
+"39
+[; ;TAD_LDR.c: 39:             }else{
 }
+[e $U 312  ]
 [e :U 311 ]
-"59
-[; ;TAD_DISPLAY.c: 59:             break;
-[e $U 305  ]
-"60
-[; ;TAD_DISPLAY.c: 60:         case 2:
+{
+"40
+[; ;TAD_LDR.c: 40:                 i++;
+[e ++ F2732 -> -> 1 `i `uc ]
+"41
+[; ;TAD_LDR.c: 41:                 valorLDR = valorLDR >> 1;
+[e = F2733 >> F2733 -> 1 `i ]
+"42
+[; ;TAD_LDR.c: 42:             }
+}
 [e :U 312 ]
-"61
-[; ;TAD_DISPLAY.c: 61:             valorX = valorX & 0x07;
-[e = _valorX & _valorX -> -> 7 `i `ui ]
-"62
-[; ;TAD_DISPLAY.c: 62:             valorY = valorY & 0x07;
-[e = _valorY & _valorY -> -> 7 `i `ui ]
-"64
-[; ;TAD_DISPLAY.c: 64:             if(flagRebotes == 0){
-[e $ ! == -> _flagRebotes `i -> 0 `i 313  ]
+"43
+[; ;TAD_LDR.c: 43:             break;
+[e $U 304  ]
+"44
+[; ;TAD_LDR.c: 44:         case 3:
+[e :U 313 ]
+"45
+[; ;TAD_LDR.c: 45:             valorLDR = valorLDR & 0x07;
+[e = F2733 & F2733 -> -> 7 `i `ui ]
+"46
+[; ;TAD_LDR.c: 46:             if(valorLDR < 200){
+[e $ ! < F2733 -> -> 200 `i `ui 314  ]
 {
-"66
-[; ;TAD_DISPLAY.c: 66:                 if(!PORTBbits.RB2){
-[e $ ! ! != -> . . _PORTBbits 0 2 `i -> 0 `i 314  ]
-{
-"68
-[; ;TAD_DISPLAY.c: 68:                     TI_ResetTics(timerRebotes);
-[e ( _TI_ResetTics (1 _timerRebotes ]
-"69
-[; ;TAD_DISPLAY.c: 69:                     flagRebotes = 2;
-[e = _flagRebotes -> -> 2 `i `uc ]
-"71
-[; ;TAD_DISPLAY.c: 71:                 } else {
+"48
+[; ;TAD_LDR.c: 48:                 SERIAL_PutString(5);
+[e ( _SERIAL_PutString (1 -> -> 5 `i `uc ]
+"49
+[; ;TAD_LDR.c: 49:                 estado = 0;
+[e = F2731 -> -> 0 `i `uc ]
+"50
+[; ;TAD_LDR.c: 50:             } else if(TI_GetTics(timerLDR) >= 5000){
 }
 [e $U 315  ]
 [e :U 314 ]
+[e $ ! >= ( _TI_GetTics (1 _timerLDR -> -> -> 5000 `i `l `ul 316  ]
 {
-"72
-[; ;TAD_DISPLAY.c: 72:                     estado = 0;
-[e = F2735 -> -> 0 `i `uc ]
-"75
-[; ;TAD_DISPLAY.c: 75:                     if(valorX == 0){
-[e $ ! == _valorX -> -> 0 `i `ui 316  ]
-{
-"77
-[; ;TAD_DISPLAY.c: 77:                         if(lastDirX != 0){
-[e $ ! != -> _lastDirX `i -> 0 `i 317  ]
-{
-"78
-[; ;TAD_DISPLAY.c: 78:                             SERIAL_PutString(3);
-[e ( _SERIAL_PutString (1 -> -> 3 `i `uc ]
-"79
-[; ;TAD_DISPLAY.c: 79:                             lastDirX = 0;
-[e = _lastDirX -> -> 0 `i `uc ]
-"80
-[; ;TAD_DISPLAY.c: 80:                         }
+"52
+[; ;TAD_LDR.c: 52:                 SERIAL_PutString(6);
+[e ( _SERIAL_PutString (1 -> -> 6 `i `uc ]
+"53
+[; ;TAD_LDR.c: 53:                 estado = 0;
+[e = F2731 -> -> 0 `i `uc ]
+"54
+[; ;TAD_LDR.c: 54:             }
 }
-[e :U 317 ]
-"81
-[; ;TAD_DISPLAY.c: 81:                     } else if(valorX == 7){
-}
-[e $U 318  ]
 [e :U 316 ]
-[e $ ! == _valorX -> -> 7 `i `ui 319  ]
-{
-"83
-[; ;TAD_DISPLAY.c: 83:                         if(lastDirX != 7){
-[e $ ! != -> _lastDirX `i -> 7 `i 320  ]
-{
-"84
-[; ;TAD_DISPLAY.c: 84:                             SERIAL_PutString(2);
-[e ( _SERIAL_PutString (1 -> -> 2 `i `uc ]
-"85
-[; ;TAD_DISPLAY.c: 85:                             lastDirX = 7;
-[e = _lastDirX -> -> 7 `i `uc ]
-"86
-[; ;TAD_DISPLAY.c: 86:                         }
-}
-[e :U 320 ]
-"87
-[; ;TAD_DISPLAY.c: 87:                     } else {
-}
-[e $U 321  ]
-[e :U 319 ]
-{
-"88
-[; ;TAD_DISPLAY.c: 88:                         lastDirX = 0xFF;
-[e = _lastDirX -> -> 255 `i `uc ]
-"89
-[; ;TAD_DISPLAY.c: 89:                     }
-}
-[e :U 321 ]
-[e :U 318 ]
-"92
-[; ;TAD_DISPLAY.c: 92:                     if(valorY == 0){
-[e $ ! == _valorY -> -> 0 `i `ui 322  ]
-{
-"94
-[; ;TAD_DISPLAY.c: 94:                         if(lastDirY != 0){
-[e $ ! != -> _lastDirY `i -> 0 `i 323  ]
-{
-"95
-[; ;TAD_DISPLAY.c: 95:                             SERIAL_PutString(1);
-[e ( _SERIAL_PutString (1 -> -> 1 `i `uc ]
-"96
-[; ;TAD_DISPLAY.c: 96:                             lastDirY = 0;
-[e = _lastDirY -> -> 0 `i `uc ]
-"97
-[; ;TAD_DISPLAY.c: 97:                         }
-}
-[e :U 323 ]
-"98
-[; ;TAD_DISPLAY.c: 98:                     } else if(valorY == 7){
-}
-[e $U 324  ]
-[e :U 322 ]
-[e $ ! == _valorY -> -> 7 `i `ui 325  ]
-{
-"100
-[; ;TAD_DISPLAY.c: 100:                         if(lastDirY != 7){
-[e $ ! != -> _lastDirY `i -> 7 `i 326  ]
-{
-"101
-[; ;TAD_DISPLAY.c: 101:                             SERIAL_PutString(0);
-[e ( _SERIAL_PutString (1 -> -> 0 `i `uc ]
-"102
-[; ;TAD_DISPLAY.c: 102:                             lastDirY = 7;
-[e = _lastDirY -> -> 7 `i `uc ]
-"103
-[; ;TAD_DISPLAY.c: 103:                         }
-}
-[e :U 326 ]
-"104
-[; ;TAD_DISPLAY.c: 104:                     } else {
-}
-[e $U 327  ]
-[e :U 325 ]
-{
-"105
-[; ;TAD_DISPLAY.c: 105:                         lastDirY = 0xFF;
-[e = _lastDirY -> -> 255 `i `uc ]
-"106
-[; ;TAD_DISPLAY.c: 106:                     }
-}
-[e :U 327 ]
-[e :U 324 ]
-"107
-[; ;TAD_DISPLAY.c: 107:                 }
-}
 [e :U 315 ]
-"109
-[; ;TAD_DISPLAY.c: 109:             } else if(flagRebotes == 2){
+"55
+[; ;TAD_LDR.c: 55:             break;
+[e $U 304  ]
+"56
+[; ;TAD_LDR.c: 56:     }
 }
-[e $U 328  ]
-[e :U 313 ]
-[e $ ! == -> _flagRebotes `i -> 2 `i 329  ]
-{
-"111
-[; ;TAD_DISPLAY.c: 111:                 if(TI_GetTics(timerRebotes) >= 16){
-[e $ ! >= ( _TI_GetTics (1 _timerRebotes -> -> -> 16 `i `l `ul 330  ]
-{
-"112
-[; ;TAD_DISPLAY.c: 112:                     if(!PORTBbits.RB2){
-[e $ ! ! != -> . . _PORTBbits 0 2 `i -> 0 `i 331  ]
-{
-"114
-[; ;TAD_DISPLAY.c: 114:                         SERIAL_PutString(4);
-[e ( _SERIAL_PutString (1 -> -> 4 `i `uc ]
-"115
-[; ;TAD_DISPLAY.c: 115:                         flagRebotes = 1;
-[e = _flagRebotes -> -> 1 `i `uc ]
-"116
-[; ;TAD_DISPLAY.c: 116:                         estado++;
-[e ++ F2735 -> -> 1 `i `uc ]
-"118
-[; ;TAD_DISPLAY.c: 118:                     } else {
-}
-[e $U 332  ]
-[e :U 331 ]
-{
-"120
-[; ;TAD_DISPLAY.c: 120:                         flagRebotes = 0;
-[e = _flagRebotes -> -> 0 `i `uc ]
-"121
-[; ;TAD_DISPLAY.c: 121:                         estado = 0;
-[e = F2735 -> -> 0 `i `uc ]
-"123
-[; ;TAD_DISPLAY.c: 123:                     }
-}
-[e :U 332 ]
-"124
-[; ;TAD_DISPLAY.c: 124:                 }
-}
-[e :U 330 ]
-"125
-[; ;TAD_DISPLAY.c: 125:             }
-}
-[e :U 329 ]
-[e :U 328 ]
-"126
-[; ;TAD_DISPLAY.c: 126:             break;
-[e $U 305  ]
-"127
-[; ;TAD_DISPLAY.c: 127:         case 3:
-[e :U 333 ]
-"128
-[; ;TAD_DISPLAY.c: 128:             if(PORTBbits.RB2){
-[e $ ! != -> . . _PORTBbits 0 2 `i -> 0 `i 334  ]
-{
-"129
-[; ;TAD_DISPLAY.c: 129:                 TI_ResetTics(timerRebotes);
-[e ( _TI_ResetTics (1 _timerRebotes ]
-"130
-[; ;TAD_DISPLAY.c: 130:                 estado++;
-[e ++ F2735 -> -> 1 `i `uc ]
-"131
-[; ;TAD_DISPLAY.c: 131:             }
-}
-[e :U 334 ]
-"132
-[; ;TAD_DISPLAY.c: 132:             break;
-[e $U 305  ]
-"133
-[; ;TAD_DISPLAY.c: 133:         case 4:
-[e :U 335 ]
-"134
-[; ;TAD_DISPLAY.c: 134:             if(TI_GetTics(timerRebotes) >= 16){
-[e $ ! >= ( _TI_GetTics (1 _timerRebotes -> -> -> 16 `i `l `ul 336  ]
-{
-"135
-[; ;TAD_DISPLAY.c: 135:                 if(PORTBbits.RB2){
-[e $ ! != -> . . _PORTBbits 0 2 `i -> 0 `i 337  ]
-{
-"137
-[; ;TAD_DISPLAY.c: 137:                     flagRebotes = 0;
-[e = _flagRebotes -> -> 0 `i `uc ]
-"138
-[; ;TAD_DISPLAY.c: 138:                     estado = 0;
-[e = F2735 -> -> 0 `i `uc ]
-"139
-[; ;TAD_DISPLAY.c: 139:                 } else {
-}
-[e $U 338  ]
-[e :U 337 ]
-{
-"141
-[; ;TAD_DISPLAY.c: 141:                     estado--;
-[e -- F2735 -> -> 1 `i `uc ]
-"142
-[; ;TAD_DISPLAY.c: 142:                 }
-}
-[e :U 338 ]
-"143
-[; ;TAD_DISPLAY.c: 143:             }
-}
-[e :U 336 ]
-"144
-[; ;TAD_DISPLAY.c: 144:             break;
-[e $U 305  ]
-"145
-[; ;TAD_DISPLAY.c: 145:     }
-}
-[e $U 305  ]
-[e :U 306 ]
-[e [\ F2735 , $ -> 0 `i 307
- , $ -> 1 `i 309
- , $ -> 2 `i 312
- , $ -> 3 `i 333
- , $ -> 4 `i 335
- 305 ]
+[e $U 304  ]
 [e :U 305 ]
-"146
-[; ;TAD_DISPLAY.c: 146: }
-[e :UE 304 ]
+[e [\ F2731 , $ -> 0 `i 306
+ , $ -> 1 `i 308
+ , $ -> 2 `i 310
+ , $ -> 3 `i 313
+ 304 ]
+[e :U 304 ]
+"57
+[; ;TAD_LDR.c: 57: }
+[e :UE 303 ]
 }

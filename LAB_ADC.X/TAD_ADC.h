@@ -8,5 +8,7 @@ unsigned int ADC_GetY(void);
 void          ADC_Start(void);
 char          ADC_Finished(void);
 unsigned char ADC_ExistValue();
+unsigned char ADC_ExistValueLDR();
+unsigned int ADC_GetLDR();
 
 #endif

@@ -3,19 +3,27 @@
 static unsigned char estat;
 static unsigned int valueX;   // eje horizontal (AN0)
 static unsigned int valueY;   // eje vertical   (AN1)
+static unsigned int valueLDR;   // LDR   (AN2)
 static unsigned char dataReady = 0;
+static unsigned char dataReadyLDR = 0; 
+
 
 void ADC_Init(){
     estat  = 0;
     valueX = 0;
     valueY = 0;
-    ADCON0 = 0x01;  // canal AN0, ADC encendido
-    ADCON1 = 0x0D;  // AN0 y AN1 analogicos, resto digital
-    ADCON2 = 0x80;  // right-justified
 }
 
 unsigned char ADC_ExistValue(){
     return dataReady == 1;
+}
+
+unsigned char ADC_ExistValueLDR(){
+    return dataReadyLDR;
+}
+
+unsigned int ADC_GetLDR(){
+    return valueLDR;
 }
 
 unsigned int ADC_GetX(void){
@@ -73,6 +81,22 @@ void ADC_Motor(){
                 valueY = ((unsigned int)ADRESH * 256) | ADRESL;
                 //ADC_CalculateValue(&valueY);
                 dataReady = 1;
+                estat++;
+            }
+            break;
+        case 4:
+            ADCON0bits.CHS3 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS0 = 0;  // AN2
+            dataReadyLDR = 0;
+            ADC_Start();
+            estat++;
+            break;
+        case 5:
+            if(ADC_Finished()){
+                valueLDR = ((unsigned int)ADRESH * 256) | ADRESL;
+                dataReadyLDR = 1;
                 estat = 0;
             }
             break;
