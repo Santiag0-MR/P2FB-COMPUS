@@ -4834,8 +4834,8 @@ static const char frase1[] = "MOVE_DOWN\r\n";
 static const char frase2[] = "MOVE_LEFT\r\n";
 static const char frase3[] = "MOVE_RIGHT\r\n";
 static const char frase4[] = "SELECT\r\n";
-static const char frase5[] = "CMD_SLEEP_SUCCESSFUL\r\n";
-static const char frase6[] = "CMD_SLEEP_UNSUCCESSFUL\r\n";
+static const char frase5[] = "SLEEP_SUCCESSFUL\r\n";
+static const char frase6[] = "SLEEP_UNSUCCESSFUL\r\n";
 
 
 static const char comando0[] = "GET_ANIMALS";
@@ -4995,10 +4995,7 @@ void Motor_Serial(void){
     switch(estado){
         case 0:
             if (PIR1bits.TXIF) {
-
-
                 if(pTxFrase && *pTxFrase != '\0') {
-# 217 "TAD_SERIAL.c"
                     char c = *pTxFrase++;
                     TXREG = (unsigned char)c;
                 }else {
@@ -5020,22 +5017,22 @@ void Motor_Serial(void){
         }
         break;
         case 2:
-            if(comando[4] == 'S'){
+            if(comando[0] == 'S'){
                 cmdSleep = 1;
-            }else if(comando[4] == 'R'){
+            }else if(comando[0] == 'R'){
                 cmdReset = 1;
-            }else if(comando[4] == 'C'){
+            }else if(comando[0] == 'C'){
                 cmdConsume = 1;
-            }else if(comando[4] == 'I'){
+            }else if(comando[0] == 'I'){
                 cmdInitialize = 1;
-            }else if(comando[4] == 'S'){
-                if(comando[6] == 'A'){
+            }else if(comando[0] == 'S'){
+                if(comando[2] == 'A'){
                     cmdStartRebel = 1;
                 }else{
                     cmdStopRebel = 1;
                 }
-            }else if(comando[4] == 'G'){
-                if(comando[8] == 'A'){
+            }else if(comando[0] == 'G'){
+                if(comando[4] == 'A'){
                     cmdGetAnimals = 1;
                 }else{
                     cmdGetProducts = 1;

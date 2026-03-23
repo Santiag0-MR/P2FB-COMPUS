@@ -649,14 +649,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 "33
-[; ;TAD_SERIAL.c: 33: static const char frase5[] = "CMD_SLEEP_SUCCESSFUL\r\n";
-[v _frase5 `Cuc ~T0 @X0 -> 23 `i s ]
+[; ;TAD_SERIAL.c: 33: static const char frase5[] = "SLEEP_SUCCESSFUL\r\n";
+[v _frase5 `Cuc ~T0 @X0 -> 19 `i s ]
 [i _frase5
 :U ..
--> 67 `c
--> 77 `c
--> 68 `c
--> 95 `c
 -> 83 `c
 -> 76 `c
 -> 69 `c
@@ -679,14 +675,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 "34
-[; ;TAD_SERIAL.c: 34: static const char frase6[] = "CMD_SLEEP_UNSUCCESSFUL\r\n";
-[v _frase6 `Cuc ~T0 @X0 -> 25 `i s ]
+[; ;TAD_SERIAL.c: 34: static const char frase6[] = "SLEEP_UNSUCCESSFUL\r\n";
+[v _frase6 `Cuc ~T0 @X0 -> 21 `i s ]
 [i _frase6
 :U ..
--> 67 `c
--> 77 `c
--> 68 `c
--> 95 `c
 -> 83 `c
 -> 76 `c
 -> 69 `c
@@ -1283,181 +1275,181 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;TAD_SERIAL.c: 204:             if (PIR1bits.TXIF) {
 [e $ ! != -> . . _PIR1bits 0 4 `i -> 0 `i 330  ]
 {
-"207
-[; ;TAD_SERIAL.c: 207:                 if(pTxFrase && *pTxFrase != '\0') {
+"205
+[; ;TAD_SERIAL.c: 205:                 if(pTxFrase && *pTxFrase != '\0') {
 [e $ ! && != _pTxFrase -> -> 0 `i `*Cuc != -> *U _pTxFrase `ui -> 0 `ui 331  ]
 {
-"217
-[; ;TAD_SERIAL.c: 217:                     char c = *pTxFrase++;
+"206
+[; ;TAD_SERIAL.c: 206:                     char c = *pTxFrase++;
 [v _c `uc ~T0 @X0 1 a ]
 [e = _c *U ++ _pTxFrase * -> -> 1 `i `x -> -> # *U _pTxFrase `i `x ]
-"218
-[; ;TAD_SERIAL.c: 218:                     TXREG = (unsigned char)c;
+"207
+[; ;TAD_SERIAL.c: 207:                     TXREG = (unsigned char)c;
 [e = _TXREG -> _c `uc ]
-"219
-[; ;TAD_SERIAL.c: 219:                 }else {
+"208
+[; ;TAD_SERIAL.c: 208:                 }else {
 }
 [e $U 332  ]
 [e :U 331 ]
 {
-"220
-[; ;TAD_SERIAL.c: 220:                     pTxFrase = 0;
+"209
+[; ;TAD_SERIAL.c: 209:                     pTxFrase = 0;
 [e = _pTxFrase -> -> 0 `i `*Cuc ]
-"221
-[; ;TAD_SERIAL.c: 221:                     estado = 1;
+"210
+[; ;TAD_SERIAL.c: 210:                     estado = 1;
 [e = _estado -> -> 1 `i `uc ]
-"222
-[; ;TAD_SERIAL.c: 222:                 }
+"211
+[; ;TAD_SERIAL.c: 211:                 }
 }
 [e :U 332 ]
-"223
-[; ;TAD_SERIAL.c: 223:             }
+"212
+[; ;TAD_SERIAL.c: 212:             }
 }
 [e :U 330 ]
-"224
-[; ;TAD_SERIAL.c: 224:             break;
+"213
+[; ;TAD_SERIAL.c: 213:             break;
 [e $U 327  ]
-"225
-[; ;TAD_SERIAL.c: 225:         case 1:
+"214
+[; ;TAD_SERIAL.c: 214:         case 1:
 [e :U 333 ]
-"226
-[; ;TAD_SERIAL.c: 226:         if(SERIAL_ReadByte(&aux)){
+"215
+[; ;TAD_SERIAL.c: 215:         if(SERIAL_ReadByte(&aux)){
 [e $ ! != -> ( _SERIAL_ReadByte (1 &U _aux `i -> 0 `i 334  ]
 {
-"227
-[; ;TAD_SERIAL.c: 227:             if(aux == '\r'){
+"216
+[; ;TAD_SERIAL.c: 216:             if(aux == '\r'){
 [e $ ! == -> _aux `ui -> 13 `ui 335  ]
 {
-"228
-[; ;TAD_SERIAL.c: 228:                 indice = 0;
+"217
+[; ;TAD_SERIAL.c: 217:                 indice = 0;
 [e = _indice -> -> 0 `i `uc ]
-"229
-[; ;TAD_SERIAL.c: 229:                 estado++;
+"218
+[; ;TAD_SERIAL.c: 218:                 estado++;
 [e ++ _estado -> -> 1 `i `uc ]
-"230
-[; ;TAD_SERIAL.c: 230:             } else if(aux == '\n'){
+"219
+[; ;TAD_SERIAL.c: 219:             } else if(aux == '\n'){
 }
 [e $U 336  ]
 [e :U 335 ]
 [e $ ! == -> _aux `ui -> 10 `ui 337  ]
 {
-"232
-[; ;TAD_SERIAL.c: 232:             } else {
+"221
+[; ;TAD_SERIAL.c: 221:             } else {
 }
 [e $U 338  ]
 [e :U 337 ]
 {
-"233
-[; ;TAD_SERIAL.c: 233:                 guardarCharArr(aux);
+"222
+[; ;TAD_SERIAL.c: 222:                 guardarCharArr(aux);
 [e ( _guardarCharArr (1 _aux ]
-"234
-[; ;TAD_SERIAL.c: 234:             }
+"223
+[; ;TAD_SERIAL.c: 223:             }
 }
 [e :U 338 ]
 [e :U 336 ]
-"235
-[; ;TAD_SERIAL.c: 235:         }
+"224
+[; ;TAD_SERIAL.c: 224:         }
 }
 [e :U 334 ]
-"236
-[; ;TAD_SERIAL.c: 236:         break;
+"225
+[; ;TAD_SERIAL.c: 225:         break;
 [e $U 327  ]
-"237
-[; ;TAD_SERIAL.c: 237:         case 2:
+"226
+[; ;TAD_SERIAL.c: 226:         case 2:
 [e :U 339 ]
-"238
-[; ;TAD_SERIAL.c: 238:             if(comando[4] == 'S'){
-[e $ ! == -> *U + &U _comando * -> -> -> 4 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 83 `ui 340  ]
+"227
+[; ;TAD_SERIAL.c: 227:             if(comando[0] == 'S'){
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 83 `ui 340  ]
 {
-"239
-[; ;TAD_SERIAL.c: 239:                 cmdSleep = 1;
+"228
+[; ;TAD_SERIAL.c: 228:                 cmdSleep = 1;
 [e = _cmdSleep -> -> 1 `i `uc ]
-"240
-[; ;TAD_SERIAL.c: 240:             }else if(comando[4] == 'R'){
+"229
+[; ;TAD_SERIAL.c: 229:             }else if(comando[0] == 'R'){
 }
 [e $U 341  ]
 [e :U 340 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 4 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 82 `ui 342  ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 82 `ui 342  ]
 {
-"241
-[; ;TAD_SERIAL.c: 241:                 cmdReset = 1;
+"230
+[; ;TAD_SERIAL.c: 230:                 cmdReset = 1;
 [e = _cmdReset -> -> 1 `i `uc ]
-"242
-[; ;TAD_SERIAL.c: 242:             }else if(comando[4] == 'C'){
+"231
+[; ;TAD_SERIAL.c: 231:             }else if(comando[0] == 'C'){
 }
 [e $U 343  ]
 [e :U 342 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 4 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 67 `ui 344  ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 67 `ui 344  ]
 {
-"243
-[; ;TAD_SERIAL.c: 243:                 cmdConsume = 1;
+"232
+[; ;TAD_SERIAL.c: 232:                 cmdConsume = 1;
 [e = _cmdConsume -> -> 1 `i `uc ]
-"244
-[; ;TAD_SERIAL.c: 244:             }else if(comando[4] == 'I'){
+"233
+[; ;TAD_SERIAL.c: 233:             }else if(comando[0] == 'I'){
 }
 [e $U 345  ]
 [e :U 344 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 4 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 73 `ui 346  ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 73 `ui 346  ]
 {
-"245
-[; ;TAD_SERIAL.c: 245:                 cmdInitialize = 1;
+"234
+[; ;TAD_SERIAL.c: 234:                 cmdInitialize = 1;
 [e = _cmdInitialize -> -> 1 `i `uc ]
-"246
-[; ;TAD_SERIAL.c: 246:             }else if(comando[4] == 'S'){
+"235
+[; ;TAD_SERIAL.c: 235:             }else if(comando[0] == 'S'){
 }
 [e $U 347  ]
 [e :U 346 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 4 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 83 `ui 348  ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 83 `ui 348  ]
 {
-"247
-[; ;TAD_SERIAL.c: 247:                 if(comando[6] == 'A'){
-[e $ ! == -> *U + &U _comando * -> -> -> 6 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 65 `ui 349  ]
+"236
+[; ;TAD_SERIAL.c: 236:                 if(comando[2] == 'A'){
+[e $ ! == -> *U + &U _comando * -> -> -> 2 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 65 `ui 349  ]
 {
-"248
-[; ;TAD_SERIAL.c: 248:                     cmdStartRebel = 1;
+"237
+[; ;TAD_SERIAL.c: 237:                     cmdStartRebel = 1;
 [e = _cmdStartRebel -> -> 1 `i `uc ]
-"249
-[; ;TAD_SERIAL.c: 249:                 }else{
+"238
+[; ;TAD_SERIAL.c: 238:                 }else{
 }
 [e $U 350  ]
 [e :U 349 ]
 {
-"250
-[; ;TAD_SERIAL.c: 250:                     cmdStopRebel = 1;
+"239
+[; ;TAD_SERIAL.c: 239:                     cmdStopRebel = 1;
 [e = _cmdStopRebel -> -> 1 `i `uc ]
-"251
-[; ;TAD_SERIAL.c: 251:                 }
+"240
+[; ;TAD_SERIAL.c: 240:                 }
 }
 [e :U 350 ]
-"252
-[; ;TAD_SERIAL.c: 252:             }else if(comando[4] == 'G'){
+"241
+[; ;TAD_SERIAL.c: 241:             }else if(comando[0] == 'G'){
 }
 [e $U 351  ]
 [e :U 348 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 4 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 71 `ui 352  ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 71 `ui 352  ]
 {
-"253
-[; ;TAD_SERIAL.c: 253:                 if(comando[8] == 'A'){
-[e $ ! == -> *U + &U _comando * -> -> -> 8 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 65 `ui 353  ]
+"242
+[; ;TAD_SERIAL.c: 242:                 if(comando[4] == 'A'){
+[e $ ! == -> *U + &U _comando * -> -> -> 4 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 65 `ui 353  ]
 {
-"254
-[; ;TAD_SERIAL.c: 254:                     cmdGetAnimals = 1;
+"243
+[; ;TAD_SERIAL.c: 243:                     cmdGetAnimals = 1;
 [e = _cmdGetAnimals -> -> 1 `i `uc ]
-"255
-[; ;TAD_SERIAL.c: 255:                 }else{
+"244
+[; ;TAD_SERIAL.c: 244:                 }else{
 }
 [e $U 354  ]
 [e :U 353 ]
 {
-"256
-[; ;TAD_SERIAL.c: 256:                     cmdGetProducts = 1;
+"245
+[; ;TAD_SERIAL.c: 245:                     cmdGetProducts = 1;
 [e = _cmdGetProducts -> -> 1 `i `uc ]
-"257
-[; ;TAD_SERIAL.c: 257:                 }
+"246
+[; ;TAD_SERIAL.c: 246:                 }
 }
 [e :U 354 ]
-"258
-[; ;TAD_SERIAL.c: 258:             }
+"247
+[; ;TAD_SERIAL.c: 247:             }
 }
 [e :U 352 ]
 [e :U 351 ]
@@ -1465,14 +1457,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 345 ]
 [e :U 343 ]
 [e :U 341 ]
-"259
-[; ;TAD_SERIAL.c: 259:             estado = 1;
+"248
+[; ;TAD_SERIAL.c: 248:             estado = 1;
 [e = _estado -> -> 1 `i `uc ]
-"260
-[; ;TAD_SERIAL.c: 260:             break;
+"249
+[; ;TAD_SERIAL.c: 249:             break;
 [e $U 327  ]
-"261
-[; ;TAD_SERIAL.c: 261:     }
+"250
+[; ;TAD_SERIAL.c: 250:     }
 }
 [e $U 327  ]
 [e :U 328 ]
@@ -1481,7 +1473,7 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 2 `i 339
  327 ]
 [e :U 327 ]
-"262
-[; ;TAD_SERIAL.c: 262: }
+"251
+[; ;TAD_SERIAL.c: 251: }
 [e :UE 326 ]
 }

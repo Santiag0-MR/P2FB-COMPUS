@@ -30,8 +30,8 @@ static const char frase1[] = "MOVE_DOWN\r\n";
 static const char frase2[] = "MOVE_LEFT\r\n";
 static const char frase3[] = "MOVE_RIGHT\r\n";
 static const char frase4[] = "SELECT\r\n";
-static const char frase5[] = "CMD_SLEEP_SUCCESSFUL\r\n";
-static const char frase6[] = "CMD_SLEEP_UNSUCCESSFUL\r\n";
+static const char frase5[] = "SLEEP_SUCCESSFUL\r\n";
+static const char frase6[] = "SLEEP_UNSUCCESSFUL\r\n";
 
 // comandos Java->PIC
 static const char comando0[] = "GET_ANIMALS";
@@ -202,18 +202,7 @@ void Motor_Serial(void){
     switch(estado){
         case 0:
             if (PIR1bits.TXIF) {
-
-                // Si tenemos pendiente enviar el '\r'
                 if(pTxFrase && *pTxFrase != '\0') {
-
-//                    char c = *pTxFrase++;
-//
-//                    if (c == '\n') {
-//                        TXREG = '\n';     // primero enviamos \n
-//                        enviarCR = 1;     // luego enviaremos \r
-//                    }else {
-//                        TXREG = (unsigned char)c;
-//                    }
                     char c = *pTxFrase++;
                     TXREG = (unsigned char)c;
                 }else {
@@ -235,24 +224,24 @@ void Motor_Serial(void){
         }
         break;
         case 2:
-            if(comando[4] == 'S'){ //CMD_[S]EELP
+            if(comando[0] == 'S'){ //[S]EELP
                 cmdSleep = 1;
-            }else if(comando[4] == 'R'){ //CMD_[R]ESET
+            }else if(comando[0] == 'R'){ //[R]ESET
                 cmdReset = 1;
-            }else if(comando[4] == 'C'){ //CMD_[C]ONSUME
+            }else if(comando[0] == 'C'){ //[C]ONSUME
                 cmdConsume = 1;
-            }else if(comando[4] == 'I'){ //CMD_[I]NICIALIZE
+            }else if(comando[0] == 'I'){ //[I]NICIALIZE
                 cmdInitialize = 1;
-            }else if(comando[4] == 'S'){
-                if(comando[6] == 'A'){ //CMD_[S]T[A]RT_REBELLION
+            }else if(comando[0] == 'S'){
+                if(comando[2] == 'A'){ //[S]T[A]RT_REBELLION
                     cmdStartRebel = 1;
-                }else{ // CMD_[S]T[O]P_REBELLION
+                }else{ // [S]T[O]P_REBELLION
                     cmdStopRebel = 1;
                 }
-            }else if(comando[4] == 'G'){
-                if(comando[8] == 'A'){ //CMD_[G]ET_[A]NIMALS
+            }else if(comando[0] == 'G'){
+                if(comando[4] == 'A'){ //[G]ET_[A]NIMALS
                     cmdGetAnimals = 1;
-                }else{ // CMD_[G]ET_[P]RODUCTS
+                }else{ // [G]ET_[P]RODUCTS
                     cmdGetProducts = 1;
                 }
             }

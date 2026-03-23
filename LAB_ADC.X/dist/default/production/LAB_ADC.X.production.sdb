@@ -352,9 +352,9 @@
 "32
 [v _frase4 frase4 `C[9]uc  1 s 9 frase4 ]
 "33
-[v _frase5 frase5 `C[23]uc  1 s 23 frase5 ]
+[v _frase5 frase5 `C[19]uc  1 s 19 frase5 ]
 "34
-[v _frase6 frase6 `C[25]uc  1 s 25 frase6 ]
+[v _frase6 frase6 `C[21]uc  1 s 21 frase6 ]
 "51
 [v _frases frases `C[7]*.31Cuc  1 s 7 frases ]
 "54
@@ -389,11 +389,11 @@
 "199
 [v _Motor_Serial Motor_Serial `(v  1 e 1 0 ]
 {
-"217
+"206
 [v Motor_Serial@c c `uc  1 a 1 1 ]
 "200
 [v Motor_Serial@aux aux `uc  1 a 1 2 ]
-"262
+"251
 } 0
 "117
 [v _guardarCharArr guardarCharArr `(v  1 e 1 0 ]
