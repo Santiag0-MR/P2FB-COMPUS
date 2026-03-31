@@ -4818,6 +4818,9 @@ unsigned char __t3rd16on(void);
 # 34 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/xc.h" 2 3
 # 5 "./TAD_HEARTBEAT.h" 2
 
+void HREATBEAT_Init();
+void HEARTBEAT_setEstadoAlarma();
+void HEARTBEAT_clearEstadoAlarma();
 void HEARTBEAT_Motor();
 # 4 "TAD_HEARTBEAT.c" 2
 
@@ -4858,7 +4861,11 @@ void HEARTBEAT_Motor(){
         case 2:
             if(TI_GetTics(timerDutyCycle) >= dutyCycle[indice]){
                 LATAbits.LA3 = 0;
-                indice++;
+                if(indice == 3){
+                    indice = 0;
+                }else{
+                    indice++;
+                }
             }
             if(TI_GetTics(timerDutyCycle) >= 500){
                 estado = 1;

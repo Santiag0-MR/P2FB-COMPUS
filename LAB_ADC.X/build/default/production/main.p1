@@ -81,6 +81,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4 ./TAD_LDR.h
 [; ;./TAD_LDR.h: 4: void LDR_Init();
 [v _LDR_Init `(v ~T0 @X0 0 e? ]
+"6 ./TAD_HEARTBEAT.h
+[; ;./TAD_HEARTBEAT.h: 6: void HREATBEAT_Init();
+[v _HREATBEAT_Init `(v ~T0 @X0 0 e? ]
 "5 ./TAD_ADC.h
 [; ;./TAD_ADC.h: 5: void ADC_Motor(void);
 [v _ADC_Motor `(v ~T0 @X0 0 ef ]
@@ -90,8 +93,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7 ./TAD_SERIAL.h
 [; ;./TAD_SERIAL.h: 7: void Motor_Serial(void);
 [v _Motor_Serial `(v ~T0 @X0 0 ef ]
-"6 ./TAD_HEARTBEAT.h
-[; ;./TAD_HEARTBEAT.h: 6: void HEARTBEAT_Motor();
+"9 ./TAD_HEARTBEAT.h
+[; ;./TAD_HEARTBEAT.h: 9: void HEARTBEAT_Motor();
 [v _HEARTBEAT_Motor `(v ~T0 @X0 0 e? ]
 "52 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 52: __asm("PORTA equ 0F80h");
@@ -545,7 +548,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 24:     LDR_Init();
 [e ( _RSI_Timer0 ..  ]
 "25
-[; ;main.c: 25: 
+[; ;main.c: 25:     HREATBEAT_Init();
 }
 [e :U 303 ]
 "26
@@ -553,27 +556,28 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 302 ]
 }
 "28
-[; ;main.c: 28:         ADC_Motor();
+[; ;main.c: 28:     while(1){
 [v _initPorts `(v ~T0 @X0 1 ef ]
 {
 [e :U _initPorts ]
 [f ]
 "29
-[; ;main.c: 29:         DSP_Motor();
+[; ;main.c: 29:         ADC_Motor();
 [e = . . _TRISBbits 0 2 -> -> 1 `i `uc ]
 "30
-[; ;main.c: 30:         Motor_Serial();
+[; ;main.c: 30:         DSP_Motor();
 [e = . . _INTCON2bits 2 1 -> -> 0 `i `uc ]
 "31
-[; ;main.c: 31:         HEARTBEAT_Motor();
+[; ;main.c: 31:         Motor_Serial();
 [e = _ADCON0 -> -> 1 `i `uc ]
 "32
-[; ;main.c: 32:     }
+[; ;main.c: 32:         HEARTBEAT_Motor();
 [e = _ADCON1 -> -> 12 `i `uc ]
 "33
-[; ;main.c: 33: }
+[; ;main.c: 33:     }
 [e = _ADCON2 -> -> 128 `i `uc ]
 "34
+[; ;main.c: 34: }
 [e = . . _TRISAbits 0 3 -> -> 0 `i `uc ]
 "35
 [e :UE 304 ]
@@ -596,22 +600,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _SERIAL_Init ..  ]
 "43
 [e ( _LDR_Init ..  ]
-"46
+"44
+[e ( _HREATBEAT_Init ..  ]
+"47
 [e :U 307 ]
 {
-"47
-[e ( _ADC_Motor ..  ]
 "48
-[e ( _DSP_Motor ..  ]
+[e ( _ADC_Motor ..  ]
 "49
-[e ( _Motor_Serial ..  ]
+[e ( _DSP_Motor ..  ]
 "50
-[e ( _HEARTBEAT_Motor ..  ]
+[e ( _Motor_Serial ..  ]
 "51
+[e ( _HEARTBEAT_Motor ..  ]
+"52
 }
 [e :U 306 ]
 [e $U 307  ]
 [e :U 308 ]
-"52
+"53
 [e :UE 305 ]
 }

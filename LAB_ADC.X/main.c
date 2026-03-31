@@ -41,6 +41,7 @@ void main(void) {
     DSP_Init();
     SERIAL_Init();
     LDR_Init();
+    HREATBEAT_Init();
     
 
     while(1){

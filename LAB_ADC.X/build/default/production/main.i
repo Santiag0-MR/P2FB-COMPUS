@@ -4881,6 +4881,9 @@ void LDR_Motor();
 
 
 
+void HREATBEAT_Init();
+void HEARTBEAT_setEstadoAlarma();
+void HEARTBEAT_clearEstadoAlarma();
 void HEARTBEAT_Motor();
 # 9 "main.c" 2
 
@@ -4918,6 +4921,7 @@ void main(void) {
     DSP_Init();
     SERIAL_Init();
     LDR_Init();
+    HREATBEAT_Init();
 
 
     while(1){

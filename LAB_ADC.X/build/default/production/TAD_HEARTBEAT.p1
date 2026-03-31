@@ -556,28 +556,45 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;TAD_HEARTBEAT.c: 41:                 LATAbits.LA3 = 0;
 [e = . . _LATAbits 1 3 -> -> 0 `i `uc ]
 "42
-[; ;TAD_HEARTBEAT.c: 42:                 indice++;
-[e ++ _indice -> -> 1 `i `uc ]
+[; ;TAD_HEARTBEAT.c: 42:                 if(indice == 3){
+[e $ ! == -> _indice `i -> 3 `i 312  ]
+{
 "43
-[; ;TAD_HEARTBEAT.c: 43:             }
-}
-[e :U 311 ]
+[; ;TAD_HEARTBEAT.c: 43:                     indice = 0;
+[e = _indice -> -> 0 `i `uc ]
 "44
-[; ;TAD_HEARTBEAT.c: 44:             if(TI_GetTics(timerDutyCycle) >= 500){
-[e $ ! >= ( _TI_GetTics (1 _timerDutyCycle -> -> -> 500 `i `l `ul 312  ]
+[; ;TAD_HEARTBEAT.c: 44:                 }else{
+}
+[e $U 313  ]
+[e :U 312 ]
 {
 "45
-[; ;TAD_HEARTBEAT.c: 45:                 estado = 1;
-[e = _estado -> -> 1 `i `uc ]
+[; ;TAD_HEARTBEAT.c: 45:                     indice++;
+[e ++ _indice -> -> 1 `i `uc ]
 "46
-[; ;TAD_HEARTBEAT.c: 46:             }
+[; ;TAD_HEARTBEAT.c: 46:                 }
 }
-[e :U 312 ]
+[e :U 313 ]
 "47
-[; ;TAD_HEARTBEAT.c: 47:             break;
-[e $U 306  ]
+[; ;TAD_HEARTBEAT.c: 47:             }
+}
+[e :U 311 ]
 "48
-[; ;TAD_HEARTBEAT.c: 48:     }
+[; ;TAD_HEARTBEAT.c: 48:             if(TI_GetTics(timerDutyCycle) >= 500){
+[e $ ! >= ( _TI_GetTics (1 _timerDutyCycle -> -> -> 500 `i `l `ul 314  ]
+{
+"49
+[; ;TAD_HEARTBEAT.c: 49:                 estado = 1;
+[e = _estado -> -> 1 `i `uc ]
+"50
+[; ;TAD_HEARTBEAT.c: 50:             }
+}
+[e :U 314 ]
+"51
+[; ;TAD_HEARTBEAT.c: 51:             break;
+[e $U 306  ]
+"52
+[; ;TAD_HEARTBEAT.c: 52:     }
 }
 [e $U 306  ]
 [e :U 307 ]
@@ -586,7 +603,7 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 2 `i 310
  306 ]
 [e :U 306 ]
-"49
-[; ;TAD_HEARTBEAT.c: 49: }
+"53
+[; ;TAD_HEARTBEAT.c: 53: }
 [e :UE 305 ]
 }

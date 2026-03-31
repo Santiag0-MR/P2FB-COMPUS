@@ -1,7 +1,7 @@
 ### HEXMate logfile and output summary ###
 
 ### Command-line arguments ###
- C:\Users\Santiago\AppData\Local\Temp\xcAs6g4.\driver_tmp_3.o
+ C:\Users\Santiago\AppData\Local\Temp\xcAsnic.\driver_tmp_3.o
  -Odist/default/production\LAB_ADC.X.production.hex
  -logfile=dist/default/production\LAB_ADC.X.production.hxl
  -format=INHX032
@@ -10,23 +10,23 @@
 
 ### Memory Usage ###
  Input file ranges:
-  0h - 3h		(C:\Users\Santiago\AppData\Local\Temp\xcAs6g4.\driver_tmp_3.o)
-  8h - 17h		(C:\Users\Santiago\AppData\Local\Temp\xcAs6g4.\driver_tmp_3.o)
-  200h - 88Ch		(C:\Users\Santiago\AppData\Local\Temp\xcAs6g4.\driver_tmp_3.o)
-  88Eh - 891h		(C:\Users\Santiago\AppData\Local\Temp\xcAs6g4.\driver_tmp_3.o)
-  200000h - 200007h		(C:\Users\Santiago\AppData\Local\Temp\xcAs6g4.\driver_tmp_3.o)
-  300000h - 30000Dh		(C:\Users\Santiago\AppData\Local\Temp\xcAs6g4.\driver_tmp_3.o)
+  0h - 3h		(C:\Users\Santiago\AppData\Local\Temp\xcAsnic.\driver_tmp_3.o)
+  8h - 17h		(C:\Users\Santiago\AppData\Local\Temp\xcAsnic.\driver_tmp_3.o)
+  200h - 8A6h		(C:\Users\Santiago\AppData\Local\Temp\xcAsnic.\driver_tmp_3.o)
+  8A8h - 8ABh		(C:\Users\Santiago\AppData\Local\Temp\xcAsnic.\driver_tmp_3.o)
+  200000h - 200007h		(C:\Users\Santiago\AppData\Local\Temp\xcAsnic.\driver_tmp_3.o)
+  300000h - 30000Dh		(C:\Users\Santiago\AppData\Local\Temp\xcAsnic.\driver_tmp_3.o)
  Unused ranges:
   4h - 7h
   18h - 1FFh
-  88Dh - 88Dh
-  892h - 1FFFFFh
+  8A7h - 8A7h
+  8ACh - 1FFFFFh
   200008h - 2FFFFFh
 
 ### Hex Memory Map ###
  Legend:
   -- = Unused memory
-  H1 = Input file             (C:\Users\Santiago\AppData\Local\Temp\xcAs6g4.\driver_tmp_3.o)
+  H1 = Input file             (C:\Users\Santiago\AppData\Local\Temp\xcAsnic.\driver_tmp_3.o)
 ----------------------------------------------------------
          | 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 ----------------------------------------------------------
@@ -137,8 +137,9 @@
 00000850 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000860 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000870 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000880 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 -- H1 H1
-00000890 | H1 H1 -- -- -- -- -- -- -- -- -- -- -- -- -- --
+00000880 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00000890 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+000008A0 | H1 H1 H1 H1 H1 H1 H1 -- H1 H1 H1 H1 -- -- -- --
 ----------------------------------------------------------
 00200000 | H1 H1 H1 H1 H1 H1 H1 H1 -- -- -- -- -- -- -- --
 ----------------------------------------------------------

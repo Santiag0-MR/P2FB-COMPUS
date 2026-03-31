@@ -39,7 +39,11 @@ void HEARTBEAT_Motor(){
         case 2:
             if(TI_GetTics(timerDutyCycle) >= dutyCycle[indice]){
                 LATAbits.LA3 = 0;
-                indice++;
+                if(indice == 3){
+                    indice = 0;
+                }else{
+                    indice++;
+                }
             }
             if(TI_GetTics(timerDutyCycle) >= MS500){
                 estado = 1;

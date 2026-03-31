@@ -3,6 +3,9 @@
 
 #include <xc.h> 
 
+void HREATBEAT_Init();
+void HEARTBEAT_setEstadoAlarma();
+void HEARTBEAT_clearEstadoAlarma();
 void HEARTBEAT_Motor();
 
 #endif 
