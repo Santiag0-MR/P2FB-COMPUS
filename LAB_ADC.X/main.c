@@ -1,9 +1,11 @@
 #include <xc.h>
+#include <proc/pic18f4321.h>
 #include "TAD_ADC.h"
 #include "TAD_DISPLAY.h"
 #include "TAD_SERIAL.h"
 #include "TAD_TIMER.h"
 #include "TAD_LDR.h"
+#include "TAD_HEARTBEAT.h"
 
 #pragma config OSC   = HS
 #pragma config PBADEN = DIG
@@ -29,6 +31,7 @@ void initPorts(){
     ADCON0 = 0x01;  // canal AN0, ADC encendido
     ADCON1 = 0x0C;  // AN0, AN1, AN2 analógicos, resto digital
     ADCON2 = 0x80;  // right-justified
+    TRISAbits.TRISA3 = 0;
 }
 
 void main(void) {
@@ -44,5 +47,6 @@ void main(void) {
         ADC_Motor();
         DSP_Motor();
         Motor_Serial();
+        HEARTBEAT_Motor();
     }
 }

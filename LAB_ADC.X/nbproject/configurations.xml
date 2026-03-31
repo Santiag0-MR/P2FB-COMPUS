@@ -9,6 +9,7 @@
       <itemPath>TAD_SERIAL.h</itemPath>
       <itemPath>TAD_TIMER.h</itemPath>
       <itemPath>TAD_LDR.h</itemPath>
+      <itemPath>TAD_HEARTBEAT.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -23,6 +24,7 @@
       <itemPath>TAD_SERIAL.c</itemPath>
       <itemPath>TAD_TIMER.c</itemPath>
       <itemPath>TAD_LDR.c</itemPath>
+      <itemPath>TAD_HEARTBEAT.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

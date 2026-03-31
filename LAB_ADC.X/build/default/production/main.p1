@@ -50,6 +50,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4643
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 4643: extern volatile unsigned char ADCON2 __attribute__((address(0xFC0)));
 [v _ADCON2 `Vuc ~T0 @X0 0 e@4032 ]
+"1497
+[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 1497:     struct {
+[s S58 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S58 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 TRISA7 ]
+"1507
+[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 1507:     struct {
+[s S59 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S59 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
+"1496
+[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 1496: typedef union {
+[u S57 `S58 1 `S59 1 ]
+[n S57 . . . ]
+"1518
+[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 1518: extern volatile TRISAbits_t TRISAbits __attribute__((address(0xF92)));
+[v _TRISAbits `VS57 ~T0 @X0 0 e@3986 ]
 [p mainexit ]
 "13 ./TAD_TIMER.h
 [; ;./TAD_TIMER.h: 13: void TI_Init (void);
@@ -75,6 +90,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7 ./TAD_SERIAL.h
 [; ;./TAD_SERIAL.h: 7: void Motor_Serial(void);
 [v _Motor_Serial `(v ~T0 @X0 0 ef ]
+"6 ./TAD_HEARTBEAT.h
+[; ;./TAD_HEARTBEAT.h: 6: void HEARTBEAT_Motor();
+[v _HEARTBEAT_Motor `(v ~T0 @X0 0 e? ]
 "52 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -489,107 +507,111 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7008
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 7008: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"8 main.c
-[; ;main.c: 8: 
-[p x OSC      =  HS ]
-"9
-[; ;main.c: 9: void initPorts(){
-[p x PBADEN  =  DIG ]
-"10
+"10 main.c
 [; ;main.c: 10:     TRISBbits.TRISB2 = 1;
-[p x MCLRE  =  ON ]
+[p x OSC      =  HS ]
 "11
 [; ;main.c: 11:     INTCON2bits.RBPU = 0;
-[p x DEBUG  =  OFF ]
+[p x PBADEN  =  DIG ]
 "12
 [; ;main.c: 12:     ADCON0 = 0x01;
-[p x PWRT    =  OFF ]
+[p x MCLRE  =  ON ]
 "13
 [; ;main.c: 13:     ADCON1 = 0x0C;
-[p x BOR      =  OFF ]
+[p x DEBUG  =  OFF ]
 "14
 [; ;main.c: 14:     ADCON2 = 0x80;
-[p x WDT      =  OFF ]
+[p x PWRT    =  OFF ]
 "15
-[; ;main.c: 15: }
+[; ;main.c: 15:     TRISAbits.TRISA3 = 0;
+[p x BOR      =  OFF ]
+"16
+[; ;main.c: 16: }
+[p x WDT      =  OFF ]
+"17
+[; ;main.c: 17: 
 [p x LVP      =  OFF ]
-"20
-[; ;main.c: 20:     ADC_Init();
+"22
+[; ;main.c: 22:     DSP_Init();
 [v _MyRSI `(v ~T42 @X0 1 sf ]
 {
 [e :U _MyRSI ]
 [f ]
-"21
-[; ;main.c: 21:     DSP_Init();
+"23
+[; ;main.c: 23:     SERIAL_Init();
 [e $ ! == -> _TMR0IF `i -> 1 `i 303  ]
 {
-"22
-[; ;main.c: 22:     SERIAL_Init();
+"24
+[; ;main.c: 24:     LDR_Init();
 [e ( _RSI_Timer0 ..  ]
-"23
-[; ;main.c: 23:     LDR_Init();
+"25
+[; ;main.c: 25: 
 }
 [e :U 303 ]
-"24
-[; ;main.c: 24: 
+"26
+[; ;main.c: 26: 
 [e :UE 302 ]
 }
-"26
-[; ;main.c: 26:     while(1){
+"28
+[; ;main.c: 28:         ADC_Motor();
 [v _initPorts `(v ~T0 @X0 1 ef ]
 {
 [e :U _initPorts ]
 [f ]
-"27
-[; ;main.c: 27:         ADC_Motor();
-[e = . . _TRISBbits 0 2 -> -> 1 `i `uc ]
-"28
-[; ;main.c: 28:         DSP_Motor();
-[e = . . _INTCON2bits 2 1 -> -> 0 `i `uc ]
 "29
-[; ;main.c: 29:         Motor_Serial();
-[e = _ADCON0 -> -> 1 `i `uc ]
+[; ;main.c: 29:         DSP_Motor();
+[e = . . _TRISBbits 0 2 -> -> 1 `i `uc ]
 "30
-[; ;main.c: 30:     }
-[e = _ADCON1 -> -> 12 `i `uc ]
+[; ;main.c: 30:         Motor_Serial();
+[e = . . _INTCON2bits 2 1 -> -> 0 `i `uc ]
 "31
-[; ;main.c: 31: }
-[e = _ADCON2 -> -> 128 `i `uc ]
+[; ;main.c: 31:         HEARTBEAT_Motor();
+[e = _ADCON0 -> -> 1 `i `uc ]
 "32
+[; ;main.c: 32:     }
+[e = _ADCON1 -> -> 12 `i `uc ]
+"33
+[; ;main.c: 33: }
+[e = _ADCON2 -> -> 128 `i `uc ]
+"34
+[e = . . _TRISAbits 0 3 -> -> 0 `i `uc ]
+"35
 [e :UE 304 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"34
+"37
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"35
-[e ( _initPorts ..  ]
-"36
-[e ( _TI_Init ..  ]
-"37
-[e ( _ADC_Init ..  ]
 "38
-[e ( _DSP_Init ..  ]
+[e ( _initPorts ..  ]
 "39
-[e ( _SERIAL_Init ..  ]
+[e ( _TI_Init ..  ]
 "40
-[e ( _LDR_Init ..  ]
+[e ( _ADC_Init ..  ]
+"41
+[e ( _DSP_Init ..  ]
+"42
+[e ( _SERIAL_Init ..  ]
 "43
+[e ( _LDR_Init ..  ]
+"46
 [e :U 307 ]
 {
-"44
-[e ( _ADC_Motor ..  ]
-"45
-[e ( _DSP_Motor ..  ]
-"46
-[e ( _Motor_Serial ..  ]
 "47
+[e ( _ADC_Motor ..  ]
+"48
+[e ( _DSP_Motor ..  ]
+"49
+[e ( _Motor_Serial ..  ]
+"50
+[e ( _HEARTBEAT_Motor ..  ]
+"51
 }
 [e :U 306 ]
 [e $U 307  ]
 [e :U 308 ]
-"48
+"52
 [e :UE 305 ]
 }

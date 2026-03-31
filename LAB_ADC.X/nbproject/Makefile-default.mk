@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c TAD_ADC.c TAD_DISPLAY.c TAD_SERIAL.c TAD_TIMER.c TAD_LDR.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c TAD_ADC.c TAD_DISPLAY.c TAD_SERIAL.c TAD_TIMER.c TAD_LDR.c TAD_HEARTBEAT.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/TAD_ADC.p1 ${OBJECTDIR}/TAD_DISPLAY.p1 ${OBJECTDIR}/TAD_SERIAL.p1 ${OBJECTDIR}/TAD_TIMER.p1 ${OBJECTDIR}/TAD_LDR.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/TAD_ADC.p1.d ${OBJECTDIR}/TAD_DISPLAY.p1.d ${OBJECTDIR}/TAD_SERIAL.p1.d ${OBJECTDIR}/TAD_TIMER.p1.d ${OBJECTDIR}/TAD_LDR.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/TAD_ADC.p1 ${OBJECTDIR}/TAD_DISPLAY.p1 ${OBJECTDIR}/TAD_SERIAL.p1 ${OBJECTDIR}/TAD_TIMER.p1 ${OBJECTDIR}/TAD_LDR.p1 ${OBJECTDIR}/TAD_HEARTBEAT.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/TAD_ADC.p1.d ${OBJECTDIR}/TAD_DISPLAY.p1.d ${OBJECTDIR}/TAD_SERIAL.p1.d ${OBJECTDIR}/TAD_TIMER.p1.d ${OBJECTDIR}/TAD_LDR.p1.d ${OBJECTDIR}/TAD_HEARTBEAT.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/TAD_ADC.p1 ${OBJECTDIR}/TAD_DISPLAY.p1 ${OBJECTDIR}/TAD_SERIAL.p1 ${OBJECTDIR}/TAD_TIMER.p1 ${OBJECTDIR}/TAD_LDR.p1
+OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/TAD_ADC.p1 ${OBJECTDIR}/TAD_DISPLAY.p1 ${OBJECTDIR}/TAD_SERIAL.p1 ${OBJECTDIR}/TAD_TIMER.p1 ${OBJECTDIR}/TAD_LDR.p1 ${OBJECTDIR}/TAD_HEARTBEAT.p1
 
 # Source Files
-SOURCEFILES=main.c TAD_ADC.c TAD_DISPLAY.c TAD_SERIAL.c TAD_TIMER.c TAD_LDR.c
+SOURCEFILES=main.c TAD_ADC.c TAD_DISPLAY.c TAD_SERIAL.c TAD_TIMER.c TAD_LDR.c TAD_HEARTBEAT.c
 
 
 
@@ -142,6 +142,14 @@ ${OBJECTDIR}/TAD_LDR.p1: TAD_LDR.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/TAD_LDR.d ${OBJECTDIR}/TAD_LDR.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/TAD_LDR.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/TAD_HEARTBEAT.p1: TAD_HEARTBEAT.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/TAD_HEARTBEAT.p1.d 
+	@${RM} ${OBJECTDIR}/TAD_HEARTBEAT.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1    -fno-short-double -fno-short-float -memi=wordwrite -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"C:/Program Files/Microchip/xc8/v3.00/pic/include/proc" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/TAD_HEARTBEAT.p1 TAD_HEARTBEAT.c 
+	@-${MV} ${OBJECTDIR}/TAD_HEARTBEAT.d ${OBJECTDIR}/TAD_HEARTBEAT.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/TAD_HEARTBEAT.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -190,6 +198,14 @@ ${OBJECTDIR}/TAD_LDR.p1: TAD_LDR.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c    -fno-short-double -fno-short-float -memi=wordwrite -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"C:/Program Files/Microchip/xc8/v3.00/pic/include/proc" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/TAD_LDR.p1 TAD_LDR.c 
 	@-${MV} ${OBJECTDIR}/TAD_LDR.d ${OBJECTDIR}/TAD_LDR.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/TAD_LDR.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/TAD_HEARTBEAT.p1: TAD_HEARTBEAT.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/TAD_HEARTBEAT.p1.d 
+	@${RM} ${OBJECTDIR}/TAD_HEARTBEAT.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c    -fno-short-double -fno-short-float -memi=wordwrite -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"C:/Program Files/Microchip/xc8/v3.00/pic/include/proc" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/TAD_HEARTBEAT.p1 TAD_HEARTBEAT.c 
+	@-${MV} ${OBJECTDIR}/TAD_HEARTBEAT.d ${OBJECTDIR}/TAD_HEARTBEAT.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/TAD_HEARTBEAT.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

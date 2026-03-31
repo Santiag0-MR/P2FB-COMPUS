@@ -27,11 +27,11 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"20 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\main.c
+"22 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\main.c
 [v _MyRSI MyRSI `IIH(v  1 s 1 MyRSI ]
-"26
+"28
 [v _initPorts initPorts `(v  1 e 1 0 ]
-"34
+"37
 [v _main main `(v  1 e 1 0 ]
 "11 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_ADC.c
 [v _ADC_Init ADC_Init `(v  1 e 1 0 ]
@@ -55,6 +55,8 @@
 [v _DSP_Init DSP_Init `(v  1 e 1 0 ]
 "38
 [v _DSP_Motor DSP_Motor `(v  1 e 1 0 ]
+"28 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_HEARTBEAT.c
+[v _HEARTBEAT_Motor HEARTBEAT_Motor `(v  1 e 1 0 ]
 "13 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_LDR.c
 [v _LDR_Init LDR_Init `(v  1 e 1 0 ]
 "56 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_SERIAL.c
@@ -79,6 +81,27 @@
 [v _TI_ResetTics TI_ResetTics `(v  1 e 1 0 ]
 "49
 [v _TI_GetTics TI_GetTics `(ul  1 e 4 0 ]
+[s S744 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"1013 C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h
+[s S753 . 1 `uc 1 LA0 1 0 :1:0 
+`uc 1 LA1 1 0 :1:1 
+`uc 1 LA2 1 0 :1:2 
+`uc 1 LA3 1 0 :1:3 
+`uc 1 LA4 1 0 :1:4 
+`uc 1 LA5 1 0 :1:5 
+`uc 1 LA6 1 0 :1:6 
+`uc 1 LA7 1 0 :1:7 
+]
+[u S762 . 1 `S744 1 . 1 0 `S753 1 . 1 0 ]
+[v _LATAbits LATAbits `VES762  1 e 1 @3977 ]
 [s S38 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
@@ -89,7 +112,7 @@
 `uc 1 RB7 1 0 :1:7 
 ]
 "326 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
-[s S269 . 1 `uc 1 INT0 1 0 :1:0 
+[s S321 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
 `uc 1 CCP2 1 0 :1:3 
@@ -98,7 +121,7 @@
 `uc 1 KBI2 1 0 :1:6 
 `uc 1 KBI3 1 0 :1:7 
 ]
-[s S278 . 1 `uc 1 AN12 1 0 :1:0 
+[s S330 . 1 `uc 1 AN12 1 0 :1:0 
 `uc 1 AN10 1 0 :1:1 
 `uc 1 AN8 1 0 :1:2 
 `uc 1 AN9 1 0 :1:3 
@@ -107,13 +130,34 @@
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S287 . 1 `uc 1 FLT0 1 0 :1:0 
+[s S339 . 1 `uc 1 FLT0 1 0 :1:0 
 ]
-[s S289 . 1 `uc 1 . 1 0 :3:0 
+[s S341 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S292 . 1 `S38 1 . 1 0 `S269 1 . 1 0 `S278 1 . 1 0 `S287 1 . 1 0 `S289 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES292  1 e 1 @3969 ]
+[u S344 . 1 `S38 1 . 1 0 `S321 1 . 1 0 `S330 1 . 1 0 `S339 1 . 1 0 `S341 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES344  1 e 1 @3969 ]
+[s S107 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1518
+[s S116 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+[u S125 . 1 `S107 1 . 1 0 `S116 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES125  1 e 1 @3986 ]
 [s S29 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
@@ -126,7 +170,7 @@
 "1740
 [u S47 . 1 `S29 1 . 1 0 `S38 1 . 1 0 ]
 [v _TRISBbits TRISBbits `VES47  1 e 1 @3987 ]
-[s S476 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[s S528 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -136,13 +180,13 @@
 `uc 1 PSPIF 1 0 :1:7 
 ]
 "2702
-[s S485 . 1 `uc 1 . 1 0 :4:0 
+[s S537 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[u S489 . 1 `S476 1 . 1 0 `S485 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES489  1 e 1 @3998 ]
-[s S420 . 1 `uc 1 RX9D 1 0 :1:0 
+[u S541 . 1 `S528 1 . 1 0 `S537 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES541  1 e 1 @3998 ]
+[s S472 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -152,23 +196,23 @@
 `uc 1 SPEN 1 0 :1:7 
 ]
 "3160
-[s S429 . 1 `uc 1 . 1 0 :3:0 
+[s S481 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 ADEN 1 0 :1:3 
 ]
-[s S432 . 1 `uc 1 . 1 0 :5:0 
+[s S484 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SRENA 1 0 :1:5 
 ]
-[s S435 . 1 `uc 1 . 1 0 :6:0 
+[s S487 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[s S438 . 1 `uc 1 . 1 0 :6:0 
+[s S490 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S441 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S493 . 1 `uc 1 RCD8 1 0 :1:0 
 ]
-[u S443 . 1 `S420 1 . 1 0 `S429 1 . 1 0 `S432 1 . 1 0 `S435 1 . 1 0 `S438 1 . 1 0 `S441 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES443  1 e 1 @4011 ]
-[s S368 . 1 `uc 1 TX9D 1 0 :1:0 
+[u S495 . 1 `S472 1 . 1 0 `S481 1 . 1 0 `S484 1 . 1 0 `S487 1 . 1 0 `S490 1 . 1 0 `S493 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES495  1 e 1 @4011 ]
+[s S420 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -178,7 +222,7 @@
 `uc 1 CSRC 1 0 :1:7 
 ]
 "3368
-[s S377 . 1 `uc 1 TX9D1 1 0 :1:0 
+[s S429 . 1 `uc 1 TX9D1 1 0 :1:0 
 `uc 1 TRMT1 1 0 :1:1 
 `uc 1 BRGH1 1 0 :1:2 
 `uc 1 SENDB1 1 0 :1:3 
@@ -187,13 +231,13 @@
 `uc 1 TX91 1 0 :1:6 
 `uc 1 CSRC1 1 0 :1:7 
 ]
-[s S386 . 1 `uc 1 . 1 0 :6:0 
+[s S438 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[s S389 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S441 . 1 `uc 1 TXD8 1 0 :1:0 
 ]
-[u S391 . 1 `S368 1 . 1 0 `S377 1 . 1 0 `S386 1 . 1 0 `S389 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES391  1 e 1 @4012 ]
+[u S443 . 1 `S420 1 . 1 0 `S429 1 . 1 0 `S438 1 . 1 0 `S441 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES443  1 e 1 @4012 ]
 "3585
 [v _TXREG TXREG `VEuc  1 e 1 @4013 ]
 "3597
@@ -208,38 +252,38 @@
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "4799
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S157 . 1 `uc 1 . 1 0 :1:0 
+[s S209 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4843
-[s S160 . 1 `uc 1 ADON 1 0 :1:0 
+[s S212 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S164 . 1 `uc 1 . 1 0 :1:0 
+[s S216 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S171 . 1 `uc 1 . 1 0 :1:0 
+[s S223 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S174 . 1 `uc 1 . 1 0 :1:0 
+[s S226 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S177 . 1 `uc 1 . 1 0 :1:0 
+[s S229 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S180 . 1 `uc 1 . 1 0 :1:0 
+[s S232 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S183 . 1 `uc 1 . 1 0 :1:0 
+[s S235 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S186 . 1 `S157 1 . 1 0 `S160 1 . 1 0 `S164 1 . 1 0 `S171 1 . 1 0 `S174 1 . 1 0 `S177 1 . 1 0 `S180 1 . 1 0 `S183 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES186  1 e 1 @4034 ]
+[u S238 . 1 `S209 1 . 1 0 `S212 1 . 1 0 `S216 1 . 1 0 `S223 1 . 1 0 `S226 1 . 1 0 `S229 1 . 1 0 `S232 1 . 1 0 `S235 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES238  1 e 1 @4034 ]
 "4925
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "4932
@@ -266,7 +310,7 @@
 ]
 [u S84 . 1 `S69 1 . 1 0 `S72 1 . 1 0 `S81 1 . 1 0 ]
 [v _INTCON2bits INTCON2bits `VES84  1 e 1 @4081 ]
-[s S592 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S644 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -276,7 +320,7 @@
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6731
-[s S601 . 1 `uc 1 . 1 0 :1:0 
+[s S653 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -285,12 +329,12 @@
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S610 . 1 `uc 1 . 1 0 :6:0 
+[s S662 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S614 . 1 `S592 1 . 1 0 `S601 1 . 1 0 `S610 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES614  1 e 1 @4082 ]
+[u S666 . 1 `S644 1 . 1 0 `S653 1 . 1 0 `S662 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES666  1 e 1 @4082 ]
 "8680
 [v _TMR0IF TMR0IF `VEb  1 e 0 @32658 ]
 "3 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_ADC.c
@@ -317,6 +361,14 @@
 [v _timerRebotes timerRebotes `uc  1 s 1 timerRebotes ]
 "24
 [v _flagRebotes flagRebotes `uc  1 s 1 flagRebotes ]
+"8 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_HEARTBEAT.c
+[v _timerDutyCycle timerDutyCycle `uc  1 s 1 timerDutyCycle ]
+"9
+[v _dutyCycle dutyCycle `[4]uc  1 s 4 dutyCycle ]
+"10
+[v _indice@TAD_HEARTBEAT$F788 indice `uc  1 s 1 indice ]
+"11
+[v _estado@TAD_HEARTBEAT$F789 estado `uc  1 s 1 estado ]
 "10 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_LDR.c
 [v _timerLDR timerLDR `uc  1 s 1 timerLDR ]
 "11 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_SERIAL.c
@@ -359,20 +411,20 @@
 [v _frases frases `C[7]*.31Cuc  1 s 7 frases ]
 "54
 [v _pTxFrase pTxFrase `*.31Cuc  1 s 1 pTxFrase ]
-[s S586 Timer 5 `ul 1 TicsInicials 4 0 `uc 1 Busy 1 4 ]
+[s S638 Timer 5 `ul 1 TicsInicials 4 0 `uc 1 Busy 1 4 ]
 "14 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_TIMER.c
-[v _Timers Timers `[4]S586  1 s 20 Timers ]
+[v _Timers Timers `[4]S638  1 s 20 Timers ]
 "16
 [v _Tics Tics `VEul  1 s 4 Tics ]
-"34 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\main.c
+"37 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"48
+"52
 } 0
-"26
+"28
 [v _initPorts initPorts `(v  1 e 1 0 ]
 {
-"32
+"35
 } 0
 "24 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_TIMER.c
 [v _TI_Init TI_Init `(v  1 e 1 0 ]
@@ -413,6 +465,11 @@
 [v _LDR_Init LDR_Init `(v  1 e 1 0 ]
 {
 "15
+} 0
+"28 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_HEARTBEAT.c
+[v _HEARTBEAT_Motor HEARTBEAT_Motor `(v  1 e 1 0 ]
+{
+"49
 } 0
 "38 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_DISPLAY.c
 [v _DSP_Motor DSP_Motor `(v  1 e 1 0 ]
@@ -499,10 +556,10 @@
 {
 "15
 } 0
-"20 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\main.c
+"22 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\main.c
 [v _MyRSI MyRSI `IIH(v  1 s 1 MyRSI ]
 {
-"24
+"26
 } 0
 "18 C:\Users\Santiago\Documents\GitHub\P2FB-COMPUS\LAB_ADC.X\TAD_TIMER.c
 [v _RSI_Timer0 RSI_Timer0 `(v  1 e 1 0 ]
