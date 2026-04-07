@@ -10,7 +10,7 @@
 /*
  * Funcions privades de baix nivell
  */
-static void EEPROM_WriteByte(unsigned char addr, unsigned char data) {
+void EEPROM_WriteByte(unsigned char addr, unsigned char data) {
     EEADR  = addr;
     EEDATA = data;
     EECON1bits.EEPGD = 0;  // Accedir a EEPROM (no Flash)
@@ -21,11 +21,13 @@ static void EEPROM_WriteByte(unsigned char addr, unsigned char data) {
     EECON2 = 0xAA;
     EECON1bits.WR = 1;     // Iniciar escriptura
     ei();                  // Tornar a activar interrupcions
-    while(EECON1bits.WR);  // Esperar fi d'escriptura (tipicament 4ms)
-    EECON1bits.WREN = 0;   // Deshabilitar escriptura
+}
+
+unsigned char EEPROM_WriteAvailable(){
+    return !EECON1bits.WR;
 }
  
-static unsigned char EEPROM_ReadByte(unsigned char addr) {
+unsigned char EEPROM_ReadByte(unsigned char addr) {
     EEADR  = addr;
     EECON1bits.EEPGD = 0;  // Accedir a EEPROM
     EECON1bits.CFGS  = 0;
