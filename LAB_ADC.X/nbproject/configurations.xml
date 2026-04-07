@@ -10,6 +10,7 @@
       <itemPath>TAD_TIMER.h</itemPath>
       <itemPath>TAD_LDR.h</itemPath>
       <itemPath>TAD_HEARTBEAT.h</itemPath>
+      <itemPath>TAD_EEPROM.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -25,6 +26,7 @@
       <itemPath>TAD_TIMER.c</itemPath>
       <itemPath>TAD_LDR.c</itemPath>
       <itemPath>TAD_HEARTBEAT.c</itemPath>
+      <itemPath>TAD_EEPROM.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
