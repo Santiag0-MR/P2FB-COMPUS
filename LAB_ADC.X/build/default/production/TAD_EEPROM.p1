@@ -457,8 +457,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 7008: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "13 TAD_EEPROM.c
-[; ;TAD_EEPROM.c: 13: static void EEPROM_WriteByte(unsigned char addr, unsigned char data) {
-[v _EEPROM_WriteByte `(v ~T0 @X0 1 sf2`uc`uc ]
+[; ;TAD_EEPROM.c: 13: void EEPROM_WriteByte(unsigned char addr, unsigned char data) {
+[v _EEPROM_WriteByte `(v ~T0 @X0 1 ef2`uc`uc ]
 {
 [e :U _EEPROM_WriteByte ]
 [v _addr `uc ~T0 @X0 1 r1 ]
@@ -495,43 +495,47 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;TAD_EEPROM.c: 23:     (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
 "24
-[; ;TAD_EEPROM.c: 24:     while(EECON1bits.WR);
-[e $U 303  ]
-[e :U 304 ]
-[e :U 303 ]
-[e $ != -> . . _EECON1bits 0 1 `i -> 0 `i 304  ]
-[e :U 305 ]
-"25
-[; ;TAD_EEPROM.c: 25:     EECON1bits.WREN = 0;
-[e = . . _EECON1bits 0 2 -> -> 0 `i `uc ]
-"26
-[; ;TAD_EEPROM.c: 26: }
+[; ;TAD_EEPROM.c: 24: }
 [e :UE 302 ]
 }
+"26
+[; ;TAD_EEPROM.c: 26: unsigned char EEPROM_WriteAvailable(){
+[v _EEPROM_WriteAvailable `(uc ~T0 @X0 1 ef ]
+{
+[e :U _EEPROM_WriteAvailable ]
+[f ]
+"27
+[; ;TAD_EEPROM.c: 27:     return !EECON1bits.WR;
+[e ) -> -> ! != -> . . _EECON1bits 0 1 `i -> 0 `i `i `uc ]
+[e $UE 303  ]
 "28
-[; ;TAD_EEPROM.c: 28: static unsigned char EEPROM_ReadByte(unsigned char addr) {
-[v _EEPROM_ReadByte `(uc ~T0 @X0 1 sf1`uc ]
+[; ;TAD_EEPROM.c: 28: }
+[e :UE 303 ]
+}
+"30
+[; ;TAD_EEPROM.c: 30: unsigned char EEPROM_ReadByte(unsigned char addr) {
+[v _EEPROM_ReadByte `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _EEPROM_ReadByte ]
 [v _addr `uc ~T0 @X0 1 r1 ]
 [f ]
-"29
-[; ;TAD_EEPROM.c: 29:     EEADR = addr;
-[e = _EEADR _addr ]
-"30
-[; ;TAD_EEPROM.c: 30:     EECON1bits.EEPGD = 0;
-[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
 "31
-[; ;TAD_EEPROM.c: 31:     EECON1bits.CFGS = 0;
-[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
+[; ;TAD_EEPROM.c: 31:     EEADR = addr;
+[e = _EEADR _addr ]
 "32
-[; ;TAD_EEPROM.c: 32:     EECON1bits.RD = 1;
-[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
+[; ;TAD_EEPROM.c: 32:     EECON1bits.EEPGD = 0;
+[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
 "33
-[; ;TAD_EEPROM.c: 33:     return EEDATA;
-[e ) _EEDATA ]
-[e $UE 306  ]
+[; ;TAD_EEPROM.c: 33:     EECON1bits.CFGS = 0;
+[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
 "34
-[; ;TAD_EEPROM.c: 34: }
-[e :UE 306 ]
+[; ;TAD_EEPROM.c: 34:     EECON1bits.RD = 1;
+[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
+"35
+[; ;TAD_EEPROM.c: 35:     return EEDATA;
+[e ) _EEDATA ]
+[e $UE 304  ]
+"36
+[; ;TAD_EEPROM.c: 36: }
+[e :UE 304 ]
 }

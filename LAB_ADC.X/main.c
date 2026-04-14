@@ -27,11 +27,14 @@ static void __interrupt (high_priority) MyRSI (void){
 
 void initPorts(){
     TRISBbits.TRISB2 = 1;
-    INTCON2bits.RBPU = 0; 
+    INTCON2bits.RBPU = 0;
     ADCON0 = 0x01;  // canal AN0, ADC encendido
-    ADCON1 = 0x0C;  // AN0, AN1, AN2 analógicos, resto digital
+    ADCON1 = 0x0C;  // AN0, AN1, AN2 analï¿½gicos, resto digital
     ADCON2 = 0x80;  // right-justified
     TRISAbits.TRISA3 = 0;
+
+    TRISBbits.TRISB3 = 1;   // RB3 = entrada (RX del canal Serial_Time)
+    TRISAbits.TRISA4 = 0;   // RA4 = salida (TX del canal Serial_time)
 }
 
 void main(void) {
@@ -42,7 +45,7 @@ void main(void) {
     SERIAL_Init();
     LDR_Init();
     HREATBEAT_Init();
-    
+
 
     while(1){
         ADC_Motor();

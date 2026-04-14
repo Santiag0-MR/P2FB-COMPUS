@@ -4788,7 +4788,7 @@ unsigned char __t3rd16on(void);
 # 1 "./TAD_EEPROM.h" 1
 # 4 "TAD_EEPROM.c" 2
 # 13 "TAD_EEPROM.c"
-static void EEPROM_WriteByte(unsigned char addr, unsigned char data) {
+void EEPROM_WriteByte(unsigned char addr, unsigned char data) {
     EEADR = addr;
     EEDATA = data;
     EECON1bits.EEPGD = 0;
@@ -4799,11 +4799,13 @@ static void EEPROM_WriteByte(unsigned char addr, unsigned char data) {
     EECON2 = 0xAA;
     EECON1bits.WR = 1;
     (INTCONbits.GIE = 1);
-    while(EECON1bits.WR);
-    EECON1bits.WREN = 0;
 }
 
-static unsigned char EEPROM_ReadByte(unsigned char addr) {
+unsigned char EEPROM_WriteAvailable(){
+    return !EECON1bits.WR;
+}
+
+unsigned char EEPROM_ReadByte(unsigned char addr) {
     EEADR = addr;
     EECON1bits.EEPGD = 0;
     EECON1bits.CFGS = 0;
