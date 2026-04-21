@@ -446,8 +446,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 7008: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "14 TAD_TIMER.c
-[; ;TAD_TIMER.c: 14: } static Timers[4];
-[v _Timers `S302 ~T0 @X0 -> 4 `i s ]
+[; ;TAD_TIMER.c: 14: } static Timers[5];
+[v _Timers `S302 ~T0 @X0 -> 5 `i s ]
 "16
 [; ;TAD_TIMER.c: 16: static volatile unsigned long Tics=0;
 [v _Tics `Vul ~T0 @X0 1 s ]
@@ -480,11 +480,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _TI_Init ]
 [f ]
 "25
-[; ;TAD_TIMER.c: 25:  for (unsigned char counter=0; counter<4; counter++) {
+[; ;TAD_TIMER.c: 25:  for (unsigned char counter=0; counter<5; counter++) {
 {
 [v _counter `uc ~T0 @X0 1 a ]
 [e = _counter -> -> 0 `i `uc ]
-[e $ < -> _counter `i -> 4 `i 305  ]
+[e $ < -> _counter `i -> 5 `i 305  ]
 [e $U 306  ]
 [e :U 305 ]
 {
@@ -495,7 +495,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;TAD_TIMER.c: 27:  }
 }
 [e ++ _counter -> -> 1 `i `uc ]
-[e $ < -> _counter `i -> 4 `i 305  ]
+[e $ < -> _counter `i -> 5 `i 305  ]
 [e :U 306 ]
 }
 "28
@@ -531,8 +531,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 310 ]
 {
 "37
-[; ;TAD_TIMER.c: 37:   if (++Comptador == 4) return (0);
-[e $ ! == -> =+ _Comptador -> -> 1 `i `uc `i -> 4 `i 312  ]
+[; ;TAD_TIMER.c: 37:   if (++Comptador == 5) return (0);
+[e $ ! == -> =+ _Comptador -> -> 1 `i `uc `i -> 5 `i 312  ]
 [e ) -> -> 0 `i `uc ]
 [e $UE 308  ]
 [e :U 312 ]

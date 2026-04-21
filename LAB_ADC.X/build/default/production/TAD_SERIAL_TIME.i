@@ -1,4 +1,4 @@
-# 1 "TAD_DISPLAY.c"
+# 1 "TAD_SERIAL_TIME.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 285 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "TAD_DISPLAY.c" 2
+# 1 "TAD_SERIAL_TIME.c" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4783,22 +4783,7 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:\\Program Files\\Microchip\\xc8\\v3.00\\pic\\include/xc.h" 2 3
-# 2 "TAD_DISPLAY.c" 2
-
-# 1 "./TAD_ADC.h" 1
-
-
-
-void ADC_Init(void);
-void ADC_Motor(void);
-unsigned int ADC_GetX(void);
-unsigned int ADC_GetY(void);
-void ADC_Start(void);
-char ADC_Finished(void);
-unsigned char ADC_ExistValue();
-unsigned char ADC_ExistValueLDR();
-unsigned int ADC_GetLDR();
-# 4 "TAD_DISPLAY.c" 2
+# 2 "TAD_SERIAL_TIME.c" 2
 # 1 "./TAD_SERIAL.h" 1
 
 
@@ -4809,7 +4794,16 @@ void SERIAL_PutString(unsigned char s);
 void SERIAL_Motor(void);
 
 unsigned char* SERIAL_GetPayload(void);
-# 5 "TAD_DISPLAY.c" 2
+# 3 "TAD_SERIAL_TIME.c" 2
+# 1 "./TAD_SERIAL_TIME.h" 1
+
+
+
+void STIME_Init(void);
+void STIME_Motor(void);
+unsigned char STIME_DateRecieved(void);
+void STIME_GetDate(unsigned char *day, unsigned char *month, unsigned char *hour, unsigned char *min, unsigned char *sec);
+# 4 "TAD_SERIAL_TIME.c" 2
 # 1 "./TAD_TIMER.h" 1
 
 
@@ -4839,133 +4833,228 @@ unsigned long TI_GetTics (unsigned char TimerHandle);
 
 
 void TI_End (void);
-# 6 "TAD_DISPLAY.c" 2
-# 19 "TAD_DISPLAY.c"
-static unsigned int valorX;
-static unsigned int valorY;
-static unsigned char lastDirX = 0xFF;
-static unsigned char lastDirY = 0xFF;
-static unsigned char timerRebotes;
-static unsigned char flagRebotes = 0;
+# 5 "TAD_SERIAL_TIME.c" 2
 
-void DSP_Init(){
-    valorX = 0;
-    valorY = 0;
-    TI_NewTimer(&timerRebotes);
+
+
+
+static unsigned char rxBuf[15];
+static unsigned char rxIdx = 0;
+static unsigned char dateReady = 0;
+static unsigned char parseDay, parseMonth;
+static unsigned char parseHour, parseMin, parseSec;
+
+static unsigned char t_siot;
+static unsigned char t_siot_rx;
+
+static const char * const string[2] = {"Date and time correct\r\n", "Please input a correct date\r\n"};
+static unsigned char ptxChar = 0;
+
+static unsigned char validarData (unsigned char *buf) {
+
+   if (buf[2] != '/' || buf[5] != ' ' || buf[8] != ':' || buf[11] != ':') return 0;
+
+      parseDay = (rxBuf[0] - '0') * 10 + (rxBuf[1] - '0');
+      parseMonth = (rxBuf[3] - '0') * 10 + (rxBuf[4] - '0');
+      parseHour = (rxBuf[6] - '0') * 10 + (rxBuf[7] - '0');
+      parseMin = (rxBuf[9] - '0') * 10 + (rxBuf[10] - '0');
+      parseSec = (rxBuf[12] - '0') * 10 + (rxBuf[13] - '0');
+
+      if (parseDay < 1 || parseDay > 31) return 0;
+      if (parseMonth < 1 || parseMonth > 12) return 0;
+      if (parseHour > 23) return 0;
+      if (parseMin > 59) return 0;
+      if (parseSec > 59) return 0;
+      return 1;
 }
 
-void DSP_Reset(void){
+unsigned char putCharTime() {
+   static unsigned char bitIdx = 0;
+   static unsigned char estado_tx = 0;
 
-    valorX = 0;
-    valorY = 0;
+   if (TI_GetTics(t_siot) >= 2) {
+      unsigned char currChar = string[dateReady][ptxChar];
+
+      if (currChar == '\0') {
+         ptxChar = 0;
+         bitIdx = 0;
+         estado_tx = 0;
+         return 1;
+      }
+
+      switch (estado_tx) {
+         case 0:
+            LATAbits.LATA4 = 0;
+            estado_tx = 1;
+            bitIdx = 0;
+            break;
+
+         case 1:
+            LATAbits.LATA4 = (currChar >> bitIdx) & 0x01;
+            bitIdx++;
+            if (bitIdx >= 8) {
+               estado_tx = 2;
+            }
+            break;
+
+         case 2:
+            LATAbits.LATA4 = 1;
+            estado_tx = 0;
+            ptxChar++;
+            break;
+      }
+
+      TI_ResetTics(t_siot);
+   }
+   return 0;
 }
 
-void DSP_Motor(){
-    static unsigned char estado = 0;
-    static unsigned char i;
+unsigned char putCharEcho(unsigned char c) {
+    static unsigned char bitIdx = 0;
+    static unsigned char estado_tx = 0;
+    static unsigned char charToSend = 0;
+    static unsigned char sending = 0;
 
-    switch(estado){
-        case 0:
-            if(ADC_ExistValue()){
-                valorX = ADC_GetX();
-                valorY = ADC_GetY();
-                i = 0;
-                estado++;
-            }
-            break;
-        case 1:
-            if(i == 7){
-                estado++;
-            }else{
-                i++;
-                valorX = valorX >> 1;
-                valorY = valorY >> 1;
-            }
-            break;
-        case 2:
-            valorX = valorX & 0x07;
-            valorY = valorY & 0x07;
-
-            if(flagRebotes == 0){
-
-                if(!PORTBbits.RB2){
-
-                    TI_ResetTics(timerRebotes);
-                    flagRebotes = 2;
-
-                } else {
-                    estado = 0;
-
-
-                    if(valorX == 0){
-
-                        if(lastDirX != 0){
-                            SERIAL_PutString(3);
-                            lastDirX = 0;
-                        }
-                    } else if(valorX == 7){
-
-                        if(lastDirX != 7){
-                            SERIAL_PutString(2);
-                            lastDirX = 7;
-                        }
-                    } else {
-                        lastDirX = 0xFF;
-                    }
-
-
-                    if(valorY == 0){
-
-                        if(lastDirY != 0){
-                            SERIAL_PutString(1);
-                            lastDirY = 0;
-                        }
-                    } else if(valorY == 7){
-
-                        if(lastDirY != 7){
-                            SERIAL_PutString(0);
-                            lastDirY = 7;
-                        }
-                    } else {
-                        lastDirY = 0xFF;
-                    }
-                }
-
-            } else if(flagRebotes == 2){
-
-                if(TI_GetTics(timerRebotes) >= 16){
-                    if(!PORTBbits.RB2){
-
-                        SERIAL_PutString(4);
-                        flagRebotes = 1;
-                        estado++;
-
-                    } else {
-
-                        flagRebotes = 0;
-                        estado = 0;
-
-                    }
-                }
-            }
-            break;
-        case 3:
-            if(PORTBbits.RB2){
-                TI_ResetTics(timerRebotes);
-                estado++;
-            }
-            break;
-        case 4:
-            if(TI_GetTics(timerRebotes) >= 16){
-                if(PORTBbits.RB2){
-
-                    flagRebotes = 0;
-                    estado = 0;
-                } else {
-
-                    estado--;
-                }
-            }
-            break;
+    if (!sending) {
+        charToSend = c;
+        sending = 1;
+        TI_ResetTics(t_siot);
     }
+
+    if (TI_GetTics(t_siot) >= 2) {
+        switch (estado_tx) {
+            case 0:
+                LATAbits.LATA4 = 0;
+                estado_tx = 1;
+                bitIdx = 0;
+                break;
+
+            case 1:
+                LATAbits.LATA4 = (charToSend >> bitIdx) & 0x01;
+                bitIdx++;
+                if (bitIdx >= 8) estado_tx = 2;
+                break;
+
+            case 2:
+                LATAbits.LATA4 = 1;
+                estado_tx = 0;
+                sending = 0;
+                TI_ResetTics(t_siot);
+                return 1;
+        }
+        TI_ResetTics(t_siot);
+    }
+    return 0;
+}
+
+unsigned char getCharTime(unsigned char *c) {
+   static unsigned char bitIdx_rx = 0;
+   static unsigned char estado_rx = 0;
+   static unsigned char byteTemporal = 0;
+
+   switch(estado_rx) {
+      case 0:
+         if (PORTBbits.RB3 == 0) {
+            TI_ResetTics(t_siot_rx);
+            estado_rx = 1;
+         }
+         break;
+
+      case 1:
+
+         if (TI_GetTics(t_siot_rx) >= 3) {
+            TI_ResetTics(t_siot_rx);
+
+
+            if (PORTBbits.RB3) byteTemporal |= (1 << 0);
+            else byteTemporal &= ~(1 << 0);
+
+            bitIdx_rx = 1;
+            estado_rx = 2;
+         }
+         break;
+
+      case 2:
+         if (TI_GetTics(t_siot_rx) >= 2) {
+            TI_ResetTics(t_siot_rx);
+
+            if (PORTBbits.RB3) {
+               byteTemporal |= (1 << bitIdx_rx);
+            } else {
+               byteTemporal &= ~(1 << bitIdx_rx);
+            }
+
+            bitIdx_rx++;
+
+            if (bitIdx_rx >= 8) {
+               *c = byteTemporal;
+               estado_rx = 3;
+            }
+         }
+         break;
+
+      case 3:
+         if (TI_GetTics(t_siot_rx) >= 2) {
+            estado_rx = 0;
+            return 1;
+         }
+         break;
+   }
+   return 0;
+}
+
+void STIME_Init(void) {
+    TI_NewTimer(&t_siot);
+    TI_NewTimer(&t_siot_rx);
+}
+
+void STIME_Motor(void){
+   static unsigned char estado = 0;
+   unsigned char c;
+   static unsigned char charPendiente;
+
+   switch (estado){
+        case 0:
+           if (getCharTime(&c)) {
+             if (c == '\r'){
+                rxBuf[rxIdx] = '\0';
+                rxIdx = 0;
+                estado++;
+             } else if (rxIdx <= 13) {
+                charPendiente = c;
+                estado = 3;
+                TI_ResetTics(t_siot);
+             } else {
+                rxIdx = 0;
+                estado++;
+             }
+           }
+           break;
+
+        case 1:
+            if (validarData(rxBuf)) {
+                dateReady = 0;
+            } else {
+                dateReady = 1;
+            }
+           estado++;
+           ptxChar = 0;
+           TI_ResetTics(t_siot);
+           break;
+        case 2:
+           if (putCharTime()) {
+                estado = 0;
+           } else {
+                estado = 2;
+           }
+           break;
+       case 3:
+            if (putCharEcho(charPendiente)) {
+                rxBuf[rxIdx] = charPendiente;
+                rxIdx++;
+                estado = 0;
+            }
+           break;
+
+   }
 }

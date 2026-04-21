@@ -4791,35 +4791,43 @@ unsigned char __t3rd16on(void);
 void SERIAL_Init(void);
 void SERIAL_PutChar(char c);
 void SERIAL_PutString(unsigned char s);
-void Motor_Serial(void);
-
-unsigned char SERIAL_SleepReceived(void);
-unsigned char SERIAL_GetAnimalsReceived(void);
-unsigned char SERIAL_GetProductsReceived(void);
-unsigned char SERIAL_ResetReceived(void);
-unsigned char SERIAL_StartRebellionReceived(void);
-unsigned char SERIAL_StopRebellionReceived(void);
-unsigned char SERIAL_ConsumeReceived(void);
-unsigned char SERIAL_InitializeReceived(void);
+void SERIAL_Motor(void);
 
 unsigned char* SERIAL_GetPayload(void);
 # 3 "TAD_SERIAL.c" 2
 
+# 1 "./TAD_CMD.h" 1
 
 
 
 
 
+void CMD_setCmd(unsigned char e, unsigned char aux[30]);
+void CMD_Motor();
+# 5 "TAD_SERIAL.c" 2
+# 1 "./TAD_LDR.h" 1
 
 
-static unsigned char cmdGetAnimals = 0;
-static unsigned char cmdGetProducts = 0;
-static unsigned char cmdConsume = 0;
-static unsigned char cmdReset = 0;
-static unsigned char cmdStartRebel = 0;
-static unsigned char cmdStopRebel = 0;
-static unsigned char cmdSleep = 0;
-static unsigned char cmdInitialize = 0;
+
+void LDR_Init();
+void LDR_SleepReceived();
+void LDR_Motor();
+# 6 "TAD_SERIAL.c" 2
+# 1 "./TAD_EEPROM.h" 1
+
+
+
+
+
+void EEPROM_WriteByte(unsigned char addr, unsigned char data);
+unsigned char EEPROM_WriteAvailable();
+unsigned char EEPROM_ReadByte(unsigned char addr);
+# 7 "TAD_SERIAL.c" 2
+
+
+
+
+
 
 
 static unsigned char comando[30];
@@ -4925,71 +4933,8 @@ void guardarCharArr(unsigned char aux){
 
 }
 
-unsigned char SERIAL_SleepReceived(){
-    if(cmdSleep == 1){
-        cmdSleep = 0;
-        return 1;
-    }
-    return 0;
-}
 
-unsigned char SERIAL_GetAnimalsReceived(){
-    if(cmdGetAnimals == 1){
-        cmdGetAnimals = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_GetProductsReceived(){
-    if(cmdGetProducts == 1){
-        cmdGetProducts = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_ResetReceived(){
-    if(cmdReset == 1){
-        cmdReset = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_StartRebellionReceived(){
-    if(cmdStartRebel == 1){
-        cmdStartRebel = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_StopRebellionReceived(){
-    if(cmdStopRebel == 1){
-        cmdStopRebel = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_ConsumeReceived(){
-    if(cmdConsume == 1){
-        cmdConsume = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_InitializeReceived(){
-    if(cmdInitialize == 1){
-        cmdInitialize = 0;
-        return 1;
-    }
-    return 0;
-}
-# 199 "TAD_SERIAL.c"
-void Motor_Serial(void){
+void SERIAL_Motor(void){
     unsigned char aux;
 
     switch(estado){
@@ -5018,27 +4963,39 @@ void Motor_Serial(void){
         break;
         case 2:
             if(comando[0] == 'S'){
-                cmdSleep = 1;
+                CMD_setCmd(0, comando);
+                LDR_SleepReceived();
             }else if(comando[0] == 'R'){
-                cmdReset = 1;
+                CMD_setCmd(1, comando);
             }else if(comando[0] == 'C'){
-                cmdConsume = 1;
-            }else if(comando[0] == 'I'){
-                cmdInitialize = 1;
-            }else if(comando[0] == 'S'){
-                if(comando[2] == 'A'){
-                    cmdStartRebel = 1;
+                CMD_setCmd(2, comando);
+            }else if(comando[0] == 'R'){
+                if(comando[1] == '1'){
+                    CMD_setCmd(4, comando);
                 }else{
-                    cmdStopRebel = 1;
+                    CMD_setCmd(5, comando);
                 }
-            }else if(comando[0] == 'G'){
-                if(comando[4] == 'A'){
-                    cmdGetAnimals = 1;
-                }else{
-                    cmdGetProducts = 1;
-                }
+            }else if(comando[0] == 'A'){
+                CMD_setCmd(6, comando);
+            }else if(comando[0] == 'P'){
+                CMD_setCmd(7, comando);
             }
             estado = 1;
+            if(comando[0] == 'I'){
+                estado++;
+                indice = 0;
+                CMD_setCmd(3, comando);
+            }
+            break;
+        case 3:
+
+            if(EEPROM_WriteAvailable()){
+                if(comando[indice] != '\0' && indice <= 30){
+
+                    indice++;
+                }
+            }
+
             break;
     }
 }

@@ -8,10 +8,15 @@
 #define LLINDAR_LDR 200
 
 static unsigned char timerLDR;
+static unsigned char sleepRecived = 0;
 
 
 void LDR_Init(){
     TI_NewTimer(&timerLDR);
+}
+
+void LDR_SleepReceived(){
+    sleepRecived = 1;
 }
 
 void LDR_Motor(){
@@ -21,8 +26,9 @@ void LDR_Motor(){
     
     switch(estado){
         case 0:
-            if(SERIAL_SleepReceived()){ 
+            if(sleepRecived){ 
                 TI_ResetTics(timerLDR);
+                sleepRecived = 0;
                 estado++;
             }
             break;

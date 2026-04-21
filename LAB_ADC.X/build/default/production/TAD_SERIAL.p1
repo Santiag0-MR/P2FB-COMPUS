@@ -80,6 +80,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3597
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 3597: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
 [v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
+"6 ./TAD_CMD.h
+[; ;./TAD_CMD.h: 6: void CMD_setCmd(unsigned char e, unsigned char aux[30]);
+[v _CMD_setCmd `(v ~T0 @X0 0 ef2`uc`*uc ]
+"5 ./TAD_LDR.h
+[; ;./TAD_LDR.h: 5: void LDR_SleepReceived();
+[v _LDR_SleepReceived `(v ~T0 @X0 0 e? ]
+"7 ./TAD_EEPROM.h
+[; ;./TAD_EEPROM.h: 7: unsigned char EEPROM_WriteAvailable();
+[v _EEPROM_WriteAvailable `(uc ~T0 @X0 0 e? ]
 "52 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -494,71 +503,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7008
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 7008: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"11 TAD_SERIAL.c
-[; ;TAD_SERIAL.c: 11: static unsigned char cmdGetAnimals = 0;
-[v _cmdGetAnimals `uc ~T0 @X0 1 s ]
-[i _cmdGetAnimals
--> -> 0 `i `uc
-]
-"12
-[; ;TAD_SERIAL.c: 12: static unsigned char cmdGetProducts = 0;
-[v _cmdGetProducts `uc ~T0 @X0 1 s ]
-[i _cmdGetProducts
--> -> 0 `i `uc
-]
-"13
-[; ;TAD_SERIAL.c: 13: static unsigned char cmdConsume = 0;
-[v _cmdConsume `uc ~T0 @X0 1 s ]
-[i _cmdConsume
--> -> 0 `i `uc
-]
-"14
-[; ;TAD_SERIAL.c: 14: static unsigned char cmdReset = 0;
-[v _cmdReset `uc ~T0 @X0 1 s ]
-[i _cmdReset
--> -> 0 `i `uc
-]
-"15
-[; ;TAD_SERIAL.c: 15: static unsigned char cmdStartRebel = 0;
-[v _cmdStartRebel `uc ~T0 @X0 1 s ]
-[i _cmdStartRebel
--> -> 0 `i `uc
-]
-"16
-[; ;TAD_SERIAL.c: 16: static unsigned char cmdStopRebel = 0;
-[v _cmdStopRebel `uc ~T0 @X0 1 s ]
-[i _cmdStopRebel
--> -> 0 `i `uc
-]
-"17
-[; ;TAD_SERIAL.c: 17: static unsigned char cmdSleep = 0;
-[v _cmdSleep `uc ~T0 @X0 1 s ]
-[i _cmdSleep
--> -> 0 `i `uc
-]
-"18
-[; ;TAD_SERIAL.c: 18: static unsigned char cmdInitialize = 0;
-[v _cmdInitialize `uc ~T0 @X0 1 s ]
-[i _cmdInitialize
--> -> 0 `i `uc
-]
-"21
-[; ;TAD_SERIAL.c: 21: static unsigned char comando[30];
+"14 TAD_SERIAL.c
+[; ;TAD_SERIAL.c: 14: static unsigned char comando[30];
 [v _comando `uc ~T0 @X0 -> 30 `i s ]
-"24
-[; ;TAD_SERIAL.c: 24: static unsigned char estado = 0;
+"17
+[; ;TAD_SERIAL.c: 17: static unsigned char estado = 0;
 [v _estado `uc ~T0 @X0 1 s ]
 [i _estado
 -> -> 0 `i `uc
 ]
-"25
-[; ;TAD_SERIAL.c: 25: static unsigned char indice = 0;
+"18
+[; ;TAD_SERIAL.c: 18: static unsigned char indice = 0;
 [v _indice `uc ~T0 @X0 1 s ]
 [i _indice
 -> -> 0 `i `uc
 ]
-"28
-[; ;TAD_SERIAL.c: 28: static const char frase0[] = "MOVE_UP\r\n";
+"21
+[; ;TAD_SERIAL.c: 21: static const char frase0[] = "MOVE_UP\r\n";
 [v _frase0 `Cuc ~T0 @X0 -> 10 `i s ]
 [i _frase0
 :U ..
@@ -574,8 +535,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"29
-[; ;TAD_SERIAL.c: 29: static const char frase1[] = "MOVE_DOWN\r\n";
+"22
+[; ;TAD_SERIAL.c: 22: static const char frase1[] = "MOVE_DOWN\r\n";
 [v _frase1 `Cuc ~T0 @X0 -> 12 `i s ]
 [i _frase1
 :U ..
@@ -593,8 +554,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"30
-[; ;TAD_SERIAL.c: 30: static const char frase2[] = "MOVE_LEFT\r\n";
+"23
+[; ;TAD_SERIAL.c: 23: static const char frase2[] = "MOVE_LEFT\r\n";
 [v _frase2 `Cuc ~T0 @X0 -> 12 `i s ]
 [i _frase2
 :U ..
@@ -612,8 +573,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"31
-[; ;TAD_SERIAL.c: 31: static const char frase3[] = "MOVE_RIGHT\r\n";
+"24
+[; ;TAD_SERIAL.c: 24: static const char frase3[] = "MOVE_RIGHT\r\n";
 [v _frase3 `Cuc ~T0 @X0 -> 13 `i s ]
 [i _frase3
 :U ..
@@ -632,8 +593,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"32
-[; ;TAD_SERIAL.c: 32: static const char frase4[] = "SELECT\r\n";
+"25
+[; ;TAD_SERIAL.c: 25: static const char frase4[] = "SELECT\r\n";
 [v _frase4 `Cuc ~T0 @X0 -> 9 `i s ]
 [i _frase4
 :U ..
@@ -648,8 +609,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"33
-[; ;TAD_SERIAL.c: 33: static const char frase5[] = "SLEEP_SUCCESSFUL\r\n";
+"26
+[; ;TAD_SERIAL.c: 26: static const char frase5[] = "SLEEP_SUCCESSFUL\r\n";
 [v _frase5 `Cuc ~T0 @X0 -> 19 `i s ]
 [i _frase5
 :U ..
@@ -674,8 +635,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"34
-[; ;TAD_SERIAL.c: 34: static const char frase6[] = "SLEEP_UNSUCCESSFUL\r\n";
+"27
+[; ;TAD_SERIAL.c: 27: static const char frase6[] = "SLEEP_UNSUCCESSFUL\r\n";
 [v _frase6 `Cuc ~T0 @X0 -> 21 `i s ]
 [i _frase6
 :U ..
@@ -702,8 +663,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"37
-[; ;TAD_SERIAL.c: 37: static const char comando0[] = "GET_ANIMALS";
+"30
+[; ;TAD_SERIAL.c: 30: static const char comando0[] = "GET_ANIMALS";
 [v _comando0 `Cuc ~T0 @X0 -> 12 `i s ]
 [i _comando0
 :U ..
@@ -721,8 +682,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"38
-[; ;TAD_SERIAL.c: 38: static const char comando1[] = "GET_PRODUCTS";
+"31
+[; ;TAD_SERIAL.c: 31: static const char comando1[] = "GET_PRODUCTS";
 [v _comando1 `Cuc ~T0 @X0 -> 13 `i s ]
 [i _comando1
 :U ..
@@ -741,8 +702,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"39
-[; ;TAD_SERIAL.c: 39: static const char comando2[] = "CONSUME";
+"32
+[; ;TAD_SERIAL.c: 32: static const char comando2[] = "CONSUME";
 [v _comando2 `Cuc ~T0 @X0 -> 8 `i s ]
 [i _comando2
 :U ..
@@ -756,8 +717,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"40
-[; ;TAD_SERIAL.c: 40: static const char comando3[] = "RESET";
+"33
+[; ;TAD_SERIAL.c: 33: static const char comando3[] = "RESET";
 [v _comando3 `Cuc ~T0 @X0 -> 6 `i s ]
 [i _comando3
 :U ..
@@ -769,8 +730,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"41
-[; ;TAD_SERIAL.c: 41: static const char comando4[] = "START_REBELLION";
+"34
+[; ;TAD_SERIAL.c: 34: static const char comando4[] = "START_REBELLION";
 [v _comando4 `Cuc ~T0 @X0 -> 16 `i s ]
 [i _comando4
 :U ..
@@ -792,8 +753,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"42
-[; ;TAD_SERIAL.c: 42: static const char comando5[] = "STOP_REBELLION";
+"35
+[; ;TAD_SERIAL.c: 35: static const char comando5[] = "STOP_REBELLION";
 [v _comando5 `Cuc ~T0 @X0 -> 15 `i s ]
 [i _comando5
 :U ..
@@ -814,8 +775,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"43
-[; ;TAD_SERIAL.c: 43: static const char comando6[] = "SLEEP";
+"36
+[; ;TAD_SERIAL.c: 36: static const char comando6[] = "SLEEP";
 [v _comando6 `Cuc ~T0 @X0 -> 6 `i s ]
 [i _comando6
 :U ..
@@ -827,8 +788,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"44
-[; ;TAD_SERIAL.c: 44: static const char comando7[] = "INITIALIZE";
+"37
+[; ;TAD_SERIAL.c: 37: static const char comando7[] = "INITIALIZE";
 [v _comando7 `Cuc ~T0 @X0 -> 11 `i s ]
 [i _comando7
 :U ..
@@ -845,9 +806,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-[v F2736 `*Cuc ~T0 @X0 1 t ]
-"47
-[; ;TAD_SERIAL.c: 47: static const char * const comandos[] = {
+[v F2733 `*Cuc ~T0 @X0 1 t ]
+"40
+[; ;TAD_SERIAL.c: 40: static const char * const comandos[] = {
 [v _comandos `C*Cuc ~T0 @X0 -> 8 `i s ]
 [i _comandos
 :U ..
@@ -861,9 +822,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 &U _comando7
 ..
 ]
-[v F2739 `*Cuc ~T0 @X0 1 t ]
-"51
-[; ;TAD_SERIAL.c: 51: static const char * const frases[] = {
+[v F2736 `*Cuc ~T0 @X0 1 t ]
+"44
+[; ;TAD_SERIAL.c: 44: static const char * const frases[] = {
 [v _frases `C*Cuc ~T0 @X0 -> 7 `i s ]
 [i _frases
 :U ..
@@ -876,604 +837,401 @@ Version 4.0 HI-TECH Software Intermediate Code
 &U _frase6
 ..
 ]
-"54
-[; ;TAD_SERIAL.c: 54: static const char *pTxFrase = 0;
+"47
+[; ;TAD_SERIAL.c: 47: static const char *pTxFrase = 0;
 [v _pTxFrase `*Cuc ~T0 @X0 1 s ]
 [i _pTxFrase
 -> -> 0 `i `*Cuc
 ]
-"56
-[; ;TAD_SERIAL.c: 56: void SERIAL_Init(void){
+"49
+[; ;TAD_SERIAL.c: 49: void SERIAL_Init(void){
 [v _SERIAL_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _SERIAL_Init ]
 [f ]
-"58
-[; ;TAD_SERIAL.c: 58:     TXSTAbits.SYNC = 0;
+"51
+[; ;TAD_SERIAL.c: 51:     TXSTAbits.SYNC = 0;
 [e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
-"59
-[; ;TAD_SERIAL.c: 59:     TXSTAbits.TX9 = 0;
+"52
+[; ;TAD_SERIAL.c: 52:     TXSTAbits.TX9 = 0;
 [e = . . _TXSTAbits 0 6 -> -> 0 `i `uc ]
-"60
-[; ;TAD_SERIAL.c: 60:     TXSTAbits.BRGH = 1;
+"53
+[; ;TAD_SERIAL.c: 53:     TXSTAbits.BRGH = 1;
 [e = . . _TXSTAbits 0 2 -> -> 1 `i `uc ]
-"61
-[; ;TAD_SERIAL.c: 61:     TXSTAbits.TXEN = 1;
+"54
+[; ;TAD_SERIAL.c: 54:     TXSTAbits.TXEN = 1;
 [e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
-"64
-[; ;TAD_SERIAL.c: 64:     RCSTAbits.SPEN = 1;
+"57
+[; ;TAD_SERIAL.c: 57:     RCSTAbits.SPEN = 1;
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-"65
-[; ;TAD_SERIAL.c: 65:     RCSTAbits.RX9 = 0;
+"58
+[; ;TAD_SERIAL.c: 58:     RCSTAbits.RX9 = 0;
 [e = . . _RCSTAbits 0 6 -> -> 0 `i `uc ]
-"66
-[; ;TAD_SERIAL.c: 66:     RCSTAbits.CREN = 1;
+"59
+[; ;TAD_SERIAL.c: 59:     RCSTAbits.CREN = 1;
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-"71
-[; ;TAD_SERIAL.c: 71:     SPBRG = (unsigned char)((10000000UL / (16UL * 9600UL)) - 1UL);
+"64
+[; ;TAD_SERIAL.c: 64:     SPBRG = (unsigned char)((10000000UL / (16UL * 9600UL)) - 1UL);
 [e = _SPBRG -> - / -> 10000000 `ul * -> 16 `ul -> 9600 `ul -> 1 `ul `uc ]
-"72
-[; ;TAD_SERIAL.c: 72:     SPBRGH = 0;
+"65
+[; ;TAD_SERIAL.c: 65:     SPBRGH = 0;
 [e = _SPBRGH -> -> 0 `i `uc ]
-"75
-[; ;TAD_SERIAL.c: 75:     PIR1bits.RCIF = 0;
+"68
+[; ;TAD_SERIAL.c: 68:     PIR1bits.RCIF = 0;
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-"76
-[; ;TAD_SERIAL.c: 76:     estado = 1;
+"69
+[; ;TAD_SERIAL.c: 69:     estado = 1;
 [e = _estado -> -> 1 `i `uc ]
-"78
-[; ;TAD_SERIAL.c: 78: }
+"71
+[; ;TAD_SERIAL.c: 71: }
 [e :UE 302 ]
 }
-"81
-[; ;TAD_SERIAL.c: 81: void SERIAL_PutChar(char c){
+"74
+[; ;TAD_SERIAL.c: 74: void SERIAL_PutChar(char c){
 [v _SERIAL_PutChar `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _SERIAL_PutChar ]
 [v _c `uc ~T0 @X0 1 r1 ]
 [f ]
-"82
-[; ;TAD_SERIAL.c: 82:     estado = 0;
+"75
+[; ;TAD_SERIAL.c: 75:     estado = 0;
 [e = _estado -> -> 0 `i `uc ]
-"83
-[; ;TAD_SERIAL.c: 83:     TXREG = (unsigned char)c;
+"76
+[; ;TAD_SERIAL.c: 76:     TXREG = (unsigned char)c;
 [e = _TXREG -> _c `uc ]
-"84
-[; ;TAD_SERIAL.c: 84: }
+"77
+[; ;TAD_SERIAL.c: 77: }
 [e :UE 303 ]
 }
-"87
-[; ;TAD_SERIAL.c: 87: void SERIAL_PutString(unsigned char s){
+"80
+[; ;TAD_SERIAL.c: 80: void SERIAL_PutString(unsigned char s){
 [v _SERIAL_PutString `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _SERIAL_PutString ]
 [v _s `uc ~T0 @X0 1 r1 ]
 [f ]
-"88
-[; ;TAD_SERIAL.c: 88:     pTxFrase = frases[s];
+"81
+[; ;TAD_SERIAL.c: 81:     pTxFrase = frases[s];
 [e = _pTxFrase *U + &U _frases * -> _s `ux -> -> # *U &U _frases `ui `ux ]
-"89
-[; ;TAD_SERIAL.c: 89:     estado = 0;
+"82
+[; ;TAD_SERIAL.c: 82:     estado = 0;
 [e = _estado -> -> 0 `i `uc ]
-"90
-[; ;TAD_SERIAL.c: 90: }
+"83
+[; ;TAD_SERIAL.c: 83: }
 [e :UE 304 ]
 }
-"96
-[; ;TAD_SERIAL.c: 96: unsigned char SERIAL_ReadByte(unsigned char *b){
+"89
+[; ;TAD_SERIAL.c: 89: unsigned char SERIAL_ReadByte(unsigned char *b){
 [v _SERIAL_ReadByte `(uc ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _SERIAL_ReadByte ]
 [v _b `*uc ~T0 @X0 1 r1 ]
 [f ]
-"97
-[; ;TAD_SERIAL.c: 97:     if (PIR1bits.RCIF == 0) return 0;
+"90
+[; ;TAD_SERIAL.c: 90:     if (PIR1bits.RCIF == 0) return 0;
 [e $ ! == -> . . _PIR1bits 0 5 `i -> 0 `i 306  ]
 [e ) -> -> 0 `i `uc ]
 [e $UE 305  ]
 [e :U 306 ]
-"100
-[; ;TAD_SERIAL.c: 100:     if (RCSTAbits.OERR) {
+"93
+[; ;TAD_SERIAL.c: 93:     if (RCSTAbits.OERR) {
 [e $ ! != -> . . _RCSTAbits 0 1 `i -> 0 `i 307  ]
 {
-"101
-[; ;TAD_SERIAL.c: 101:         RCSTAbits.CREN = 0;
+"94
+[; ;TAD_SERIAL.c: 94:         RCSTAbits.CREN = 0;
 [e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
-"102
-[; ;TAD_SERIAL.c: 102:         RCSTAbits.CREN = 1;
+"95
+[; ;TAD_SERIAL.c: 95:         RCSTAbits.CREN = 1;
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-"103
-[; ;TAD_SERIAL.c: 103:     }
+"96
+[; ;TAD_SERIAL.c: 96:     }
 }
 [e :U 307 ]
-"105
-[; ;TAD_SERIAL.c: 105:     *b = RCREG;
+"98
+[; ;TAD_SERIAL.c: 98:     *b = RCREG;
 [e = *U _b _RCREG ]
-"108
-[; ;TAD_SERIAL.c: 108:     if (RCSTAbits.FERR) return 0;
+"101
+[; ;TAD_SERIAL.c: 101:     if (RCSTAbits.FERR) return 0;
 [e $ ! != -> . . _RCSTAbits 0 2 `i -> 0 `i 308  ]
 [e ) -> -> 0 `i `uc ]
 [e $UE 305  ]
 [e :U 308 ]
-"110
-[; ;TAD_SERIAL.c: 110:     return 1;
+"103
+[; ;TAD_SERIAL.c: 103:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 305  ]
-"111
-[; ;TAD_SERIAL.c: 111: }
+"104
+[; ;TAD_SERIAL.c: 104: }
 [e :UE 305 ]
 }
-"117
-[; ;TAD_SERIAL.c: 117: void guardarCharArr(unsigned char aux){
+"110
+[; ;TAD_SERIAL.c: 110: void guardarCharArr(unsigned char aux){
 [v _guardarCharArr `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _guardarCharArr ]
 [v _aux `uc ~T0 @X0 1 r1 ]
 [f ]
-"118
-[; ;TAD_SERIAL.c: 118:     comando[indice] = aux;
+"111
+[; ;TAD_SERIAL.c: 111:     comando[indice] = aux;
 [e = *U + &U _comando * -> _indice `ux -> -> # *U &U _comando `ui `ux _aux ]
-"119
-[; ;TAD_SERIAL.c: 119:     indice++;
+"112
+[; ;TAD_SERIAL.c: 112:     indice++;
 [e ++ _indice -> -> 1 `i `uc ]
-"120
-[; ;TAD_SERIAL.c: 120:     comando[indice] = '\0';
+"113
+[; ;TAD_SERIAL.c: 113:     comando[indice] = '\0';
 [e = *U + &U _comando * -> _indice `ux -> -> # *U &U _comando `ui `ux -> -> 0 `ui `uc ]
-"122
-[; ;TAD_SERIAL.c: 122: }
+"115
+[; ;TAD_SERIAL.c: 115: }
 [e :UE 309 ]
 }
-"124
-[; ;TAD_SERIAL.c: 124: unsigned char SERIAL_SleepReceived(){
-[v _SERIAL_SleepReceived `(uc ~T0 @X0 1 ef ]
+"118
+[; ;TAD_SERIAL.c: 118: void SERIAL_Motor(void){
+[v _SERIAL_Motor `(v ~T0 @X0 1 ef ]
 {
-[e :U _SERIAL_SleepReceived ]
+[e :U _SERIAL_Motor ]
 [f ]
-"125
-[; ;TAD_SERIAL.c: 125:     if(cmdSleep == 1){
-[e $ ! == -> _cmdSleep `i -> 1 `i 311  ]
-{
-"126
-[; ;TAD_SERIAL.c: 126:         cmdSleep = 0;
-[e = _cmdSleep -> -> 0 `i `uc ]
-"127
-[; ;TAD_SERIAL.c: 127:         return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 310  ]
-"128
-[; ;TAD_SERIAL.c: 128:     }
-}
-[e :U 311 ]
-"129
-[; ;TAD_SERIAL.c: 129:     return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 310  ]
-"130
-[; ;TAD_SERIAL.c: 130: }
-[e :UE 310 ]
-}
-"132
-[; ;TAD_SERIAL.c: 132: unsigned char SERIAL_GetAnimalsReceived(){
-[v _SERIAL_GetAnimalsReceived `(uc ~T0 @X0 1 ef ]
-{
-[e :U _SERIAL_GetAnimalsReceived ]
-[f ]
-"133
-[; ;TAD_SERIAL.c: 133:     if(cmdGetAnimals == 1){
-[e $ ! == -> _cmdGetAnimals `i -> 1 `i 313  ]
-{
-"134
-[; ;TAD_SERIAL.c: 134:         cmdGetAnimals = 0;
-[e = _cmdGetAnimals -> -> 0 `i `uc ]
-"135
-[; ;TAD_SERIAL.c: 135:         return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 312  ]
-"136
-[; ;TAD_SERIAL.c: 136:     }
-}
-[e :U 313 ]
-"137
-[; ;TAD_SERIAL.c: 137:     return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 312  ]
-"138
-[; ;TAD_SERIAL.c: 138: }
-[e :UE 312 ]
-}
-"140
-[; ;TAD_SERIAL.c: 140: unsigned char SERIAL_GetProductsReceived(){
-[v _SERIAL_GetProductsReceived `(uc ~T0 @X0 1 ef ]
-{
-[e :U _SERIAL_GetProductsReceived ]
-[f ]
-"141
-[; ;TAD_SERIAL.c: 141:     if(cmdGetProducts == 1){
-[e $ ! == -> _cmdGetProducts `i -> 1 `i 315  ]
-{
-"142
-[; ;TAD_SERIAL.c: 142:         cmdGetProducts = 0;
-[e = _cmdGetProducts -> -> 0 `i `uc ]
-"143
-[; ;TAD_SERIAL.c: 143:         return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 314  ]
-"144
-[; ;TAD_SERIAL.c: 144:     }
-}
-[e :U 315 ]
-"145
-[; ;TAD_SERIAL.c: 145:     return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 314  ]
-"146
-[; ;TAD_SERIAL.c: 146: }
-[e :UE 314 ]
-}
-"148
-[; ;TAD_SERIAL.c: 148: unsigned char SERIAL_ResetReceived(){
-[v _SERIAL_ResetReceived `(uc ~T0 @X0 1 ef ]
-{
-[e :U _SERIAL_ResetReceived ]
-[f ]
-"149
-[; ;TAD_SERIAL.c: 149:     if(cmdReset == 1){
-[e $ ! == -> _cmdReset `i -> 1 `i 317  ]
-{
-"150
-[; ;TAD_SERIAL.c: 150:         cmdReset = 0;
-[e = _cmdReset -> -> 0 `i `uc ]
-"151
-[; ;TAD_SERIAL.c: 151:         return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 316  ]
-"152
-[; ;TAD_SERIAL.c: 152:     }
-}
-[e :U 317 ]
-"153
-[; ;TAD_SERIAL.c: 153:     return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 316  ]
-"154
-[; ;TAD_SERIAL.c: 154: }
-[e :UE 316 ]
-}
-"156
-[; ;TAD_SERIAL.c: 156: unsigned char SERIAL_StartRebellionReceived(){
-[v _SERIAL_StartRebellionReceived `(uc ~T0 @X0 1 ef ]
-{
-[e :U _SERIAL_StartRebellionReceived ]
-[f ]
-"157
-[; ;TAD_SERIAL.c: 157:     if(cmdStartRebel == 1){
-[e $ ! == -> _cmdStartRebel `i -> 1 `i 319  ]
-{
-"158
-[; ;TAD_SERIAL.c: 158:         cmdStartRebel = 0;
-[e = _cmdStartRebel -> -> 0 `i `uc ]
-"159
-[; ;TAD_SERIAL.c: 159:         return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 318  ]
-"160
-[; ;TAD_SERIAL.c: 160:     }
-}
-[e :U 319 ]
-"161
-[; ;TAD_SERIAL.c: 161:     return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 318  ]
-"162
-[; ;TAD_SERIAL.c: 162: }
-[e :UE 318 ]
-}
-"164
-[; ;TAD_SERIAL.c: 164: unsigned char SERIAL_StopRebellionReceived(){
-[v _SERIAL_StopRebellionReceived `(uc ~T0 @X0 1 ef ]
-{
-[e :U _SERIAL_StopRebellionReceived ]
-[f ]
-"165
-[; ;TAD_SERIAL.c: 165:     if(cmdStopRebel == 1){
-[e $ ! == -> _cmdStopRebel `i -> 1 `i 321  ]
-{
-"166
-[; ;TAD_SERIAL.c: 166:         cmdStopRebel = 0;
-[e = _cmdStopRebel -> -> 0 `i `uc ]
-"167
-[; ;TAD_SERIAL.c: 167:         return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 320  ]
-"168
-[; ;TAD_SERIAL.c: 168:     }
-}
-[e :U 321 ]
-"169
-[; ;TAD_SERIAL.c: 169:     return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 320  ]
-"170
-[; ;TAD_SERIAL.c: 170: }
-[e :UE 320 ]
-}
-"172
-[; ;TAD_SERIAL.c: 172: unsigned char SERIAL_ConsumeReceived(){
-[v _SERIAL_ConsumeReceived `(uc ~T0 @X0 1 ef ]
-{
-[e :U _SERIAL_ConsumeReceived ]
-[f ]
-"173
-[; ;TAD_SERIAL.c: 173:     if(cmdConsume == 1){
-[e $ ! == -> _cmdConsume `i -> 1 `i 323  ]
-{
-"174
-[; ;TAD_SERIAL.c: 174:         cmdConsume = 0;
-[e = _cmdConsume -> -> 0 `i `uc ]
-"175
-[; ;TAD_SERIAL.c: 175:         return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 322  ]
-"176
-[; ;TAD_SERIAL.c: 176:     }
-}
-[e :U 323 ]
-"177
-[; ;TAD_SERIAL.c: 177:     return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 322  ]
-"178
-[; ;TAD_SERIAL.c: 178: }
-[e :UE 322 ]
-}
-"180
-[; ;TAD_SERIAL.c: 180: unsigned char SERIAL_InitializeReceived(){
-[v _SERIAL_InitializeReceived `(uc ~T0 @X0 1 ef ]
-{
-[e :U _SERIAL_InitializeReceived ]
-[f ]
-"181
-[; ;TAD_SERIAL.c: 181:     if(cmdInitialize == 1){
-[e $ ! == -> _cmdInitialize `i -> 1 `i 325  ]
-{
-"182
-[; ;TAD_SERIAL.c: 182:         cmdInitialize = 0;
-[e = _cmdInitialize -> -> 0 `i `uc ]
-"183
-[; ;TAD_SERIAL.c: 183:         return 1;
-[e ) -> -> 1 `i `uc ]
-[e $UE 324  ]
-"184
-[; ;TAD_SERIAL.c: 184:     }
-}
-[e :U 325 ]
-"185
-[; ;TAD_SERIAL.c: 185:     return 0;
-[e ) -> -> 0 `i `uc ]
-[e $UE 324  ]
-"186
-[; ;TAD_SERIAL.c: 186: }
-[e :UE 324 ]
-}
-"199
-[; ;TAD_SERIAL.c: 199: void Motor_Serial(void){
-[v _Motor_Serial `(v ~T0 @X0 1 ef ]
-{
-[e :U _Motor_Serial ]
-[f ]
-"200
-[; ;TAD_SERIAL.c: 200:     unsigned char aux;
+"119
+[; ;TAD_SERIAL.c: 119:     unsigned char aux;
 [v _aux `uc ~T0 @X0 1 a ]
-"202
-[; ;TAD_SERIAL.c: 202:     switch(estado){
-[e $U 328  ]
+"121
+[; ;TAD_SERIAL.c: 121:     switch(estado){
+[e $U 312  ]
 {
-"203
-[; ;TAD_SERIAL.c: 203:         case 0:
-[e :U 329 ]
-"204
-[; ;TAD_SERIAL.c: 204:             if (PIR1bits.TXIF) {
-[e $ ! != -> . . _PIR1bits 0 4 `i -> 0 `i 330  ]
+"122
+[; ;TAD_SERIAL.c: 122:         case 0:
+[e :U 313 ]
+"123
+[; ;TAD_SERIAL.c: 123:             if (PIR1bits.TXIF) {
+[e $ ! != -> . . _PIR1bits 0 4 `i -> 0 `i 314  ]
 {
-"205
-[; ;TAD_SERIAL.c: 205:                 if(pTxFrase && *pTxFrase != '\0') {
-[e $ ! && != _pTxFrase -> -> 0 `i `*Cuc != -> *U _pTxFrase `ui -> 0 `ui 331  ]
+"124
+[; ;TAD_SERIAL.c: 124:                 if(pTxFrase && *pTxFrase != '\0') {
+[e $ ! && != _pTxFrase -> -> 0 `i `*Cuc != -> *U _pTxFrase `ui -> 0 `ui 315  ]
 {
-"206
-[; ;TAD_SERIAL.c: 206:                     char c = *pTxFrase++;
+"125
+[; ;TAD_SERIAL.c: 125:                     char c = *pTxFrase++;
 [v _c `uc ~T0 @X0 1 a ]
 [e = _c *U ++ _pTxFrase * -> -> 1 `i `x -> -> # *U _pTxFrase `i `x ]
-"207
-[; ;TAD_SERIAL.c: 207:                     TXREG = (unsigned char)c;
+"126
+[; ;TAD_SERIAL.c: 126:                     TXREG = (unsigned char)c;
 [e = _TXREG -> _c `uc ]
-"208
-[; ;TAD_SERIAL.c: 208:                 }else {
+"127
+[; ;TAD_SERIAL.c: 127:                 }else {
+}
+[e $U 316  ]
+[e :U 315 ]
+{
+"128
+[; ;TAD_SERIAL.c: 128:                     pTxFrase = 0;
+[e = _pTxFrase -> -> 0 `i `*Cuc ]
+"129
+[; ;TAD_SERIAL.c: 129:                     estado = 1;
+[e = _estado -> -> 1 `i `uc ]
+"130
+[; ;TAD_SERIAL.c: 130:                 }
+}
+[e :U 316 ]
+"131
+[; ;TAD_SERIAL.c: 131:             }
+}
+[e :U 314 ]
+"132
+[; ;TAD_SERIAL.c: 132:             break;
+[e $U 311  ]
+"133
+[; ;TAD_SERIAL.c: 133:         case 1:
+[e :U 317 ]
+"134
+[; ;TAD_SERIAL.c: 134:         if(SERIAL_ReadByte(&aux)){
+[e $ ! != -> ( _SERIAL_ReadByte (1 &U _aux `i -> 0 `i 318  ]
+{
+"135
+[; ;TAD_SERIAL.c: 135:             if(aux == '\r'){
+[e $ ! == -> _aux `ui -> 13 `ui 319  ]
+{
+"136
+[; ;TAD_SERIAL.c: 136:                 indice = 0;
+[e = _indice -> -> 0 `i `uc ]
+"137
+[; ;TAD_SERIAL.c: 137:                 estado++;
+[e ++ _estado -> -> 1 `i `uc ]
+"138
+[; ;TAD_SERIAL.c: 138:             } else if(aux == '\n'){
+}
+[e $U 320  ]
+[e :U 319 ]
+[e $ ! == -> _aux `ui -> 10 `ui 321  ]
+{
+"140
+[; ;TAD_SERIAL.c: 140:             } else {
+}
+[e $U 322  ]
+[e :U 321 ]
+{
+"141
+[; ;TAD_SERIAL.c: 141:                 guardarCharArr(aux);
+[e ( _guardarCharArr (1 _aux ]
+"142
+[; ;TAD_SERIAL.c: 142:             }
+}
+[e :U 322 ]
+[e :U 320 ]
+"143
+[; ;TAD_SERIAL.c: 143:         }
+}
+[e :U 318 ]
+"144
+[; ;TAD_SERIAL.c: 144:         break;
+[e $U 311  ]
+"145
+[; ;TAD_SERIAL.c: 145:         case 2:
+[e :U 323 ]
+"146
+[; ;TAD_SERIAL.c: 146:             if(comando[0] == 'S'){
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 83 `ui 324  ]
+{
+"147
+[; ;TAD_SERIAL.c: 147:                 CMD_setCmd(0, comando);
+[e ( _CMD_setCmd (2 , -> -> 0 `i `uc &U _comando ]
+"148
+[; ;TAD_SERIAL.c: 148:                 LDR_SleepReceived();
+[e ( _LDR_SleepReceived ..  ]
+"149
+[; ;TAD_SERIAL.c: 149:             }else if(comando[0] == 'R'){
+}
+[e $U 325  ]
+[e :U 324 ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 82 `ui 326  ]
+{
+"150
+[; ;TAD_SERIAL.c: 150:                 CMD_setCmd(1, comando);
+[e ( _CMD_setCmd (2 , -> -> 1 `i `uc &U _comando ]
+"151
+[; ;TAD_SERIAL.c: 151:             }else if(comando[0] == 'C'){
+}
+[e $U 327  ]
+[e :U 326 ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 67 `ui 328  ]
+{
+"152
+[; ;TAD_SERIAL.c: 152:                 CMD_setCmd(2, comando);
+[e ( _CMD_setCmd (2 , -> -> 2 `i `uc &U _comando ]
+"153
+[; ;TAD_SERIAL.c: 153:             }else if(comando[0] == 'R'){
+}
+[e $U 329  ]
+[e :U 328 ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 82 `ui 330  ]
+{
+"154
+[; ;TAD_SERIAL.c: 154:                 if(comando[1] == '1'){
+[e $ ! == -> *U + &U _comando * -> -> -> 1 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 49 `ui 331  ]
+{
+"155
+[; ;TAD_SERIAL.c: 155:                     CMD_setCmd(4, comando);
+[e ( _CMD_setCmd (2 , -> -> 4 `i `uc &U _comando ]
+"156
+[; ;TAD_SERIAL.c: 156:                 }else{
 }
 [e $U 332  ]
 [e :U 331 ]
 {
-"209
-[; ;TAD_SERIAL.c: 209:                     pTxFrase = 0;
-[e = _pTxFrase -> -> 0 `i `*Cuc ]
-"210
-[; ;TAD_SERIAL.c: 210:                     estado = 1;
-[e = _estado -> -> 1 `i `uc ]
-"211
-[; ;TAD_SERIAL.c: 211:                 }
+"157
+[; ;TAD_SERIAL.c: 157:                     CMD_setCmd(5, comando);
+[e ( _CMD_setCmd (2 , -> -> 5 `i `uc &U _comando ]
+"158
+[; ;TAD_SERIAL.c: 158:                 }
 }
 [e :U 332 ]
-"212
-[; ;TAD_SERIAL.c: 212:             }
+"159
+[; ;TAD_SERIAL.c: 159:             }else if(comando[0] == 'A'){
 }
+[e $U 333  ]
 [e :U 330 ]
-"213
-[; ;TAD_SERIAL.c: 213:             break;
-[e $U 327  ]
-"214
-[; ;TAD_SERIAL.c: 214:         case 1:
-[e :U 333 ]
-"215
-[; ;TAD_SERIAL.c: 215:         if(SERIAL_ReadByte(&aux)){
-[e $ ! != -> ( _SERIAL_ReadByte (1 &U _aux `i -> 0 `i 334  ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 65 `ui 334  ]
 {
-"216
-[; ;TAD_SERIAL.c: 216:             if(aux == '\r'){
-[e $ ! == -> _aux `ui -> 13 `ui 335  ]
-{
-"217
-[; ;TAD_SERIAL.c: 217:                 indice = 0;
-[e = _indice -> -> 0 `i `uc ]
-"218
-[; ;TAD_SERIAL.c: 218:                 estado++;
-[e ++ _estado -> -> 1 `i `uc ]
-"219
-[; ;TAD_SERIAL.c: 219:             } else if(aux == '\n'){
+"160
+[; ;TAD_SERIAL.c: 160:                 CMD_setCmd(6, comando);
+[e ( _CMD_setCmd (2 , -> -> 6 `i `uc &U _comando ]
+"161
+[; ;TAD_SERIAL.c: 161:             }else if(comando[0] == 'P'){
 }
-[e $U 336  ]
-[e :U 335 ]
-[e $ ! == -> _aux `ui -> 10 `ui 337  ]
-{
-"221
-[; ;TAD_SERIAL.c: 221:             } else {
-}
-[e $U 338  ]
-[e :U 337 ]
-{
-"222
-[; ;TAD_SERIAL.c: 222:                 guardarCharArr(aux);
-[e ( _guardarCharArr (1 _aux ]
-"223
-[; ;TAD_SERIAL.c: 223:             }
-}
-[e :U 338 ]
-[e :U 336 ]
-"224
-[; ;TAD_SERIAL.c: 224:         }
-}
+[e $U 335  ]
 [e :U 334 ]
-"225
-[; ;TAD_SERIAL.c: 225:         break;
-[e $U 327  ]
-"226
-[; ;TAD_SERIAL.c: 226:         case 2:
-[e :U 339 ]
-"227
-[; ;TAD_SERIAL.c: 227:             if(comando[0] == 'S'){
-[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 83 `ui 340  ]
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 80 `ui 336  ]
 {
-"228
-[; ;TAD_SERIAL.c: 228:                 cmdSleep = 1;
-[e = _cmdSleep -> -> 1 `i `uc ]
-"229
-[; ;TAD_SERIAL.c: 229:             }else if(comando[0] == 'R'){
+"162
+[; ;TAD_SERIAL.c: 162:                 CMD_setCmd(7, comando);
+[e ( _CMD_setCmd (2 , -> -> 7 `i `uc &U _comando ]
+"163
+[; ;TAD_SERIAL.c: 163:             }
 }
-[e $U 341  ]
-[e :U 340 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 82 `ui 342  ]
-{
-"230
-[; ;TAD_SERIAL.c: 230:                 cmdReset = 1;
-[e = _cmdReset -> -> 1 `i `uc ]
-"231
-[; ;TAD_SERIAL.c: 231:             }else if(comando[0] == 'C'){
-}
-[e $U 343  ]
-[e :U 342 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 67 `ui 344  ]
-{
-"232
-[; ;TAD_SERIAL.c: 232:                 cmdConsume = 1;
-[e = _cmdConsume -> -> 1 `i `uc ]
-"233
-[; ;TAD_SERIAL.c: 233:             }else if(comando[0] == 'I'){
-}
-[e $U 345  ]
-[e :U 344 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 73 `ui 346  ]
-{
-"234
-[; ;TAD_SERIAL.c: 234:                 cmdInitialize = 1;
-[e = _cmdInitialize -> -> 1 `i `uc ]
-"235
-[; ;TAD_SERIAL.c: 235:             }else if(comando[0] == 'S'){
-}
-[e $U 347  ]
-[e :U 346 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 83 `ui 348  ]
-{
-"236
-[; ;TAD_SERIAL.c: 236:                 if(comando[2] == 'A'){
-[e $ ! == -> *U + &U _comando * -> -> -> 2 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 65 `ui 349  ]
-{
-"237
-[; ;TAD_SERIAL.c: 237:                     cmdStartRebel = 1;
-[e = _cmdStartRebel -> -> 1 `i `uc ]
-"238
-[; ;TAD_SERIAL.c: 238:                 }else{
-}
-[e $U 350  ]
-[e :U 349 ]
-{
-"239
-[; ;TAD_SERIAL.c: 239:                     cmdStopRebel = 1;
-[e = _cmdStopRebel -> -> 1 `i `uc ]
-"240
-[; ;TAD_SERIAL.c: 240:                 }
-}
-[e :U 350 ]
-"241
-[; ;TAD_SERIAL.c: 241:             }else if(comando[0] == 'G'){
-}
-[e $U 351  ]
-[e :U 348 ]
-[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 71 `ui 352  ]
-{
-"242
-[; ;TAD_SERIAL.c: 242:                 if(comando[4] == 'A'){
-[e $ ! == -> *U + &U _comando * -> -> -> 4 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 65 `ui 353  ]
-{
-"243
-[; ;TAD_SERIAL.c: 243:                     cmdGetAnimals = 1;
-[e = _cmdGetAnimals -> -> 1 `i `uc ]
-"244
-[; ;TAD_SERIAL.c: 244:                 }else{
-}
-[e $U 354  ]
-[e :U 353 ]
-{
-"245
-[; ;TAD_SERIAL.c: 245:                     cmdGetProducts = 1;
-[e = _cmdGetProducts -> -> 1 `i `uc ]
-"246
-[; ;TAD_SERIAL.c: 246:                 }
-}
-[e :U 354 ]
-"247
-[; ;TAD_SERIAL.c: 247:             }
-}
-[e :U 352 ]
-[e :U 351 ]
-[e :U 347 ]
-[e :U 345 ]
-[e :U 343 ]
-[e :U 341 ]
-"248
-[; ;TAD_SERIAL.c: 248:             estado = 1;
-[e = _estado -> -> 1 `i `uc ]
-"249
-[; ;TAD_SERIAL.c: 249:             break;
-[e $U 327  ]
-"250
-[; ;TAD_SERIAL.c: 250:     }
-}
-[e $U 327  ]
-[e :U 328 ]
-[e [\ _estado , $ -> 0 `i 329
- , $ -> 1 `i 333
- , $ -> 2 `i 339
- 327 ]
+[e :U 336 ]
+[e :U 335 ]
+[e :U 333 ]
+[e :U 329 ]
 [e :U 327 ]
-"251
-[; ;TAD_SERIAL.c: 251: }
-[e :UE 326 ]
+[e :U 325 ]
+"164
+[; ;TAD_SERIAL.c: 164:             estado = 1;
+[e = _estado -> -> 1 `i `uc ]
+"165
+[; ;TAD_SERIAL.c: 165:             if(comando[0] == 'I'){
+[e $ ! == -> *U + &U _comando * -> -> -> 0 `i `ui `ux -> -> # *U &U _comando `ui `ux `ui -> 73 `ui 337  ]
+{
+"166
+[; ;TAD_SERIAL.c: 166:                 estado++;
+[e ++ _estado -> -> 1 `i `uc ]
+"167
+[; ;TAD_SERIAL.c: 167:                 indice = 0;
+[e = _indice -> -> 0 `i `uc ]
+"168
+[; ;TAD_SERIAL.c: 168:                 CMD_setCmd(3, comando);
+[e ( _CMD_setCmd (2 , -> -> 3 `i `uc &U _comando ]
+"169
+[; ;TAD_SERIAL.c: 169:             }
+}
+[e :U 337 ]
+"170
+[; ;TAD_SERIAL.c: 170:             break;
+[e $U 311  ]
+"171
+[; ;TAD_SERIAL.c: 171:         case 3:
+[e :U 338 ]
+"173
+[; ;TAD_SERIAL.c: 173:             if(EEPROM_WriteAvailable()){
+[e $ ! != -> ( _EEPROM_WriteAvailable ..  `i -> 0 `i 339  ]
+{
+"174
+[; ;TAD_SERIAL.c: 174:                 if(comando[indice] != '\0' && indice <= 30){
+[e $ ! && != -> *U + &U _comando * -> _indice `ux -> -> # *U &U _comando `ui `ux `ui -> 0 `ui <= -> _indice `i -> 30 `i 340  ]
+{
+"176
+[; ;TAD_SERIAL.c: 176:                     indice++;
+[e ++ _indice -> -> 1 `i `uc ]
+"177
+[; ;TAD_SERIAL.c: 177:                 }
+}
+[e :U 340 ]
+"178
+[; ;TAD_SERIAL.c: 178:             }
+}
+[e :U 339 ]
+"180
+[; ;TAD_SERIAL.c: 180:             break;
+[e $U 311  ]
+"181
+[; ;TAD_SERIAL.c: 181:     }
+}
+[e $U 311  ]
+[e :U 312 ]
+[e [\ _estado , $ -> 0 `i 313
+ , $ -> 1 `i 317
+ , $ -> 2 `i 323
+ , $ -> 3 `i 338
+ 311 ]
+[e :U 311 ]
+"182
+[; ;TAD_SERIAL.c: 182: }
+[e :UE 310 ]
 }

@@ -1,21 +1,14 @@
 #include <xc.h>
 #include "TAD_SERIAL.h"
 #include "pic18f4321.h"
+#include "TAD_CMD.h"
+#include "TAD_LDR.h"
+#include "TAD_EEPROM.h"
 
 
 // Baudrate que faràs servir al terminal del PC
 #define BAUDRATE 9600UL // Velocidad de comunicación serie
 #define OSC_FREQ 10000000UL // Frecuencia del oscilador (10 MHz)
-
-// Flags de comandos recibidos
-static unsigned char cmdGetAnimals    = 0;
-static unsigned char cmdGetProducts   = 0;
-static unsigned char cmdConsume       = 0;
-static unsigned char cmdReset         = 0;
-static unsigned char cmdStartRebel    = 0;
-static unsigned char cmdStopRebel     = 0;
-static unsigned char cmdSleep         = 0;
-static unsigned char cmdInitialize    = 0;
 
 // Buffer para guardar el comando 
 static unsigned char comando[30];
@@ -121,82 +114,8 @@ void guardarCharArr(unsigned char aux){
     
 }
 
-unsigned char SERIAL_SleepReceived(){
-    if(cmdSleep == 1){
-        cmdSleep = 0;
-        return 1;
-    }
-    return 0;
-}
 
-unsigned char SERIAL_GetAnimalsReceived(){
-    if(cmdGetAnimals == 1){
-        cmdGetAnimals = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_GetProductsReceived(){
-    if(cmdGetProducts == 1){
-        cmdGetProducts = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_ResetReceived(){
-    if(cmdReset == 1){
-        cmdReset = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_StartRebellionReceived(){
-    if(cmdStartRebel == 1){
-        cmdStartRebel = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_StopRebellionReceived(){
-    if(cmdStopRebel == 1){
-        cmdStopRebel = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_ConsumeReceived(){
-    if(cmdConsume == 1){
-        cmdConsume = 0;
-        return 1;
-    }
-    return 0;
-}
-
-unsigned char SERIAL_InitializeReceived(){
-    if(cmdInitialize == 1){
-        cmdInitialize = 0;
-        return 1;
-    }
-    return 0;
-}
-
-/**
- * Motor_Serial ? Gestiona la transmisión y recepción serie de forma cooperativa.
- *
- * Estado 0 (TX): Envía la frase apuntada por pTxFrase carácter a carácter.
- *                Convierte '\n' en la secuencia '\n'+'\r' que esperan los terminales.
- *                Al terminar la frase, pasa al estado 1.
- *
- * Estado 1 (RX): Lee lo que escribe el usuario y lo acumula en readArr.
- *                Al pulsar Enter ('\r'), notifica a PIN y EXIT que hay respuesta
- *                lista para validar, resetea el índice y envía un salto de línea.
- */
-void Motor_Serial(void){
+void SERIAL_Motor(void){
     unsigned char aux;
     
     switch(estado){
@@ -225,27 +144,39 @@ void Motor_Serial(void){
         break;
         case 2:
             if(comando[0] == 'S'){ //[S]EELP
-                cmdSleep = 1;
+                CMD_setCmd(0, comando);
+                LDR_SleepReceived();
             }else if(comando[0] == 'R'){ //[R]ESET
-                cmdReset = 1;
+                CMD_setCmd(1, comando);
             }else if(comando[0] == 'C'){ //[C]ONSUME
-                cmdConsume = 1;
-            }else if(comando[0] == 'I'){ //[I]NICIALIZE
-                cmdInitialize = 1;
-            }else if(comando[0] == 'S'){
-                if(comando[2] == 'A'){ //[S]T[A]RT_REBELLION
-                    cmdStartRebel = 1;
-                }else{ // [S]T[O]P_REBELLION
-                    cmdStopRebel = 1;
+                CMD_setCmd(2, comando);
+            }else if(comando[0] == 'R'){
+                if(comando[1] == '1'){ //[R]1 = START REBELLION
+                    CMD_setCmd(4, comando);
+                }else{ // [R]2 = STOP REBELLION
+                    CMD_setCmd(5, comando);
                 }
-            }else if(comando[0] == 'G'){
-                if(comando[4] == 'A'){ //[G]ET_[A]NIMALS
-                    cmdGetAnimals = 1;
-                }else{ // [G]ET_[P]RODUCTS
-                    cmdGetProducts = 1;
-                }
+            }else if(comando[0] == 'A'){
+                CMD_setCmd(6, comando);
+            }else if(comando[0] == 'P'){ //[P]RODUCTS
+                CMD_setCmd(7, comando);
             }
             estado = 1;
+            if(comando[0] == 'I'){
+                estado++;
+                indice = 0;
+                CMD_setCmd(3, comando);
+            }
+            break;
+        case 3: // Para la inicialización
+            
+            if(EEPROM_WriteAvailable()){
+                if(comando[indice] != '\0' && indice <= 30){
+                    
+                    indice++;
+                }
+            }
+            
             break;
     }
 }

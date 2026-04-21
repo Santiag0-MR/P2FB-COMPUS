@@ -4786,6 +4786,14 @@ unsigned char __t3rd16on(void);
 # 2 "TAD_EEPROM.c" 2
 
 # 1 "./TAD_EEPROM.h" 1
+
+
+
+
+
+void EEPROM_WriteByte(unsigned char addr, unsigned char data);
+unsigned char EEPROM_WriteAvailable();
+unsigned char EEPROM_ReadByte(unsigned char addr);
 # 4 "TAD_EEPROM.c" 2
 # 13 "TAD_EEPROM.c"
 void EEPROM_WriteByte(unsigned char addr, unsigned char data) {

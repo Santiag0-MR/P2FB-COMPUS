@@ -1,28 +1,4 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"16 ./TAD_TIMER.h
-[; ;./TAD_TIMER.h: 16: unsigned char TI_NewTimer(unsigned char *TimerHandle) ;
-[v _TI_NewTimer `(uc ~T0 @X0 0 ef1`*uc ]
-"992 C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h: 992:     struct {
-[s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S38 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
-"1002
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h: 1002:     struct {
-[s S39 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S39 . LA0 LA1 LA2 LA3 LA4 LA5 LA6 LA7 ]
-"991
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h: 991: typedef union {
-[u S37 `S38 1 `S39 1 ]
-[n S37 . . . ]
-"1013
-[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h: 1013: extern volatile LATAbits_t LATAbits __attribute__((address(0xF89)));
-[v _LATAbits `VS37 ~T0 @X0 0 e@3977 ]
-"20 ./TAD_TIMER.h
-[; ;./TAD_TIMER.h: 20: void TI_ResetTics (unsigned char TimerHandle);
-[v _TI_ResetTics `(v ~T0 @X0 0 ef1`uc ]
-"24
-[; ;./TAD_TIMER.h: 24: unsigned long TI_GetTics (unsigned char TimerHandle);
-[v _TI_GetTics `(ul ~T0 @X0 0 ef1`uc ]
 "52 C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -437,181 +413,151 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7008
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include/proc/pic18f4321.h: 7008: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"7 TAD_HEARTBEAT.c
-[; ;TAD_HEARTBEAT.c: 7: static unsigned char timerDutyCycle;
-[v _timerDutyCycle `uc ~T0 @X0 1 s ]
-"8
-[; ;TAD_HEARTBEAT.c: 8: static unsigned char dutyCycle = 0;
-[v _dutyCycle `uc ~T0 @X0 1 s ]
-[i _dutyCycle
--> -> 0 `i `uc
-]
-"9
-[; ;TAD_HEARTBEAT.c: 9: static unsigned char estado = 1;
+"4 TAD_CMD.c
+[; ;TAD_CMD.c: 4: static unsigned char estado = 0;
 [v _estado `uc ~T0 @X0 1 s ]
 [i _estado
--> -> 1 `i `uc
+-> -> 0 `i `uc
 ]
-"10
-[; ;TAD_HEARTBEAT.c: 10: static unsigned char flag = 0;
-[v _flag `uc ~T0 @X0 1 s ]
-[i _flag
+"5
+[; ;TAD_CMD.c: 5: static unsigned char arr[30];
+[v _arr `uc ~T0 @X0 -> 30 `i s ]
+"7
+[; ;TAD_CMD.c: 7: void CMD_setCmd(unsigned char e, unsigned char aux[30]){
+[v _CMD_setCmd `(v ~T0 @X0 1 ef2`uc`*uc ]
+{
+[e :U _CMD_setCmd ]
+[v _e `uc ~T0 @X0 1 r1 ]
+[v _aux `*uc ~T0 @X0 1 r2 ]
+[f ]
+"8
+[; ;TAD_CMD.c: 8:     estado = e;
+[e = _estado _e ]
+"9
+[; ;TAD_CMD.c: 9: }
+[e :UE 302 ]
+}
+"11
+[; ;TAD_CMD.c: 11: void init(){
+[v _init `(v ~T0 @X0 1 ef ]
+{
+[e :U _init ]
+[f ]
+"12
+[; ;TAD_CMD.c: 12:     static unsigned char eInit = 0;
+[v F2703 `uc ~T0 @X0 1 s eInit ]
+[i F2703
 -> -> 0 `i `uc
 ]
 "13
-[; ;TAD_HEARTBEAT.c: 13: void HREATBEAT_Init(){
-[v _HREATBEAT_Init `(v ~T0 @X0 1 ef ]
-{
-[e :U _HREATBEAT_Init ]
-[f ]
-"14
-[; ;TAD_HEARTBEAT.c: 14:     TI_NewTimer(&timerDutyCycle);
-[e ( _TI_NewTimer (1 &U _timerDutyCycle ]
+[; ;TAD_CMD.c: 13:     static unsigned char indice = 1;
+[v F2704 `uc ~T0 @X0 1 s indice ]
+[i F2704
+-> -> 1 `i `uc
+]
 "15
-[; ;TAD_HEARTBEAT.c: 15: }
-[e :UE 302 ]
-}
-"17
-[; ;TAD_HEARTBEAT.c: 17: void HEARTBEAT_setEstadoAlarma(){
-[v _HEARTBEAT_setEstadoAlarma `(v ~T0 @X0 1 ef ]
+[; ;TAD_CMD.c: 15:     switch(eInit){
+[e $U 305  ]
 {
-[e :U _HEARTBEAT_setEstadoAlarma ]
-[f ]
+"16
+[; ;TAD_CMD.c: 16:         case 0:
+[e :U 306 ]
 "18
-[; ;TAD_HEARTBEAT.c: 18:     estado = 0;
-[e = _estado -> -> 0 `i `uc ]
+[; ;TAD_CMD.c: 18:             break;
+[e $U 304  ]
 "19
-[; ;TAD_HEARTBEAT.c: 19: }
+[; ;TAD_CMD.c: 19:         case 1:
+[e :U 307 ]
+"20
+[; ;TAD_CMD.c: 20:             break;
+[e $U 304  ]
+"21
+[; ;TAD_CMD.c: 21:     }
+}
+[e $U 304  ]
+[e :U 305 ]
+[e [\ F2703 , $ -> 0 `i 306
+ , $ -> 1 `i 307
+ 304 ]
+[e :U 304 ]
+"22
+[; ;TAD_CMD.c: 22: }
 [e :UE 303 ]
 }
-"21
-[; ;TAD_HEARTBEAT.c: 21: void HEARTBEAT_clearEstadoAlarma(){
-[v _HEARTBEAT_clearEstadoAlarma `(v ~T0 @X0 1 ef ]
+"24
+[; ;TAD_CMD.c: 24: void CMD_Motor(){
+[v _CMD_Motor `(v ~T0 @X0 1 ef ]
 {
-[e :U _HEARTBEAT_clearEstadoAlarma ]
+[e :U _CMD_Motor ]
 [f ]
-"22
-[; ;TAD_HEARTBEAT.c: 22:     estado = 0;
-[e = _estado -> -> 0 `i `uc ]
-"23
-[; ;TAD_HEARTBEAT.c: 23: }
-[e :UE 304 ]
-}
-"25
-[; ;TAD_HEARTBEAT.c: 25: void HEARTBEAT_Motor(){
-[v _HEARTBEAT_Motor `(v ~T0 @X0 1 ef ]
+"26
+[; ;TAD_CMD.c: 26:     switch(estado){
+[e $U 310  ]
 {
-[e :U _HEARTBEAT_Motor ]
-[f ]
 "27
-[; ;TAD_HEARTBEAT.c: 27:     switch(estado){
-[e $U 307  ]
-{
-"28
-[; ;TAD_HEARTBEAT.c: 28:         case 0:
-[e :U 308 ]
-"29
-[; ;TAD_HEARTBEAT.c: 29:             LATAbits.LA3 = 0;
-[e = . . _LATAbits 1 3 -> -> 0 `i `uc ]
-"30
-[; ;TAD_HEARTBEAT.c: 30:             break;
-[e $U 306  ]
-"31
-[; ;TAD_HEARTBEAT.c: 31:         case 1:
-[e :U 309 ]
-"32
-[; ;TAD_HEARTBEAT.c: 32:             TI_ResetTics(timerDutyCycle);
-[e ( _TI_ResetTics (1 _timerDutyCycle ]
-"33
-[; ;TAD_HEARTBEAT.c: 33:             LATAbits.LA3 = 1;
-[e = . . _LATAbits 1 3 -> -> 1 `i `uc ]
-"34
-[; ;TAD_HEARTBEAT.c: 34:             estado++;
-[e ++ _estado -> -> 1 `i `uc ]
-"35
-[; ;TAD_HEARTBEAT.c: 35:             if(dutyCycle == 40){
-[e $ ! == -> _dutyCycle `i -> 40 `i 310  ]
-{
-"36
-[; ;TAD_HEARTBEAT.c: 36:                 flag = 1;
-[e = _flag -> -> 1 `i `uc ]
-"37
-[; ;TAD_HEARTBEAT.c: 37:             }
-}
-[e :U 310 ]
-"38
-[; ;TAD_HEARTBEAT.c: 38:             if(dutyCycle == 0){
-[e $ ! == -> _dutyCycle `i -> 0 `i 311  ]
-{
-"39
-[; ;TAD_HEARTBEAT.c: 39:                 flag = 0;
-[e = _flag -> -> 0 `i `uc ]
-"40
-[; ;TAD_HEARTBEAT.c: 40:             }
-}
+[; ;TAD_CMD.c: 27:         case 0:
 [e :U 311 ]
-"41
-[; ;TAD_HEARTBEAT.c: 41:             if(flag == 0){
-[e $ ! == -> _flag `i -> 0 `i 312  ]
-{
-"42
-[; ;TAD_HEARTBEAT.c: 42:                 dutyCycle++;
-[e ++ _dutyCycle -> -> 1 `i `uc ]
-"43
-[; ;TAD_HEARTBEAT.c: 43:             }else{
-}
-[e $U 313  ]
+"28
+[; ;TAD_CMD.c: 28:             break;
+[e $U 309  ]
+"29
+[; ;TAD_CMD.c: 29:         case 1:
 [e :U 312 ]
-{
-"44
-[; ;TAD_HEARTBEAT.c: 44:                 dutyCycle--;
-[e -- _dutyCycle -> -> 1 `i `uc ]
-"45
-[; ;TAD_HEARTBEAT.c: 45:             }
-}
+"30
+[; ;TAD_CMD.c: 30:             break;
+[e $U 309  ]
+"31
+[; ;TAD_CMD.c: 31:         case 2:
 [e :U 313 ]
-"46
-[; ;TAD_HEARTBEAT.c: 46:             break;
-[e $U 306  ]
-"47
-[; ;TAD_HEARTBEAT.c: 47:         case 2:
+"32
+[; ;TAD_CMD.c: 32:             break;
+[e $U 309  ]
+"33
+[; ;TAD_CMD.c: 33:         case 3:
 [e :U 314 ]
-"48
-[; ;TAD_HEARTBEAT.c: 48:             if(TI_GetTics(timerDutyCycle) >= dutyCycle){
-[e $ ! >= ( _TI_GetTics (1 _timerDutyCycle -> _dutyCycle `ul 315  ]
-{
-"49
-[; ;TAD_HEARTBEAT.c: 49:                 LATAbits.LA3 = 0;
-[e = . . _LATAbits 1 3 -> -> 0 `i `uc ]
-"50
-[; ;TAD_HEARTBEAT.c: 50:             }
-}
+"35
+[; ;TAD_CMD.c: 35:             break;
+[e $U 309  ]
+"36
+[; ;TAD_CMD.c: 36:         case 4:
 [e :U 315 ]
-"51
-[; ;TAD_HEARTBEAT.c: 51:             if(TI_GetTics(timerDutyCycle) >= 20){
-[e $ ! >= ( _TI_GetTics (1 _timerDutyCycle -> -> -> 20 `i `l `ul 316  ]
-{
-"52
-[; ;TAD_HEARTBEAT.c: 52:                 estado = 1;
-[e = _estado -> -> 1 `i `uc ]
-"53
-[; ;TAD_HEARTBEAT.c: 53:             }
-}
+"37
+[; ;TAD_CMD.c: 37:             break;
+[e $U 309  ]
+"38
+[; ;TAD_CMD.c: 38:         case 5:
 [e :U 316 ]
-"54
-[; ;TAD_HEARTBEAT.c: 54:             break;
-[e $U 306  ]
-"55
-[; ;TAD_HEARTBEAT.c: 55:     }
+"39
+[; ;TAD_CMD.c: 39:             break;
+[e $U 309  ]
+"40
+[; ;TAD_CMD.c: 40:         case 6:
+[e :U 317 ]
+"41
+[; ;TAD_CMD.c: 41:             break;
+[e $U 309  ]
+"42
+[; ;TAD_CMD.c: 42:         case 7:
+[e :U 318 ]
+"43
+[; ;TAD_CMD.c: 43:             break;
+[e $U 309  ]
+"44
+[; ;TAD_CMD.c: 44:     }
 }
-[e $U 306  ]
-[e :U 307 ]
-[e [\ _estado , $ -> 0 `i 308
- , $ -> 1 `i 309
- , $ -> 2 `i 314
- 306 ]
-[e :U 306 ]
-"56
-[; ;TAD_HEARTBEAT.c: 56: }
-[e :UE 305 ]
+[e $U 309  ]
+[e :U 310 ]
+[e [\ _estado , $ -> 0 `i 311
+ , $ -> 1 `i 312
+ , $ -> 2 `i 313
+ , $ -> 3 `i 314
+ , $ -> 4 `i 315
+ , $ -> 5 `i 316
+ , $ -> 6 `i 317
+ , $ -> 7 `i 318
+ 309 ]
+[e :U 309 ]
+"45
+[; ;TAD_CMD.c: 45: }
+[e :UE 308 ]
 }

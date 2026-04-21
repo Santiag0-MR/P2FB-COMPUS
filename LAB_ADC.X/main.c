@@ -6,6 +6,7 @@
 #include "TAD_TIMER.h"
 #include "TAD_LDR.h"
 #include "TAD_HEARTBEAT.h"
+#include "TAD_SERIAL_TIME.h"
 
 #pragma config OSC   = HS
 #pragma config PBADEN = DIG
@@ -32,9 +33,11 @@ void initPorts(){
     ADCON1 = 0x0C;  // AN0, AN1, AN2 anal�gicos, resto digital
     ADCON2 = 0x80;  // right-justified
     TRISAbits.TRISA3 = 0;
+    LATAbits.LATA3 = 0;
 
     TRISBbits.TRISB3 = 1;   // RB3 = entrada (RX del canal Serial_Time)
     TRISAbits.TRISA4 = 0;   // RA4 = salida (TX del canal Serial_time)
+    LATAbits.LATA4 = 0;
 }
 
 void main(void) {
@@ -45,12 +48,14 @@ void main(void) {
     SERIAL_Init();
     LDR_Init();
     HREATBEAT_Init();
+    STIME_Init();
 
 
     while(1){
         ADC_Motor();
         DSP_Motor();
-        Motor_Serial();
+        SERIAL_Motor();
         HEARTBEAT_Motor();
+        STIME_Motor();
     }
 }

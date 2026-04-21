@@ -65,6 +65,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1518
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 1518: extern volatile TRISAbits_t TRISAbits __attribute__((address(0xF92)));
 [v _TRISAbits `VS57 ~T0 @X0 0 e@3986 ]
+"992
+[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 992:     struct {
+[s S43 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S43 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
+"1002
+[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 1002:     struct {
+[s S44 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S44 . LA0 LA1 LA2 LA3 LA4 LA5 LA6 LA7 ]
+"991
+[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 991: typedef union {
+[u S42 `S43 1 `S44 1 ]
+[n S42 . . . ]
+"1013
+[; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 1013: extern volatile LATAbits_t LATAbits __attribute__((address(0xF89)));
+[v _LATAbits `VS42 ~T0 @X0 0 e@3977 ]
 [p mainexit ]
 "13 ./TAD_TIMER.h
 [; ;./TAD_TIMER.h: 13: void TI_Init (void);
@@ -84,6 +99,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6 ./TAD_HEARTBEAT.h
 [; ;./TAD_HEARTBEAT.h: 6: void HREATBEAT_Init();
 [v _HREATBEAT_Init `(v ~T0 @X0 0 e? ]
+"4 ./TAD_SERIAL_TIME.h
+[; ;./TAD_SERIAL_TIME.h: 4: void STIME_Init(void);
+[v _STIME_Init `(v ~T0 @X0 0 ef ]
 "5 ./TAD_ADC.h
 [; ;./TAD_ADC.h: 5: void ADC_Motor(void);
 [v _ADC_Motor `(v ~T0 @X0 0 ef ]
@@ -91,11 +109,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./TAD_DISPLAY.h: 17: void DSP_Motor();
 [v _DSP_Motor `(v ~T0 @X0 0 e? ]
 "7 ./TAD_SERIAL.h
-[; ;./TAD_SERIAL.h: 7: void Motor_Serial(void);
-[v _Motor_Serial `(v ~T0 @X0 0 ef ]
+[; ;./TAD_SERIAL.h: 7: void SERIAL_Motor(void);
+[v _SERIAL_Motor `(v ~T0 @X0 0 ef ]
 "9 ./TAD_HEARTBEAT.h
 [; ;./TAD_HEARTBEAT.h: 9: void HEARTBEAT_Motor();
 [v _HEARTBEAT_Motor `(v ~T0 @X0 0 e? ]
+"5 ./TAD_SERIAL_TIME.h
+[; ;./TAD_SERIAL_TIME.h: 5: void STIME_Motor(void);
+[v _STIME_Motor `(v ~T0 @X0 0 ef ]
 "52 C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 52: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -510,114 +531,131 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7008
 [; ;C:\Program Files\Microchip\xc8\v3.00\pic\include\proc/pic18f4321.h: 7008: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"10 main.c
-[; ;main.c: 10:     TRISBbits.TRISB2 = 1;
-[p x OSC      =  HS ]
-"11
+"11 main.c
 [; ;main.c: 11:     INTCON2bits.RBPU = 0;
-[p x PBADEN  =  DIG ]
+[p x OSC      =  HS ]
 "12
 [; ;main.c: 12:     ADCON0 = 0x01;
-[p x MCLRE  =  ON ]
+[p x PBADEN  =  DIG ]
 "13
 [; ;main.c: 13:     ADCON1 = 0x0C;
-[p x DEBUG  =  OFF ]
+[p x MCLRE  =  ON ]
 "14
 [; ;main.c: 14:     ADCON2 = 0x80;
-[p x PWRT    =  OFF ]
+[p x DEBUG  =  OFF ]
 "15
 [; ;main.c: 15:     TRISAbits.TRISA3 = 0;
-[p x BOR      =  OFF ]
+[p x PWRT    =  OFF ]
 "16
-[; ;main.c: 16: }
-[p x WDT      =  OFF ]
+[; ;main.c: 16:     LATAbits.LATA3 = 0;
+[p x BOR      =  OFF ]
 "17
 [; ;main.c: 17: 
+[p x WDT      =  OFF ]
+"18
+[; ;main.c: 18:     TRISBbits.TRISB3 = 1;
 [p x LVP      =  OFF ]
-"22
-[; ;main.c: 22:     DSP_Init();
+"23
+[; ;main.c: 23: void main(void) {
 [v _MyRSI `(v ~T42 @X0 1 sf ]
 {
 [e :U _MyRSI ]
 [f ]
-"23
-[; ;main.c: 23:     SERIAL_Init();
+"24
+[; ;main.c: 24:     initPorts();
 [e $ ! == -> _TMR0IF `i -> 1 `i 303  ]
 {
-"24
-[; ;main.c: 24:     LDR_Init();
-[e ( _RSI_Timer0 ..  ]
 "25
-[; ;main.c: 25:     HREATBEAT_Init();
+[; ;main.c: 25:     TI_Init();
+[e ( _RSI_Timer0 ..  ]
+"26
+[; ;main.c: 26:     ADC_Init();
 }
 [e :U 303 ]
-"26
-[; ;main.c: 26: 
+"27
+[; ;main.c: 27:     DSP_Init();
 [e :UE 302 ]
 }
-"28
-[; ;main.c: 28:     while(1){
+"29
+[; ;main.c: 29:     LDR_Init();
 [v _initPorts `(v ~T0 @X0 1 ef ]
 {
 [e :U _initPorts ]
 [f ]
-"29
-[; ;main.c: 29:         ADC_Motor();
-[e = . . _TRISBbits 0 2 -> -> 1 `i `uc ]
 "30
-[; ;main.c: 30:         DSP_Motor();
-[e = . . _INTCON2bits 2 1 -> -> 0 `i `uc ]
+[; ;main.c: 30:     HREATBEAT_Init();
+[e = . . _TRISBbits 0 2 -> -> 1 `i `uc ]
 "31
-[; ;main.c: 31:         Motor_Serial();
-[e = _ADCON0 -> -> 1 `i `uc ]
+[; ;main.c: 31:     STIME_Init();
+[e = . . _INTCON2bits 2 1 -> -> 0 `i `uc ]
 "32
-[; ;main.c: 32:         HEARTBEAT_Motor();
-[e = _ADCON1 -> -> 12 `i `uc ]
+[; ;main.c: 32: 
+[e = _ADCON0 -> -> 1 `i `uc ]
 "33
-[; ;main.c: 33:     }
-[e = _ADCON2 -> -> 128 `i `uc ]
+[; ;main.c: 33: 
+[e = _ADCON1 -> -> 12 `i `uc ]
 "34
-[; ;main.c: 34: }
-[e = . . _TRISAbits 0 3 -> -> 0 `i `uc ]
+[; ;main.c: 34:     while(1){
+[e = _ADCON2 -> -> 128 `i `uc ]
 "35
+[; ;main.c: 35:         ADC_Motor();
+[e = . . _TRISAbits 0 3 -> -> 0 `i `uc ]
+"36
+[; ;main.c: 36:         DSP_Motor();
+[e = . . _LATAbits 0 3 -> -> 0 `i `uc ]
+"38
+[; ;main.c: 38:         HEARTBEAT_Motor();
+[e = . . _TRISBbits 0 3 -> -> 1 `i `uc ]
+"39
+[; ;main.c: 39:         STIME_Motor();
+[e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
+"40
+[; ;main.c: 40:     }
+[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
+"41
+[; ;main.c: 41: }
 [e :UE 304 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"37
+"43
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"38
-[e ( _initPorts ..  ]
-"39
-[e ( _TI_Init ..  ]
-"40
-[e ( _ADC_Init ..  ]
-"41
-[e ( _DSP_Init ..  ]
-"42
-[e ( _SERIAL_Init ..  ]
-"43
-[e ( _LDR_Init ..  ]
 "44
-[e ( _HREATBEAT_Init ..  ]
+[e ( _initPorts ..  ]
+"45
+[e ( _TI_Init ..  ]
+"46
+[e ( _ADC_Init ..  ]
 "47
+[e ( _DSP_Init ..  ]
+"48
+[e ( _SERIAL_Init ..  ]
+"49
+[e ( _LDR_Init ..  ]
+"50
+[e ( _HREATBEAT_Init ..  ]
+"51
+[e ( _STIME_Init ..  ]
+"54
 [e :U 307 ]
 {
-"48
+"55
 [e ( _ADC_Motor ..  ]
-"49
+"56
 [e ( _DSP_Motor ..  ]
-"50
-[e ( _Motor_Serial ..  ]
-"51
+"57
+[e ( _SERIAL_Motor ..  ]
+"58
 [e ( _HEARTBEAT_Motor ..  ]
-"52
+"59
+[e ( _STIME_Motor ..  ]
+"60
 }
 [e :U 306 ]
 [e $U 307  ]
 [e :U 308 ]
-"53
+"61
 [e :UE 305 ]
 }

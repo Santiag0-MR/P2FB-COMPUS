@@ -2,10 +2,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "16 ./TAD_TIMER.h
 [; ;./TAD_TIMER.h: 16: unsigned char TI_NewTimer(unsigned char *TimerHandle) ;
 [v _TI_NewTimer `(uc ~T0 @X0 0 ef1`*uc ]
-"9 ./TAD_SERIAL.h
-[; ;./TAD_SERIAL.h: 9: unsigned char SERIAL_SleepReceived(void);
-[v _SERIAL_SleepReceived `(uc ~T0 @X0 0 ef ]
-"20 ./TAD_TIMER.h
+"20
 [; ;./TAD_TIMER.h: 20: void TI_ResetTics (unsigned char TimerHandle);
 [v _TI_ResetTics `(v ~T0 @X0 0 ef1`uc ]
 "11 ./TAD_ADC.h
@@ -437,162 +434,184 @@ Version 4.0 HI-TECH Software Intermediate Code
 "10 TAD_LDR.c
 [; ;TAD_LDR.c: 10: static unsigned char timerLDR;
 [v _timerLDR `uc ~T0 @X0 1 s ]
-"13
-[; ;TAD_LDR.c: 13: void LDR_Init(){
+"11
+[; ;TAD_LDR.c: 11: static unsigned char sleepRecived = 0;
+[v _sleepRecived `uc ~T0 @X0 1 s ]
+[i _sleepRecived
+-> -> 0 `i `uc
+]
+"14
+[; ;TAD_LDR.c: 14: void LDR_Init(){
 [v _LDR_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _LDR_Init ]
 [f ]
-"14
-[; ;TAD_LDR.c: 14:     TI_NewTimer(&timerLDR);
-[e ( _TI_NewTimer (1 &U _timerLDR ]
 "15
-[; ;TAD_LDR.c: 15: }
+[; ;TAD_LDR.c: 15:     TI_NewTimer(&timerLDR);
+[e ( _TI_NewTimer (1 &U _timerLDR ]
+"16
+[; ;TAD_LDR.c: 16: }
 [e :UE 302 ]
 }
-"17
-[; ;TAD_LDR.c: 17: void LDR_Motor(){
+"18
+[; ;TAD_LDR.c: 18: void LDR_SleepReceived(){
+[v _LDR_SleepReceived `(v ~T0 @X0 1 ef ]
+{
+[e :U _LDR_SleepReceived ]
+[f ]
+"19
+[; ;TAD_LDR.c: 19:     sleepRecived = 1;
+[e = _sleepRecived -> -> 1 `i `uc ]
+"20
+[; ;TAD_LDR.c: 20: }
+[e :UE 303 ]
+}
+"22
+[; ;TAD_LDR.c: 22: void LDR_Motor(){
 [v _LDR_Motor `(v ~T0 @X0 1 ef ]
 {
 [e :U _LDR_Motor ]
 [f ]
-"18
-[; ;TAD_LDR.c: 18:     static unsigned char estado = 0;
-[v F2731 `uc ~T0 @X0 1 s estado ]
-[i F2731
+"23
+[; ;TAD_LDR.c: 23:     static unsigned char estado = 0;
+[v F2726 `uc ~T0 @X0 1 s estado ]
+[i F2726
 -> -> 0 `i `uc
 ]
-"19
-[; ;TAD_LDR.c: 19:     static unsigned char i;
-[v F2732 `uc ~T0 @X0 1 s i ]
-"20
-[; ;TAD_LDR.c: 20:     static unsigned int valorLDR;
-[v F2733 `ui ~T0 @X0 1 s valorLDR ]
-"22
-[; ;TAD_LDR.c: 22:     switch(estado){
-[e $U 305  ]
-{
-"23
-[; ;TAD_LDR.c: 23:         case 0:
-[e :U 306 ]
 "24
-[; ;TAD_LDR.c: 24:             if(SERIAL_SleepReceived()){
-[e $ ! != -> ( _SERIAL_SleepReceived ..  `i -> 0 `i 307  ]
-{
+[; ;TAD_LDR.c: 24:     static unsigned char i;
+[v F2727 `uc ~T0 @X0 1 s i ]
 "25
-[; ;TAD_LDR.c: 25:                 TI_ResetTics(timerLDR);
-[e ( _TI_ResetTics (1 _timerLDR ]
-"26
-[; ;TAD_LDR.c: 26:                 estado++;
-[e ++ F2731 -> -> 1 `i `uc ]
+[; ;TAD_LDR.c: 25:     static unsigned int valorLDR;
+[v F2728 `ui ~T0 @X0 1 s valorLDR ]
 "27
-[; ;TAD_LDR.c: 27:             }
-}
-[e :U 307 ]
+[; ;TAD_LDR.c: 27:     switch(estado){
+[e $U 306  ]
+{
 "28
-[; ;TAD_LDR.c: 28:             break;
-[e $U 304  ]
+[; ;TAD_LDR.c: 28:         case 0:
+[e :U 307 ]
 "29
-[; ;TAD_LDR.c: 29:         case 1:
-[e :U 308 ]
+[; ;TAD_LDR.c: 29:             if(sleepRecived){
+[e $ ! != -> _sleepRecived `i -> 0 `i 308  ]
+{
 "30
-[; ;TAD_LDR.c: 30:             if(ADC_ExistValueLDR()){
-[e $ ! != -> ( _ADC_ExistValueLDR ..  `i -> 0 `i 309  ]
-{
+[; ;TAD_LDR.c: 30:                 TI_ResetTics(timerLDR);
+[e ( _TI_ResetTics (1 _timerLDR ]
 "31
-[; ;TAD_LDR.c: 31:                 valorLDR = ADC_GetLDR();
-[e = F2733 ( _ADC_GetLDR ..  ]
+[; ;TAD_LDR.c: 31:                 sleepRecived = 0;
+[e = _sleepRecived -> -> 0 `i `uc ]
 "32
-[; ;TAD_LDR.c: 32:                 i = 0;
-[e = F2732 -> -> 0 `i `uc ]
+[; ;TAD_LDR.c: 32:                 estado++;
+[e ++ F2726 -> -> 1 `i `uc ]
 "33
-[; ;TAD_LDR.c: 33:                 estado++;
-[e ++ F2731 -> -> 1 `i `uc ]
+[; ;TAD_LDR.c: 33:             }
+}
+[e :U 308 ]
 "34
-[; ;TAD_LDR.c: 34:             }
-}
-[e :U 309 ]
+[; ;TAD_LDR.c: 34:             break;
+[e $U 305  ]
 "35
-[; ;TAD_LDR.c: 35:             break;
-[e $U 304  ]
+[; ;TAD_LDR.c: 35:         case 1:
+[e :U 309 ]
 "36
-[; ;TAD_LDR.c: 36:         case 2:
-[e :U 310 ]
+[; ;TAD_LDR.c: 36:             if(ADC_ExistValueLDR()){
+[e $ ! != -> ( _ADC_ExistValueLDR ..  `i -> 0 `i 310  ]
+{
 "37
-[; ;TAD_LDR.c: 37:             if(i == 7){
-[e $ ! == -> F2732 `i -> 7 `i 311  ]
-{
+[; ;TAD_LDR.c: 37:                 valorLDR = ADC_GetLDR();
+[e = F2728 ( _ADC_GetLDR ..  ]
 "38
-[; ;TAD_LDR.c: 38:                 estado++;
-[e ++ F2731 -> -> 1 `i `uc ]
+[; ;TAD_LDR.c: 38:                 i = 0;
+[e = F2727 -> -> 0 `i `uc ]
 "39
-[; ;TAD_LDR.c: 39:             }else{
-}
-[e $U 312  ]
-[e :U 311 ]
-{
+[; ;TAD_LDR.c: 39:                 estado++;
+[e ++ F2726 -> -> 1 `i `uc ]
 "40
-[; ;TAD_LDR.c: 40:                 i++;
-[e ++ F2732 -> -> 1 `i `uc ]
+[; ;TAD_LDR.c: 40:             }
+}
+[e :U 310 ]
 "41
-[; ;TAD_LDR.c: 41:                 valorLDR = valorLDR >> 1;
-[e = F2733 >> F2733 -> 1 `i ]
+[; ;TAD_LDR.c: 41:             break;
+[e $U 305  ]
 "42
-[; ;TAD_LDR.c: 42:             }
-}
-[e :U 312 ]
+[; ;TAD_LDR.c: 42:         case 2:
+[e :U 311 ]
 "43
-[; ;TAD_LDR.c: 43:             break;
-[e $U 304  ]
+[; ;TAD_LDR.c: 43:             if(i == 7){
+[e $ ! == -> F2727 `i -> 7 `i 312  ]
+{
 "44
-[; ;TAD_LDR.c: 44:         case 3:
-[e :U 313 ]
+[; ;TAD_LDR.c: 44:                 estado++;
+[e ++ F2726 -> -> 1 `i `uc ]
 "45
-[; ;TAD_LDR.c: 45:             valorLDR = valorLDR & 0x07;
-[e = F2733 & F2733 -> -> 7 `i `ui ]
+[; ;TAD_LDR.c: 45:             }else{
+}
+[e $U 313  ]
+[e :U 312 ]
+{
 "46
-[; ;TAD_LDR.c: 46:             if(valorLDR < 200){
-[e $ ! < F2733 -> -> 200 `i `ui 314  ]
-{
+[; ;TAD_LDR.c: 46:                 i++;
+[e ++ F2727 -> -> 1 `i `uc ]
+"47
+[; ;TAD_LDR.c: 47:                 valorLDR = valorLDR >> 1;
+[e = F2728 >> F2728 -> 1 `i ]
 "48
-[; ;TAD_LDR.c: 48:                 SERIAL_PutString(5);
-[e ( _SERIAL_PutString (1 -> -> 5 `i `uc ]
+[; ;TAD_LDR.c: 48:             }
+}
+[e :U 313 ]
 "49
-[; ;TAD_LDR.c: 49:                 estado = 0;
-[e = F2731 -> -> 0 `i `uc ]
+[; ;TAD_LDR.c: 49:             break;
+[e $U 305  ]
 "50
-[; ;TAD_LDR.c: 50:             } else if(TI_GetTics(timerLDR) >= 5000){
-}
-[e $U 315  ]
+[; ;TAD_LDR.c: 50:         case 3:
 [e :U 314 ]
-[e $ ! >= ( _TI_GetTics (1 _timerLDR -> -> -> 5000 `i `l `ul 316  ]
-{
+"51
+[; ;TAD_LDR.c: 51:             valorLDR = valorLDR & 0x07;
+[e = F2728 & F2728 -> -> 7 `i `ui ]
 "52
-[; ;TAD_LDR.c: 52:                 SERIAL_PutString(6);
-[e ( _SERIAL_PutString (1 -> -> 6 `i `uc ]
-"53
-[; ;TAD_LDR.c: 53:                 estado = 0;
-[e = F2731 -> -> 0 `i `uc ]
+[; ;TAD_LDR.c: 52:             if(valorLDR < 200){
+[e $ ! < F2728 -> -> 200 `i `ui 315  ]
+{
 "54
-[; ;TAD_LDR.c: 54:             }
-}
-[e :U 316 ]
-[e :U 315 ]
+[; ;TAD_LDR.c: 54:                 SERIAL_PutString(5);
+[e ( _SERIAL_PutString (1 -> -> 5 `i `uc ]
 "55
-[; ;TAD_LDR.c: 55:             break;
-[e $U 304  ]
+[; ;TAD_LDR.c: 55:                 estado = 0;
+[e = F2726 -> -> 0 `i `uc ]
 "56
-[; ;TAD_LDR.c: 56:     }
+[; ;TAD_LDR.c: 56:             } else if(TI_GetTics(timerLDR) >= 5000){
 }
-[e $U 304  ]
+[e $U 316  ]
+[e :U 315 ]
+[e $ ! >= ( _TI_GetTics (1 _timerLDR -> -> -> 5000 `i `l `ul 317  ]
+{
+"58
+[; ;TAD_LDR.c: 58:                 SERIAL_PutString(6);
+[e ( _SERIAL_PutString (1 -> -> 6 `i `uc ]
+"59
+[; ;TAD_LDR.c: 59:                 estado = 0;
+[e = F2726 -> -> 0 `i `uc ]
+"60
+[; ;TAD_LDR.c: 60:             }
+}
+[e :U 317 ]
+[e :U 316 ]
+"61
+[; ;TAD_LDR.c: 61:             break;
+[e $U 305  ]
+"62
+[; ;TAD_LDR.c: 62:     }
+}
+[e $U 305  ]
+[e :U 306 ]
+[e [\ F2726 , $ -> 0 `i 307
+ , $ -> 1 `i 309
+ , $ -> 2 `i 311
+ , $ -> 3 `i 314
+ 305 ]
 [e :U 305 ]
-[e [\ F2731 , $ -> 0 `i 306
- , $ -> 1 `i 308
- , $ -> 2 `i 310
- , $ -> 3 `i 313
- 304 ]
-[e :U 304 ]
-"57
-[; ;TAD_LDR.c: 57: }
-[e :UE 303 ]
+"63
+[; ;TAD_LDR.c: 63: }
+[e :UE 304 ]
 }

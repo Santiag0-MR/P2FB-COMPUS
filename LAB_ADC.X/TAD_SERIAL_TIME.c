@@ -52,13 +52,13 @@ unsigned char putCharTime() {
 
       switch (estado_tx) {
          case 0: // ESTADO: START BIT
-            LATAbits.LATA4 = 0;
+            LATBbits.LATB4 = 0;
             estado_tx = 1;
             bitIdx = 0;
             break;
 
          case 1: // ESTADO: DATA BITS (8 bits)
-            LATAbits.LATA4 = (currChar >> bitIdx) & 0x01;
+            LATBbits.LATB4 = (currChar >> bitIdx) & 0x01;
             bitIdx++;
             if (bitIdx >= 8) {
                estado_tx = 2;
@@ -66,7 +66,7 @@ unsigned char putCharTime() {
             break;
 
          case 2: // ESTADO: STOP BIT
-            LATAbits.LATA4 = 1;
+            LATBbits.LATB4 = 1;
             estado_tx = 0;
             ptxChar++;
             break;
@@ -75,6 +75,44 @@ unsigned char putCharTime() {
       TI_ResetTics(t_siot);
    }
    return 0;
+}
+
+unsigned char putCharEcho(unsigned char c) {
+    static unsigned char bitIdx = 0;
+    static unsigned char estado_tx = 0;
+    static unsigned char charToSend = 0;
+    static unsigned char sending = 0;
+
+    if (!sending) {
+        charToSend = c;
+        sending = 1;
+        TI_ResetTics(t_siot);
+    }
+
+    if (TI_GetTics(t_siot) >= 2) {
+        switch (estado_tx) {
+            case 0: // START BIT
+                LATBbits.LATB4 = 0;
+                estado_tx = 1;
+                bitIdx = 0;
+                break;
+
+            case 1: // DATA BITS
+                LATBbits.LATB4 = (charToSend >> bitIdx) & 0x01;
+                bitIdx++;
+                if (bitIdx >= 8) estado_tx = 2;
+                break;
+
+            case 2: // STOP BIT
+                LATBbits.LATB4 = 1;
+                estado_tx = 0;
+                sending = 0;
+                TI_ResetTics(t_siot);
+                return 1; // echo completado
+        }
+        TI_ResetTics(t_siot);
+    }
+    return 0;
 }
 
 unsigned char getCharTime(unsigned char *c) {
@@ -141,32 +179,50 @@ void STIME_Init(void) {
 void STIME_Motor(void){
    static unsigned char estado = 0;
    unsigned char c;
+   static unsigned char charPendiente;
 
    switch (estado){
-   case 0:
-      if (getCharTime(&c)) {
-         if (c == '\r'){
-            rxBuf[rxIdx] = '\0';
-            rxIdx = 0;
-            estado++;
-         } else if (rxIdx <= 13) {
-            rxBuf[rxIdx] = c;
-            rxIdx++;
-         } else {
-            rxIdx = 0;
-            estado++;
-         }
-      }
-      break;
+        case 0:
+           if (getCharTime(&c)) {
+             if (c == '\r'){
+                rxBuf[rxIdx] = '\0';
+                rxIdx = 0;
+                estado++;
+             } else if (rxIdx <= 13) {
+                charPendiente = c; // guardarlo temporalmente
+                estado = 3;        // ir a hacer echo primero
+                TI_ResetTics(t_siot);
+             } else {
+                rxIdx = 0;
+                estado++;
+             }
+           }
+           break;
 
-   case 1:  // Validar y parsear: formato DD/MM HH:MM:SS
-      dateReady = validarData(rxBuf) ? 0 : 1;
-      estado++;
-      ptxChar = 0;
-      TI_ResetTics(t_siot);
-      break;
-   case 2:
-      estado = putCharTime() ? 0 : 2;
-      break;
+        case 1:  // Validar y parsear: formato DD/MM HH:MM:SS
+            if (validarData(rxBuf)) {
+                dateReady = 0;  
+            } else {
+                dateReady = 1;  
+            }
+           estado++;
+           ptxChar = 0;
+           TI_ResetTics(t_siot);
+           break;
+        case 2:
+           if (putCharTime()) {
+                estado = 0;  // ha terminado de enviar, volver a escuchar
+           } else {
+                estado = 2;  // todavía enviando, quedarse aquí
+           }
+           break;
+       case 3:
+            if (putCharEcho(charPendiente)) {
+                rxBuf[rxIdx] = charPendiente; 
+                rxIdx++;
+                estado = 0; 
+            }
+           break;
+      
    }
 }

@@ -2,12 +2,10 @@
 #include "TAD_TIMER.h"
 #include "TAD_HEARTBEAT.h"
 
-#define MS500 500
-#define PERIODE_TOTAL 500
+#define PERIODE_TOTAL 20
 
 static unsigned char timerDutyCycle;
-static unsigned char dutyCycle[4] = {50, 400, 50, 250};
-static unsigned char indice = 0;
+static unsigned char dutyCycle = 0;
 static unsigned char estado = 1;
 static unsigned char flag = 0;
 
@@ -21,8 +19,7 @@ void HEARTBEAT_setEstadoAlarma(){
 }
 
 void HEARTBEAT_clearEstadoAlarma(){
-    estado = 1;
-    indice = 0; 
+    estado = 0;
 }
 
 void HEARTBEAT_Motor(){
@@ -35,17 +32,23 @@ void HEARTBEAT_Motor(){
             TI_ResetTics(timerDutyCycle);
             LATAbits.LA3 = 1;
             estado++;
+            if(dutyCycle == 40){
+                flag = 1;
+            }
+            if(dutyCycle == 0){
+                flag = 0;
+            }
+            if(flag == 0){
+                dutyCycle++;
+            }else{
+                dutyCycle--;
+            }
             break;
         case 2:
-            if(TI_GetTics(timerDutyCycle) >= dutyCycle[indice]){
+            if(TI_GetTics(timerDutyCycle) >= dutyCycle){
                 LATAbits.LA3 = 0;
-                if(indice == 3){
-                    indice = 0;
-                }else{
-                    indice++;
-                }
             }
-            if(TI_GetTics(timerDutyCycle) >= MS500){
+            if(TI_GetTics(timerDutyCycle) >= PERIODE_TOTAL){
                 estado = 1;
             }
             break;

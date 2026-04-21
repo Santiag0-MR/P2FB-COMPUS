@@ -4789,6 +4789,7 @@ unsigned char __t3rd16on(void);
 
 
 void LDR_Init();
+void LDR_SleepReceived();
 void LDR_Motor();
 # 3 "TAD_LDR.c" 2
 # 1 "./TAD_SERIAL.h" 1
@@ -4798,16 +4799,7 @@ void LDR_Motor();
 void SERIAL_Init(void);
 void SERIAL_PutChar(char c);
 void SERIAL_PutString(unsigned char s);
-void Motor_Serial(void);
-
-unsigned char SERIAL_SleepReceived(void);
-unsigned char SERIAL_GetAnimalsReceived(void);
-unsigned char SERIAL_GetProductsReceived(void);
-unsigned char SERIAL_ResetReceived(void);
-unsigned char SERIAL_StartRebellionReceived(void);
-unsigned char SERIAL_StopRebellionReceived(void);
-unsigned char SERIAL_ConsumeReceived(void);
-unsigned char SERIAL_InitializeReceived(void);
+void SERIAL_Motor(void);
 
 unsigned char* SERIAL_GetPayload(void);
 # 4 "TAD_LDR.c" 2
@@ -4860,10 +4852,15 @@ unsigned int ADC_GetLDR();
 
 
 static unsigned char timerLDR;
+static unsigned char sleepRecived = 0;
 
 
 void LDR_Init(){
     TI_NewTimer(&timerLDR);
+}
+
+void LDR_SleepReceived(){
+    sleepRecived = 1;
 }
 
 void LDR_Motor(){
@@ -4873,8 +4870,9 @@ void LDR_Motor(){
 
     switch(estado){
         case 0:
-            if(SERIAL_SleepReceived()){
+            if(sleepRecived){
                 TI_ResetTics(timerLDR);
+                sleepRecived = 0;
                 estado++;
             }
             break;

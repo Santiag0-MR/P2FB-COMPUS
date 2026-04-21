@@ -4825,16 +4825,7 @@ void DSP_Motor();
 void SERIAL_Init(void);
 void SERIAL_PutChar(char c);
 void SERIAL_PutString(unsigned char s);
-void Motor_Serial(void);
-
-unsigned char SERIAL_SleepReceived(void);
-unsigned char SERIAL_GetAnimalsReceived(void);
-unsigned char SERIAL_GetProductsReceived(void);
-unsigned char SERIAL_ResetReceived(void);
-unsigned char SERIAL_StartRebellionReceived(void);
-unsigned char SERIAL_StopRebellionReceived(void);
-unsigned char SERIAL_ConsumeReceived(void);
-unsigned char SERIAL_InitializeReceived(void);
+void SERIAL_Motor(void);
 
 unsigned char* SERIAL_GetPayload(void);
 # 6 "main.c" 2
@@ -4873,6 +4864,7 @@ void TI_End (void);
 
 
 void LDR_Init();
+void LDR_SleepReceived();
 void LDR_Motor();
 # 8 "main.c" 2
 # 1 "./TAD_HEARTBEAT.h" 1
@@ -4886,6 +4878,15 @@ void HEARTBEAT_setEstadoAlarma();
 void HEARTBEAT_clearEstadoAlarma();
 void HEARTBEAT_Motor();
 # 9 "main.c" 2
+# 1 "./TAD_SERIAL_TIME.h" 1
+
+
+
+void STIME_Init(void);
+void STIME_Motor(void);
+unsigned char STIME_DateRecieved(void);
+void STIME_GetDate(unsigned char *day, unsigned char *month, unsigned char *hour, unsigned char *min, unsigned char *sec);
+# 10 "main.c" 2
 
 #pragma config OSC = HS
 #pragma config PBADEN = DIG
@@ -4912,6 +4913,11 @@ void initPorts(){
     ADCON1 = 0x0C;
     ADCON2 = 0x80;
     TRISAbits.TRISA3 = 0;
+    LATAbits.LATA3 = 0;
+
+    TRISBbits.TRISB3 = 1;
+    TRISAbits.TRISA4 = 0;
+    LATAbits.LATA4 = 0;
 }
 
 void main(void) {
@@ -4922,12 +4928,14 @@ void main(void) {
     SERIAL_Init();
     LDR_Init();
     HREATBEAT_Init();
+    STIME_Init();
 
 
     while(1){
         ADC_Motor();
         DSP_Motor();
-        Motor_Serial();
+        SERIAL_Motor();
         HEARTBEAT_Motor();
+        STIME_Motor();
     }
 }
